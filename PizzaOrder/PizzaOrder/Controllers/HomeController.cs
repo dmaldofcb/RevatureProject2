@@ -21,6 +21,7 @@ namespace PizzaOrder.Controllers
 
         public IActionResult Index()
         {
+            //Logans commit
             return View();
         }
 
@@ -32,6 +33,7 @@ namespace PizzaOrder.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            //logans second comment
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
