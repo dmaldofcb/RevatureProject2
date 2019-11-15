@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pizza.Models.Models
+namespace Layers.Models.Models
 {
-    class PizzaToppings
+    public class PizzaToppings
     {
+        public int Id { get; set; }
         public int ToppingsID { get; set; }
 
         public int PizzaID { get; set; }

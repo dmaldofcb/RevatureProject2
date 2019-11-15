@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaOrder", "PizzaOrder\PizzaOrder.csproj", "{EB2D6A28-8A11-4081-A57A-CDFBF41832DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pizza.Models", "Pizza.Models\Pizza.Models.csproj", "{672622B4-A9FE-4DC0-8D31-1EFC0791BA41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Layers.Models", "Pizza.Models\Layers.Models.csproj", "{672622B4-A9FE-4DC0-8D31-1EFC0791BA41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

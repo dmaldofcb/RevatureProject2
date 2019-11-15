@@ -4,14 +4,12 @@ using System.Text;
 
 namespace Layers.Models.Models
 {
-    public class Order
+    class Size
     {
         public int Id { get; set; }
 
-        public int CustomerID {get;set;}
+        public string Type { get; set; }
 
-        public DateTime OrderDate { get; set; }
-
-        public decimal Total { get; set; }
+        public decimal Price { get; set; }
     }
 }

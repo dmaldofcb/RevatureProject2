@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pizza.Models.Models
+namespace Layers.Models.Models
 {
-    class Pizza
+    public class Pizza
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        public String Type { get; set; }
+        public string Type { get; set; }
 
         public int CrustID { get; set; }
 

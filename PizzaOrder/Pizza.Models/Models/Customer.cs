@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 
-namespace Pizza.Models.Models
+namespace Layers.Models.Models
 {
-    class Customer : IdentityUser
+    public class Customer : IdentityUser
     {
         public string City { get; set; }
         public string State { get; set; }

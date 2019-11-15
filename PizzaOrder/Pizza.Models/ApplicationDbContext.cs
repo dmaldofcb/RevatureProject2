@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Layers.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Pizza.Models.Models;
 
 namespace PizzaOrder.Data
 {
@@ -13,5 +13,17 @@ namespace PizzaOrder.Data
             : base(options)
         {
         }
+
+        public DbSet<Layers.Models.Models.Pizza> Pizzas { get; set; }
+        public DbSet<Crust> Crusts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetails> OrdersDetails { get; set; }
+        public DbSet<PizzaToppings> PizzasToppings { get; set; }
+        public DbSet<Toppings> Toppings { get; set; }
+
+
+
+
     }
 }

@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pizza.Models;
-using PizzaTut.Models;
 
 namespace PizzaOrder
 {
@@ -37,9 +36,9 @@ namespace PizzaOrder
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddDbContext<MyDbContext>(options =>
-   options.UseSqlServer(
-       Configuration.GetConnectionString("MyDbContext")));
+   //         services.AddDbContext<MyDbContext>(options =>
+   //options.UseSqlServer(
+   //    Configuration.GetConnectionString("MyDbContext")));
 
         }
 

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pizza.Models.Models
+namespace Layers.Models.Models
 {
-    class Crust
+    public class Crust
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        public String Type { get; set; }
+        public string Type { get; set; }
 
-        public Double Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
