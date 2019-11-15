@@ -27,6 +27,8 @@ namespace PizzaOrder.Controllers
 
         public IActionResult Privacy()
         {
+            //comment
+            //comment
             return View();
         }
 
