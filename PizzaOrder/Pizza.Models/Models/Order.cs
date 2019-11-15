@@ -12,6 +12,6 @@ namespace Pizza.Models.Models
 
         public DateTime OrderDate { get; set; }
 
-        public double Total { get; set }
+        public double Total { get; set; }
     }
 }

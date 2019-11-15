@@ -8,6 +8,6 @@ namespace Pizza.Models.Models
     {
         public int ToppingsID { get; set; }
 
-        public int PizzaID { get;set }
+        public int PizzaID { get; set; }
     }
 }

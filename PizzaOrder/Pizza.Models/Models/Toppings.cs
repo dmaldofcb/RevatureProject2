@@ -6,7 +6,7 @@ namespace Pizza.Models.Models
 {
     class Toppings
     {
-        public int ID { get;set }
+        public int ID { get; set; }
 
         public String Type { get; set; }
 
