@@ -21,6 +21,7 @@ namespace PizzaOrder.Data
         public DbSet<OrderDetails> OrdersDetails { get; set; }
         public DbSet<PizzaToppings> PizzasToppings { get; set; }
         public DbSet<Toppings> Toppings { get; set; }
+        public DbSet<Size> Sizes { get; set; }
 
 
 

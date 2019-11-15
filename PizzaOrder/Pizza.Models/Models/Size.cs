@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Layers.Models.Models
 {
-    class Size
+    public class Size
     {
         public int Id { get; set; }
 
