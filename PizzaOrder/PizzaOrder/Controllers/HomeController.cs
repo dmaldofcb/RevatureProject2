@@ -23,6 +23,7 @@ namespace PizzaOrder.Controllers
 
         public IActionResult Index()
         {
+            var i = 2 + 3;
             //Logans commit
             return View();
         }
