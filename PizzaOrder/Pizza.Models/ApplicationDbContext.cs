@@ -15,7 +15,7 @@ namespace PizzaOrder.Data
         {
         }
 
-        public DbSet<Layers.Models.Models.Pizza> Pizzas { get; set; }
+        public DbSet<PizzaPie> Pizzas { get; set; }
         public DbSet<Crust> Crusts { get; set; }
         public DbSet<Order> Orders { get; set; }
 
