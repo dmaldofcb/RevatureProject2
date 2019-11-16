@@ -162,7 +162,7 @@ namespace PizzaOrder.Data.Migrations
                     b.ToTable("OrdersDetails");
                 });
 
-            modelBuilder.Entity("Layers.Models.Models.Pizza", b =>
+            modelBuilder.Entity("Layers.Models.Models.PizzaPie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
