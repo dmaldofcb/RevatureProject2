@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Layers.Models.Models;
+using Layers.Models.Repository;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,16 +16,11 @@ namespace PizzaOrderAPI.Controllers
     
     public class PizzaController : ControllerBase
     {
-        //private readonly PizzaRepo _pizzaRepo;
-
-        //public PizzaController(PizzaRepo pizzaRepo)
-        //{
-        //    _pizzaRepo = pizzaRepo;
-        //}
-
-        public PizzaController()
+       // private readonly PizzaPieRepo _pizzaRepo;
+        private readonly IPizza _pizzaRepo;
+        public PizzaController(IPizza pizzarepo)
         {
-
+            _pizzaRepo = pizzarepo;
         }
 
         public List<PizzaPie> pizzas = new List<PizzaPie>()
@@ -36,9 +32,10 @@ namespace PizzaOrderAPI.Controllers
 
 
         [HttpGet]
-        public IEnumerable<PizzaPie> Get()
+        public async Task<IEnumerable<PizzaPie>> Get()
         {
-            return pizzas;
+            var pizzaMenu = await _pizzaRepo.Get();
+            return pizzaMenu;
         }
 
     }
