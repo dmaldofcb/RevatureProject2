@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Layers.Models.Models;
+
+namespace Layers.Models.Repository
+{
+    public interface IPizza
+    {
+        Task<PizzaPie> Get(int? id); //get a pizza with a particular
+        Task<List<PizzaPie>> Get(); //get list of all pizza 
+        Task<bool> Create(PizzaPie pizza);
+        Task<bool> Edit(int id, PizzaPie pizza);
+        Task<bool> Delete(int id);
+        bool PizzaExists(int id);
+
+    }
+}
