@@ -19,7 +19,14 @@
 
 
   <ItemGroup>
+    <Folder Include="Content\" />
     <Folder Include="Data\" />
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\pepperoni-pizza.png" />
   </ItemGroup>
 
 
