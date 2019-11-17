@@ -31,7 +31,7 @@ namespace PizzaOrder.Controllers
 
             //var apiUrl = "api/Pizza";
             var responseTask = client.GetAsync("pizza");
-            responseTask.Wait();
+            //responseTask.Wait();
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
@@ -46,7 +46,7 @@ namespace PizzaOrder.Controllers
 
                pizzas = Enumerable.Empty<PizzaPie>();
 
-                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                ModelState.AddModelError(string.Empty, "Server error. Please wait a few minutes and refresh the page.");
             }
             return View(pizzas);
         }
