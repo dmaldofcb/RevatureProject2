@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PizzaOrder.Models;
+
+
 //Raymond's Test Comment
 
 //Must Set up Repo
@@ -25,7 +27,10 @@ namespace PizzaOrder.Controllers
 
         public IActionResult Index()
         {
+
             var i = 2 + 3;
+            //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             //Logans commit
             return View();
         }
