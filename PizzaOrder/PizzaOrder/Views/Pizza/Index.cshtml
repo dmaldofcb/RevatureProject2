@@ -3,51 +3,72 @@
 @{
     ViewData["Title"] = "Index";
 }
+<body>
+    <div class="container-fluid" style="background-color:cornsilk;">
+        <div class="m-md-4">
+            <div class="row">
+                <div class="col">
+                    <img src="~/Images/pepperoni-pizza.png" />
+                </div>
+            </div>
+        </div>
+        </div>
+        </body>
 
-<h1>Index</h1>
+        <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CrustID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SizeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCustom)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CrustID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SizeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsCustom)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <p>
+            <a asp-controller="Home" asp-action="Index">Back to Main Menu</a>
+        </p>
+
+        <h2> Testttttttiiiiiiiiing</h2>
+     
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CrustID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SizeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsCustom)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CrustID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SizeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsCustom)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+
+                <p>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </p>
+            </tbody>
+        </table>
+    </div>
