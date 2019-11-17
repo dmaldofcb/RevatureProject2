@@ -9,7 +9,7 @@ namespace Layers.Models.Repository
     public interface IOrder
     {
         Task<Order> Get(int? id); 
-        Task<List<Order>> Get(); 
+        Task<List<Order>> OrderOfCustomer(); 
         Task<bool> Create(Order order);
         Task<bool> Edit(int id, Order order);
         Task<bool> Delete(int id);

@@ -13,7 +13,7 @@ namespace Layers.Models.Repository
     public class OrderRepo : IOrder
     {
         private ApplicationDbContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        //private readonly HttpContextAccessor _httpContextAccessor = new HttpContextAccessor();
         public OrderRepo(ApplicationDbContext ctx)
         {
             
@@ -46,18 +46,29 @@ namespace Layers.Models.Repository
             return order;
         }
 
-        public async Task<List<Order>> Get()
-        {
+        //public async Task<List<Order>> Get()
+        //{
 
-            //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
-            var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
-            return orders;
-        }
+        //    //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //   // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
+        //    //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
+        //    var orders = await _context.Orders.ToListAsync(); 
+        //    return orders;
+        //}
 
         public bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.Id == id);
         }
+
+        public async Task<List<Order>> OrderOfCustomer()
+        {
+            //    //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //   // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
+            //    //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
+            var orders = await _context.Orders.ToListAsync();
+            return orders;
+        }
+
     }
 }
