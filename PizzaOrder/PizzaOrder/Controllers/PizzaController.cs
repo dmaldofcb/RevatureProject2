@@ -15,25 +15,47 @@ namespace PizzaOrder.Controllers
 {
     public class PizzaController : Controller
     {
-        private string url = "http://localhost:62620/";
+        private string url = "http://localhost:51193/";
 
        
 
         // Display Menu
         public ActionResult Index()
         {
+            IEnumerable<PizzaPie> pizzas = null;
             HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:51193/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var apiUrl = "api/Pizza";
-            var stringTask = client.GetStringAsync(url + apiUrl);
-            var pizzasAsString = stringTask.Result;
-            var result = JsonConvert.DeserializeObject<List<PizzaPie>>(pizzasAsString);
+            //var apiUrl = "api/Pizza";
+            var responseTask = client.GetAsync("pizza");
+            responseTask.Wait();
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<PizzaPie>>();
+                readTask.Wait();
 
-            return View(result);
+                pizzas = readTask.Result;
+            }
+            else //web api sent error response 
+            {
+                //log response status here..
+
+               pizzas = Enumerable.Empty<PizzaPie>();
+
+                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+            }
+            return View(pizzas);
         }
+  
+            //var pizzasAsString = stringTask.Result;
+            //var result = JsonConvert.DeserializeObject<List<PizzaPie>>(pizzasAsString);
+
+      
+        
 
         // GET: Pizza/Details/5
         //public async Task<IActionResult> Details(int? id)
