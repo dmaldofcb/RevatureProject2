@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Layers.Models.Models
 {
@@ -13,7 +14,6 @@ namespace Layers.Models.Models
         public int PizzaID { get; set; }
 
         public decimal Price { get; set; }
-
         public int Quantity { get; set; }
     }
 }
