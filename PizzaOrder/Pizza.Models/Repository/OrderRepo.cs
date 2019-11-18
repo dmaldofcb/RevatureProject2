@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Layers.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using PizzaOrder.Data;
-using Layers.Models.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Layers.Models.Repository
 {
@@ -23,6 +22,7 @@ namespace Layers.Models.Repository
 
         public async Task<bool> Create(Order order)
         {
+            
             _context.Add(order);
             await _context.SaveChangesAsync();
 
@@ -46,29 +46,29 @@ namespace Layers.Models.Repository
             return order;
         }
 
-        //public async Task<List<Order>> Get()
-        //{
+        public async Task<List<Order>> Get()
+        {
 
-        //    //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //   // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
-        //    //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
-        //    var orders = await _context.Orders.ToListAsync(); 
-        //    return orders;
-        //}
+            //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
+            //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
+            var orders = await _context.Orders.ToListAsync();
+            return orders;
+        }
 
         public bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.Id == id);
         }
 
-        public async Task<List<Order>> OrderOfCustomer()
-        {
-            //    //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //   // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
-            //    //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
-            var orders = await _context.Orders.ToListAsync();
-            return orders;
-        }
+        //public async Task<List<Order>> OrderOfCustomer()
+        //{
+        //    //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
+        //    //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
+        //    var orders = await _context.Orders.ToListAsync();
+        //    return orders;
+        //}
 
     }
 }
