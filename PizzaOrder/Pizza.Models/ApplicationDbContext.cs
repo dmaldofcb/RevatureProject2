@@ -21,6 +21,7 @@ namespace PizzaOrder.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(@"Server = tcp:pizzaserver2019.database.windows.net, 1433; Initial Catalog = PizzaDb; Persist Security Info = False; User ID = pizzauser; Password = Pizzaparty2019; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30");
+               // optionsBuilder.UseSqlServer(@"data source=DESKTOP-HI5QLH4\\SQLEXPRESS01;initial catalog=BankingDB;integrated security=True;MultipleActiveResultSets=True");
             }
         }
         public DbSet<PizzaPie> Pizzas { get; set; }

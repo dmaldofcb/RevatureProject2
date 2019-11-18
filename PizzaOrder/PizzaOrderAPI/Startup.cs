@@ -30,8 +30,10 @@ namespace PizzaOrderAPI
 
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("Server=tcp:pizzaserver2019.database.windows.net,1433;Initial Catalog=PizzaDb;Persist Security Info=False;User ID=pizzauser;Password=Pizzaparty2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+               options.UseSqlServer("Server=tcp:pizzaserver2019.database.windows.net,1433;Initial Catalog=PizzaDb;Persist Security Info=False;User ID=pizzauser;Password=Pizzaparty2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+               // options.UseSqlServer("data source=DESKTOP-HI5QLH4\\SQLEXPRESS01;initial catalog=BankingDB;integrated security=True;MultipleActiveResultSets=True"));
             services.AddTransient<IPizza, PizzaPieRepo>();
+            services.AddTransient<IOrder, OrderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

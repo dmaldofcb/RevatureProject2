@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Layers.Models.Models;
 using Layers.Models.Repository;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PizzaOrder.Data;
 
 namespace PizzaOrderAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class OrdersController : ControllerBase
     {
         private readonly IOrder _repo;
@@ -26,7 +26,7 @@ namespace PizzaOrderAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            return await _repo.OrderOfCustomer();
+            return await _repo.Get();
         }
 
         // GET: api/Orders/5
