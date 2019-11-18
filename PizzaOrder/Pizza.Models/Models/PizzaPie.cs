@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Layers.Models.Models
 {
-    public class Pizza
+    public class PizzaPie
     {
         public int Id { get; set; }
 
