@@ -14,7 +14,15 @@ namespace PizzaOrder.Data
         {
         }
 
-        public DbSet<Layers.Models.Models.Pizza> Pizzas { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(@"Server = tcp:pizzaserver2019.database.windows.net, 1433; Initial Catalog = PizzaDb; Persist Security Info = False; User ID = pizzauser; Password = Pizzaparty2019; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30");
+            }
+        }
+        public DbSet<PizzaPie> Pizzas { get; set; }
         public DbSet<Crust> Crusts { get; set; }
         public DbSet<Order> Orders { get; set; }
 

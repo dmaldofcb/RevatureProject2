@@ -8,7 +8,7 @@ namespace Layers.Models.Models
     {
         public int Id { get; set; }
 
-        public int CustomerID {get;set;}
+        public string CustomerID {get;set;}
 
         public DateTime OrderDate { get; set; }
 
