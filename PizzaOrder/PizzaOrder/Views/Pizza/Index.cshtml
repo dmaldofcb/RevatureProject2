@@ -3,17 +3,118 @@
 @{
     ViewData["Title"] = "Index";
 }
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+          $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").slideToggle("slow");
+            });
+          });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.mdb-select').materialSelect();
+        });
+
+        //$(document).ready(function () {
+        //    $("#sizedropdown").click(function () {
+        //        $("#size").show();
+        //    });
+        //});
+
+        //$(document).ready(function () {
+        //    $("button").on(
+        //        {
+        //            mouseenter: function () {
+        //                $(this).css("background-color", "blue");
+        //            }
+        //        });
+        //});
+
+      
+    </script>
+
+   
+</head>
 <body>
-    <div class="container-fluid" style="background-color:cornsilk;">
+    <div id="flip">Click to see our list of toppings!</div>
+    <div id="panel">Ya got got Jabroni! We don't have any toppings for you</div>
+    <div class="container-fluid">
         <div class="m-md-4">
             <div class="row">
                 <div class="col">
-                    <img src="~/Images/pepperoni-pizza.png" />
+                    <div class="card" style="background-color:cornsilk">
+                        <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
+                        <div class="card-body">
+                            <h2>$16.85</h2>
+                            <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
+                        </div>
+                        <div class=" card-footer" style="background-color:silver">
+                            <button type="submit" class="=btn btn-primary">Add to Cart</button>
+                            @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
+                            <select class="mdb-select md-form">
+                                <option value="" disabled selected>Select Your Size</option>
+                                <option value="1" style="color:blue">Small</option>
+                                <option value="2" style="color:blue">Medium</option>
+                                <option value="3" style="color:blue">Large</option>
+                            </select>
+                            @*<div class="dropdown-menu" style="background-color:lightgray">
+                                    <a class="dropdown-item" id="size" style="color:blue" href="#">Small</a>
+                                    <a class="dropdown-item" id="size" style="color:blue" href="#">Medium</a>
+                                    <a class="dropdown-item" id="size" style="color:blue" href="#">Large</a>
+                                </div>*@
+                            <button type="button" id="Customize">Customize Your Order</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="card" style="background-color:cornsilk">
+                        <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
+                        <div class="card-body">
+                            <h2>$18.95</h2>
+                            <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
+                        </div>
+                        <div class=" card-footer" style="background-color:silver">
+                            <button type="button" class="=btn btn-primary">Add to Cart</button>
+                            <select class="mdb-select md-form">
+                                <option value="" disabled selected>Select Your Size</option>
+                                <option value="1" style="color:blue">Small</option>
+                                <option value="2" style="color:blue">Medium</option>
+                                <option value="3" style="color:blue">Large</option>
+                            </select>
+                            <button type="button">Customize Your Order</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="background-color:cornsilk">
+                        <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
+                        <div class="card-body">
+                            <h2>$18.95</h2>
+                            <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
+                        </div>
+                        <div class=" card-footer" style="background-color:silver">
+                            footer
+                            <button type="button" class="=btn btn-primary">Add to Cart</button>
+                            <select class="mdb-select md-form">
+                                <option value="" disabled selected>Select Your Size</option>
+                                <option value="1" style="color:blue">Small</option>
+                                <option value="2" style="color:blue">Medium</option>
+                                <option value="3" style="color:blue">Large</option>
+                            </select>
+                            <button type="button">Customize Your Order</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        </div>
-        </body>
+    </div>
+</body>
 
         <h1>Index</h1>
 

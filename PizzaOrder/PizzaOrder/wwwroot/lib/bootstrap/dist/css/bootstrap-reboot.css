@@ -11,6 +11,11 @@
   box-sizing: border-box;
 }
 
+#hawaiian {
+    width: 50%;
+    height: 50%;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

@@ -4,6 +4,12 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+#hawaiian {
+    width: 50%;
+    height: 50%
+}
+
 html {
   box-sizing: border-box;
   -ms-overflow-style: scrollbar;
