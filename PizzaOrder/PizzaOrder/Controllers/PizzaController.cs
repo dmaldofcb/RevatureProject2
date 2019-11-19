@@ -25,7 +25,7 @@ namespace PizzaOrder.Controllers
             List<PizzaPie> pizzas = new List<PizzaPie>();
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("http://localhost:59293/api/Pizza"))
+                using (var response = await httpClient.GetAsync("https://pizzorderapi.azurewebsites.net/api/Pizza"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     pizzas = JsonConvert.DeserializeObject<List<PizzaPie>>(apiResponse);
