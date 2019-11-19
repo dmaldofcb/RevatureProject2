@@ -1,4 +1,4 @@
-﻿@model Layers.Models.Models.Pizza
+﻿@model Layers.Models.Models.OrderDetails
 
 @{
     ViewData["Title"] = "Details";
@@ -7,32 +7,32 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Pizza</h4>
+    <h4>OrderDetails</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.OrderID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.OrderID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CrustID)
+            @Html.DisplayNameFor(model => model.PizzaID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CrustID)
+            @Html.DisplayFor(model => model.PizzaID)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SizeId)
+            @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SizeId)
+            @Html.DisplayFor(model => model.Price)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsCustom)
+            @Html.DisplayNameFor(model => model.Quantity)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCustom)
+            @Html.DisplayFor(model => model.Quantity)
         </dd>
     </dl>
 </div>
