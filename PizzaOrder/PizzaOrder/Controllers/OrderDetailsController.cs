@@ -13,17 +13,17 @@ using Newtonsoft.Json;
 
 namespace PizzaOrder.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersDetailsController : Controller
     {
         public async Task<IActionResult> Index()
         {
-            List<Order> reservationList = new List<Order>();
+            List<OrderDetails> reservationList = new List<OrderDetails>();
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("http://localhost:60611/api/Orders"))
+                using (var response = await httpClient.GetAsync("http://localhost:60611/api/OrderDetails"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    reservationList = JsonConvert.DeserializeObject<List<Order>>(apiResponse);
+                    reservationList = JsonConvert.DeserializeObject<List<OrderDetails>>(apiResponse);
                 }
             }
             return View(reservationList);

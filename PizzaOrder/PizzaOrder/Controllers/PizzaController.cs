@@ -24,7 +24,7 @@ namespace PizzaOrder.Controllers
         {
             IEnumerable<PizzaPie> pizzas = null;
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64757/api");
+            client.BaseAddress = new Uri("http://localhost:60611/api");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
