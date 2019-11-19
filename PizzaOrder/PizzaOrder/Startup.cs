@@ -33,7 +33,11 @@ namespace PizzaOrder
                 options.UseSqlServer("Server=tcp:pizzaserver2019.database.windows.net,1433;Initial Catalog=PizzaDb;Persist Security Info=False;User ID=pizzauser;Password=Pizzaparty2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
             services.AddDefaultIdentity<Customer>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddTransient<IPizza, PizzaPieRepo>();
+            services.AddTransient<IOrder, OrderRepo>();
+            services.AddTransient<IOrderDetails, OdrerDetailsRepo>();
+            services.AddControllers();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
