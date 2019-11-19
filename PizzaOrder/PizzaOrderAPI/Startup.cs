@@ -34,6 +34,7 @@ namespace PizzaOrderAPI
                // options.UseSqlServer("data source=DESKTOP-HI5QLH4\\SQLEXPRESS01;initial catalog=BankingDB;integrated security=True;MultipleActiveResultSets=True"));
             services.AddTransient<IPizza, PizzaPieRepo>();
             services.AddTransient<IOrder, OrderRepo>();
+            services.AddTransient<IOrderDetails, OdrerDetailsRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
