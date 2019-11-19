@@ -20,7 +20,7 @@ namespace PizzaOrder.Controllers
             List<Order> reservationList = new List<Order>();
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://pizzorderapi.azurewebsites.net/api/Orders"))
+                using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     reservationList = JsonConvert.DeserializeObject<List<Order>>(apiResponse);
