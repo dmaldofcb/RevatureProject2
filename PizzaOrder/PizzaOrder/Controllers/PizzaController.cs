@@ -34,13 +34,9 @@ namespace PizzaOrder.Controllers
             // Display Menu
             public async Task<IActionResult> Index()
             {
-<<<<<<< Updated upstream
-                using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Pizza"))
-=======
                 //List<PizzaPie> pizzas = null;
                 PizzaMenuVM pizzas = null;
                 using (var client = new HttpClient())
->>>>>>> Stashed changes
                 {
                     client.BaseAddress = new Uri("http://localhost:51600/"); // DONT PLACE API HERE. OR ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     client.DefaultRequestHeaders.Accept.Clear();
