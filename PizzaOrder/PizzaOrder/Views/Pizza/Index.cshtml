@@ -1,19 +1,21 @@
-﻿@model Layers.Models.ViewModels.PizzaMenuVM
+﻿@model IEnumerable<Layers.Models.Models.PizzaPie>
 
-
+@{
+    ViewData["Title"] = "Index";
+}
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
+          $(document).ready(function () {
             $("#flip").click(function () {
                 $("#panel").slideToggle("slow");
             });
-        });
+          });
     </script>
     <script>
-        //$(document).ready(function () {
-        //    $('.mdb-select').materialSelect();
-        //});
+        $(document).ready(function () {
+            $('.mdb-select').materialSelect();
+        });
 
         //$(document).ready(function () {
         //    $("#sizedropdown").click(function () {
@@ -29,45 +31,29 @@
         //            }
         //        });
         //});
+
+      
     </script>
 
-
+   
 </head>
 <body>
-    <div id="flip">Click to see our list of toppings!>
-    <div id="panel">
-        @foreach (var item in Model.Toppings)
-        {
-            <table>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        $
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                </tr>
-            </table>
-        }
-
-    </div>
-    </div>
-    
-    <div class="container-fluid" id="Pizzas">
+    <div id="flip">Click to see our list of toppings!</div>
+    <div id="panel">Ya got got Jabroni! We don't have any toppings for you</div>
+    <div class="container-fluid">
         <div class="m-md-4">
             <div class="row">
                 <div class="col">
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
                         <div class="card-body">
-                            <h2 id="price" /> $16.85
+                            <h2>$16.85</h2>
                             <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
-                            <button onclick="AddToCart()" id="1" value="AddToCart" class="=btn btn-primary">Add to Cart</button>
+                            <button type="submit" class="=btn btn-primary">Add to Cart</button>
                             @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
-                            <select id="SelectSize" onchange="ChangePrice()"class="mdb-select md-form">
+                            <select class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -87,12 +73,12 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                         <div class="card-body">
-                            <h2 id="price" /> $18.95
+                            <h2>$18.95</h2>
                             <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select id="SelectSize" class="mdb-select md-form">
+                            <select class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -108,13 +94,13 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                         <div class="card-body">
-                            <h2 id="price" /> $12.75
+                            <h2>$18.95</h2>
                             <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             footer
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select id="SelectSize" onchange="ChangePrice()" class="mdb-select md-form">
+                            <select class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -128,43 +114,62 @@
             </div>
         </div>
     </div>
-    <script>
-         var psize = document.getElementById("SelectSize");
-        var id = psize.value;
-        console.log(id);
-        var textToChange = $("#price");
-       // $("#textToChange").empty();
-        function ChangePrice() {
-
-            $.ajax({
-                contentType: "application/json;charset=utf-8",
-                type: "GET",
-                url: "http://localhost:51600/api/PizzaAPI/GetSizes/" + id,
-               
-             
-                success: function (data) {
-                    $("#textToChange").innerHTML = data.Price;
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    textToChange.innerHTML = textStatus;
-                }
-            });
-        };
-            
-
-           @*var list = document.getElementById("SelectSize").getElementsByTagName('option');
-
-        for (var i=0; i<list.length; i++) {
-        list[i].addEventListener('click', getSize(), false);
-        }
-
-         function getSize() {
-             var price = document.getElementsByTagName("h2");
-             price = @Model.Size.FirstOrDefault(x => x.Id == 1).Price;
-    }
-        document.getElementsById("price").innerHTML = 100;*@
-        
-
-    </script>
 </body>
 
+        <h1>Index</h1>
+
+        <p>
+            <a asp-controller="Home" asp-action="Index">Back to Main Menu</a>
+        </p>
+
+        <h2> Testttttttiiiiiiiiing</h2>
+     
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CrustID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SizeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsCustom)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CrustID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SizeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsCustom)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+
+                <p>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </p>
+            </tbody>
+        </table>
+    </div>
