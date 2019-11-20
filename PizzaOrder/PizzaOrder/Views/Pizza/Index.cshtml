@@ -1,7 +1,5 @@
 ﻿@model Layers.Models.ViewModels.PizzaMenuVM
 
-
-<head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -9,6 +7,8 @@
                 $("#panel").slideToggle("slow");
             });
         });
+
+
     </script>
     <script>
         //$(document).ready(function () {
@@ -32,8 +32,6 @@
     </script>
 
 
-</head>
-<body>
     <div id="flip">Click to see our list of toppings!>
     <div id="panel">
         @foreach (var item in Model.Toppings)
@@ -87,7 +85,7 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                         <div class="card-body">
-                            <h2 id="price" /> $18.95
+                            <h2 id="price"> $18.95</h2>
                             <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
@@ -108,13 +106,13 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                         <div class="card-body">
-                            <h2 id="price2" /> $12.75
+                            <h2 id="price2"> $12.75</h2>
                             <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             footer
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select name="SelectSize" id="sausage" onclick="passPizza(price2)" class="mdb-select md-form">
+                            <select name="SelectSize" id="sausage" onclick="passPizza('price2')" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -137,12 +135,11 @@
         
         var textToChange = $("#price");
        // $("#textToChange").empty();
-
         function passPizza(pizzaPrice) {
             console.log(pizzaPrice);
             var elems = document.getElementByNames("SelectSize");
             //var id = elems.getElementById(pizzaPrice)
-            elems.addEventListener("onchange", selectPizzaSize(pizzaPrice));
+            elems.addEventListener("change", selectPizzaSize(pizzaPrice));
         }
 
        
@@ -163,13 +160,13 @@
                     console.log("Price:", data.price);
 
                     //var json = JSON.parse(data);
-                    document.getElementById("price").innerHTML = data.price + @Model.Toppings[0].Price;
+                    document.getElementById(pizzaPrice).innerHTML = data.price + @Model.Toppings[0].Price;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
                 }
             });
-        });
+        }
             
 
            @*var list = document.getElementById("SelectSize").getElementsByTagName('option');
@@ -186,5 +183,4 @@
         
 
     </script>
-</body>
 
