@@ -40,6 +40,22 @@ namespace Layers.Models.Repository
             return pizza;
         }
 
+        public async Task<List<Toppings>> GetToppings()
+        {
+            var toppings = await _context.Toppings.ToListAsync();
+            return toppings;
+        }
+
+        public async Task<List<PizzaToppings>> GetPizzaToppings()
+        {
+            var pizzaToppings = await _context.PizzasToppings.ToListAsync();
+            return pizzaToppings;
+        }
+        public async Task<List<Size>> GetSizes()
+        {
+            var sizes = await _context.Sizes.ToListAsync();
+            return sizes;
+        }
         //Get all pies on our menu
         public async Task<List<PizzaPie>> Get()
         {
