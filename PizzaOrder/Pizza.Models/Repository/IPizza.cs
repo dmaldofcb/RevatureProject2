@@ -8,11 +8,6 @@ namespace Layers.Models.Repository
 {
     public interface IPizza
     {
-        Task<List<PizzaToppings>> GetPizzaToppings();
-        Task<List<Toppings>> GetToppings();
-
-        Task<List<Size>> GetSizes();
-
         Task<PizzaPie> Get(int? id); //get a particular Pizza
         Task<List<PizzaPie>> Get(); //get list of all pizzas 
         Task<bool> Create(PizzaPie pizza);
