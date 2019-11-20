@@ -61,13 +61,13 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
                         <div class="card-body">
-                            <h2 id="price" /> $16.85
+                            <h2 id="price" > $16.85 </h2>
                             <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             <button onclick="AddToCart()" id="1" value="AddToCart" class="=btn btn-primary">Add to Cart</button>
                             @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
-                            <select id="SelectSize" onchange="ChangePrice()"class="mdb-select md-form">
+                            <select name="SelectSize" id="pepperoni" onclick="passPizza(this.id)" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -92,7 +92,7 @@
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select id="SelectSize" class="mdb-select md-form">
+                            <select name="SelectSize" id="hawaiian" onclick="passPizza(this.id)" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -108,13 +108,13 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                         <div class="card-body">
-                            <h2 id="price" /> $12.75
+                            <h2 id="price2" /> $12.75
                             <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             footer
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select id="SelectSize" onchange="ChangePrice()" class="mdb-select md-form">
+                            <select name="SelectSize" id="sausage" onclick="passPizza(price2)" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -129,27 +129,47 @@
         </div>
     </div>
     <script>
-         var psize = document.getElementById("SelectSize");
-        var id = psize.value;
-        console.log(id);
+//      $('#SelectSize').change(function () {
+//    alert('This works');
+//}); 
+         //var psize = document.getElementById("SelectSize");   
+        //var id = psize.value;
+        
         var textToChange = $("#price");
        // $("#textToChange").empty();
-        function ChangePrice() {
 
+        function passPizza(pizzaType) {
+            console.log(pizzaType);
+            var elems = document.getElementByNames("SelectSize");
+            var id = elems.getElementById(pizzaType)
+            elems.addEventListener("onchange", selectPizzaSize(id));
+        }
+
+       
+        //$('#SelectSize').change(function () { // have to get the value of the id after the change has been made. Cannot declare before
+          function selectPizzaSize(pizzaType) {
+            var id = $('#SelectSize').val();
+            console.log(id);
+                    //document.getElementById("price").innerHTML = "100";
+           // function ChangePrice()
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
-                url: "http://localhost:51600/api/PizzaAPI/GetSizes/" + id,
+                url: "http://localhost:51600/api/PizzaAPI/" + id,
                
              
                 success: function (data) {
-                    $("#textToChange").innerHTML = data.Price;
+                    console.log("data:", data);
+                    console.log("Price:", data.price);
+
+                    //var json = JSON.parse(data);
+                    document.getElementById("price").innerHTML = data.price + @Model.Toppings[0].Price;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
                 }
             });
-        };
+        });
             
 
            @*var list = document.getElementById("SelectSize").getElementsByTagName('option');
