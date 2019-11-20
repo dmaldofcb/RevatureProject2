@@ -6,6 +6,8 @@ using Layers.Models.Models;
 using Layers.Models.Repository;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using PizzaOrder.Data;
 
@@ -24,15 +26,18 @@ namespace PizzaOrderAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        [Route("GetOrders/{userId}")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders(string userId)
         {
-            return await _repo.Get();
+            
+            return await _repo.Get(userId);
         }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
+
             var order = await _repo.Get(id);
 
             if (order == null)
