@@ -46,13 +46,13 @@ namespace Layers.Models.Repository
             return order;
         }
 
-        public async Task<List<Order>> Get()
+        public async Task<List<Order>> Get(string userID)
         {
 
             //var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
             // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); //get customer Identity class id
-            //var orders = await _context.Orders.Where(d => d.CustomerID == userId).ToListAsync(); 
-            var orders = await _context.Orders.ToListAsync();
+            var orders = await _context.Orders.Where(d => d.CustomerID == userID).ToListAsync(); 
+            //var orders = await _context.Orders.ToListAsync();
             return orders;
         }
 
