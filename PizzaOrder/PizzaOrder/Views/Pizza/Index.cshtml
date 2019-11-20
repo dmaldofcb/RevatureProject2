@@ -138,16 +138,16 @@
         var textToChange = $("#price");
        // $("#textToChange").empty();
 
-        function passPizza(pizzaType) {
-            console.log(pizzaType);
+        function passPizza(pizzaPrice) {
+            console.log(pizzaPrice);
             var elems = document.getElementByNames("SelectSize");
-            var id = elems.getElementById(pizzaType)
-            elems.addEventListener("onchange", selectPizzaSize(id));
+            //var id = elems.getElementById(pizzaPrice)
+            elems.addEventListener("onchange", selectPizzaSize(pizzaPrice));
         }
 
        
         //$('#SelectSize').change(function () { // have to get the value of the id after the change has been made. Cannot declare before
-          function selectPizzaSize(pizzaType) {
+          function selectPizzaSize(pizzaPrice) {
             var id = $('#SelectSize').val();
             console.log(id);
                     //document.getElementById("price").innerHTML = "100";
