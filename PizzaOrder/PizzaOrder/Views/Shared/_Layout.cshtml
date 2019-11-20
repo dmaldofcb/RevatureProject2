@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/PizzaCSS/icomoon.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/PizzaCSS/style.css">
 </head>
-<body style="background-color:#dbdbdb">
+<body style="background-color:#fac564">
     <div>
         <header>
             @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:gold;">
@@ -58,7 +58,7 @@
             </nav>*@
             <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html"><span class="flaticon-pizza-1 mr-1"></span>Pizza<br><small>Delicous</small></a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><h3 style="color:#fac564"><span class="flaticon-pizza">Callback Cat's Pizzeria</span></h3></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="oi oi-menu"></span> Menu
                     </button>
@@ -85,7 +85,7 @@
             <!-- END nav -->
 
         </header>
-        <div class="container">
+        <div class="container-fluid">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
