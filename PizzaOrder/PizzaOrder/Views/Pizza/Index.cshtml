@@ -1,16 +1,14 @@
-﻿@model IEnumerable<Layers.Models.Models.PizzaPie>
+﻿@model Layers.Models.ViewModels.PizzaMenuVM
 
-@{
-    ViewData["Title"] = "Index";
-}
-<head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
           $(document).ready(function () {
             $("#flip").click(function () {
                 $("#panel").slideToggle("slow");
             });
-          });
+        });
+
+
     </script>
     <script>
         $(document).ready(function () {
@@ -35,25 +33,40 @@
       
     </script>
 
-   
-</head>
-<body>
-    <div id="flip">Click to see our list of toppings!</div>
-    <div id="panel">Ya got got Jabroni! We don't have any toppings for you</div>
-    <div class="container-fluid">
+    <div id="flip">Click to see our list of toppings!>
+    <div id="panel">
+        @foreach (var item in Model.Toppings)
+        {
+            <table>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        $
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            </table>
+        }
+
+    </div>
+    </div>
+    
+    <div class="container-fluid" id="Pizzas">
         <div class="m-md-4">
             <div class="row">
                 <div class="col">
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
                         <div class="card-body">
-                            <h2>$16.85</h2>
+                            <h2 id="price" > $16.85 </h2>
                             <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             <button type="submit" class="=btn btn-primary">Add to Cart</button>
                             @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
-                            <select class="mdb-select md-form">
+                            <select name="SelectSize" id="pepperoni" onclick="passPizza(this.id)" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -73,12 +86,12 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                         <div class="card-body">
-                            <h2>$18.95</h2>
+                            <h2 id="price"> $18.95</h2>
                             <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select class="mdb-select md-form">
+                            <select name="SelectSize" id="hawaiian" onclick="passPizza(this.id)" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -94,13 +107,13 @@
                     <div class="card" style="background-color:cornsilk">
                         <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                         <div class="card-body">
-                            <h2>$18.95</h2>
+                            <h2 id="price2"> $12.75</h2>
                             <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                         </div>
                         <div class=" card-footer" style="background-color:silver">
                             footer
                             <button type="button" class="=btn btn-primary">Add to Cart</button>
-                            <select class="mdb-select md-form">
+                            <select name="SelectSize" id="sausage" onclick="passPizza('price2')" class="mdb-select md-form">
                                 <option value="" disabled selected>Select Your Size</option>
                                 <option value="1" style="color:blue">Small</option>
                                 <option value="2" style="color:blue">Medium</option>
@@ -114,7 +127,48 @@
             </div>
         </div>
     </div>
-</body>
+    <script>
+//      $('#SelectSize').change(function () {
+//    alert('This works');
+//}); 
+         //var psize = document.getElementById("SelectSize");   
+        //var id = psize.value;
+        
+        var textToChange = $("#price");
+       // $("#textToChange").empty();
+        function passPizza(pizzaPrice) {
+            console.log(pizzaPrice);
+            var elems = document.getElementByNames("SelectSize");
+            //var id = elems.getElementById(pizzaPrice)
+            elems.addEventListener("change", selectPizzaSize(pizzaPrice));
+        }
+
+       
+        //$('#SelectSize').change(function () { // have to get the value of the id after the change has been made. Cannot declare before
+          function selectPizzaSize(pizzaPrice) {
+            var id = $('#SelectSize').val();
+            console.log(id);
+                    //document.getElementById("price").innerHTML = "100";
+           // function ChangePrice()
+            $.ajax({
+                contentType: "application/json;charset=utf-8",
+                type: "GET",
+                url: "http://localhost:51600/api/PizzaAPI/" + id,
+               
+             
+                success: function (data) {
+                    console.log("data:", data);
+                    console.log("Price:", data.price);
+
+                    //var json = JSON.parse(data);
+                    document.getElementById(pizzaPrice).innerHTML = data.price + @Model.Toppings[0].Price;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    textToChange.innerHTML = textStatus;
+                }
+            });
+        }
+            
 
         <h1>Index</h1>
 
@@ -164,8 +218,7 @@
                             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
-
-                }
+    </script>
 
                 <p>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
