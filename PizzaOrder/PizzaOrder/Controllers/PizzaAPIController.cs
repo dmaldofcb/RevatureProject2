@@ -14,7 +14,7 @@ namespace PizzaOrderAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    
+    [EnableCors("Cors Policy")]
     public class PizzaAPIController : ControllerBase
     {
        // private readonly PizzaPieRepo _pizzaRepo;
@@ -42,6 +42,7 @@ namespace PizzaOrderAPI.Controllers
         }
 
         [HttpGet("{id}")]
+
         public async Task<Size> GetSizes(int id)
         {
             var sizes = await _pizzaRepo.GetSizes();
@@ -50,7 +51,8 @@ namespace PizzaOrderAPI.Controllers
         }
 
         //[HttpGet("{name}")]
-        //public async Task<List<PizzaToppings>> GetToppings(string name)
+        //[Route("api/PizzaAPI/GetToppings")]
+        //public async Task<List<PizzaToppings>> GetToppingsForPremade(string name)
         //{
         //    var pizzas = await _pizzaRepo.Get();
 
