@@ -44,7 +44,7 @@ namespace PizzaOrder.Controllers
                     //    new MediaTypeWithQualityHeaderValue("application/json"));
 
                     //var apiUrl = "api/Pizza";
-                    var responseTask = await client.GetAsync("https://pizzordersystem.azurewebsites.net/api/PizzaAPI");
+                    var responseTask = await client.GetAsync("https://pizzaordersystem.azurewebsites.net/api/PizzaAPI");
                     //responseTask.Wait();
                     //var result = responseTask.Result;
                     if (responseTask.IsSuccessStatusCode)
