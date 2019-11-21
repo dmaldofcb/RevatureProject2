@@ -37,7 +37,7 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
                     <div class="card-body">
-                        <h2 id="price1"> $16.85 </h2>
+                        <h2 id="price1" style="color: black"> -- </h2>
                         <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
@@ -57,7 +57,7 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                     <div class="card-body">
-                        <h2 id="price2"> $18.95</h2>
+                        <h2 id="price2" style="color: black"> --</h2>
                         <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
@@ -78,13 +78,13 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                     <div class="card-body">
-                        <h2 id="price3"> $12.75</h2>
+                        <h2 id="price3" style="color: black"> --</h2>
                         <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
                         footer
                         <button type="button" class="=btn btn-primary">Add to Cart</button>
-                        <select name="SelectSize" id="sausage" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="sausage" onchange="passPizza('price3', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -126,7 +126,7 @@
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
-                url: "http://localhost:51600/api/PizzaAPI/" + id,
+                url: "https://pizzorderapi.azurewebsites.net/api/PizzaAPI/" + id,
 
 
                 success: function (data) {
@@ -134,11 +134,33 @@
                     console.log("Price:", data.price);
 
                     //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = data.price;
+                    document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
                 }
             });
-        }
+    }
+
+     //function getToppings(pizzaPrice, _id) {
+     //       var id = document.getElementById(_id).value;
+     //       console.log(id);
+     //       $.ajax({
+     //           contentType: "application/json;charset=utf-8",
+     //           type: "GET",
+     //           url: "http://localhost:51600/api/PizzaAPI/" + id,
+
+
+     //           success: function (data) {
+     //               console.log("data:", data);
+     //               console.log("Price:", data.price);
+
+     //               //var json = JSON.parse(data);
+     //               document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
+     //           },
+     //           error: function (jqXHR, textStatus, errorThrown) {
+     //               textToChange.innerHTML = textStatus;
+     //           }
+     //       });
+     //   }
 </script>
