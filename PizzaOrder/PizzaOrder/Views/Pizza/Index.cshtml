@@ -122,44 +122,55 @@
 
         function selectPizzaSize(pizzaPrice, _id) {
             var id = document.getElementById(_id).value;
-            console.log(id);
+            console.log("calling ajax");
+            var pizzaToppings = getToppings("sausage");
+            console.log(pizzaToppings.length);
+            console.log(pizzaToppings[0]);
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
                 url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
-
+               
                 success: function (data) {
-                    console.log("data:", data);
-                    console.log("Price:", data.price);
-
+                    //console.log("data:", data);
+                    //console.log("Price:", data.price);
+                   
                     //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
+                    document.getElementById(pizzaPrice).innerHTML = '$' + data.price;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
+                  
                 }
             });
     }
 
-     //function getToppings(pizzaPrice, _id) {
-     //       var id = document.getElementById(_id).value;
-     //       console.log(id);
-     //       $.ajax({
-     //           contentType: "application/json;charset=utf-8",
-     //           type: "GET",
-     //           url: "http://localhost:51600/api/PizzaAPI/" + id,
+    function getToppings(pizzaID) {
+            //var id = document.getElementById(_id).value;
+           // console.log(id);
+            $.ajax({
+                contentType: "application/json;charset=utf-8",
+                type: "GET",
+                // returns a list of our middle table 
+                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/Toppings/" + pizzaID,
 
 
-     //           success: function (data) {
-     //               console.log("data:", data);
-     //               console.log("Price:", data.price);
-
-     //               //var json = JSON.parse(data);
-     //               document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
-     //           },
-     //           error: function (jqXHR, textStatus, errorThrown) {
-     //               textToChange.innerHTML = textStatus;
-     //           }
-     //       });
-     //   }
+                success: function (data) {
+                    console.log("data:", data);
+                    console.log("PizzaType:", data.type);
+                    
+                    return data;
+                    //var json = JSON.parse(data);
+                   // document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
+                },
+                
+                error: function (jqXHR, textStatus, errorThrown) {
+                    textToChange.innerHTML = textStatus;
+                    console.log("no pizza found");
+                    return "No pizza found";
+                }
+            });
+         return "xello";
+        
+        }
 </script>

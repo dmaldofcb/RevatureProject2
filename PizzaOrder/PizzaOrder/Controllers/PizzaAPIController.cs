@@ -56,9 +56,13 @@ namespace PizzaOrderAPI.Controllers
         {
             var pizzas = await _pizzaRepo.Get();
 
+            // searches our middle table
             var pizzaToppings = await _pizzaRepo.GetPizzaToppings();
-            var getPie = pizzas.FirstOrDefault(x => x.Type == name);
+            //searches our pizza menu to link the name in .cshtml to the name in our database table
+            var getPie = pizzas.FirstOrDefault(x => x.Type == name); // returns a single item
+            //searches middle table for where our PizzaID matches the pizza id in our menu table 
             var toppings = pizzaToppings.Where(x => x.PizzaID == getPie.Id).ToList();
+            //returns list of toppings and its associated pizza id. 
             return toppings;
         }
 
