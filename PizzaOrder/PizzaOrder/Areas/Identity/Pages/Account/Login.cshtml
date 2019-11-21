@@ -43,10 +43,10 @@
                 </div>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword"><ul style="color:blue">Forgot your password?</ul></a>
+                        <a id="forgot-password" asp-page="./ForgotPassword"><ul style="color:blue"><button type="button">Forgot your password?</button></ul></a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><button type="button">Register as a new user</button></a>
                     </p>
                     <p>
                         <button type="submit" asp-page-handler="SendVerificationEmail" class="btn-link" style="padding:0px;margin:0px;border:0px">Resend email confirmation</button>
