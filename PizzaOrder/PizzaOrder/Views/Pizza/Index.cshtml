@@ -124,8 +124,8 @@
             var id = document.getElementById(_id).value;
             console.log("calling ajax");
             var pizzaToppings = getToppings("sausage");
-            console.log(pizzaToppings.length);
-            console.log(pizzaToppings[0]);
+           // console.log(pizzaToppings.length);
+            console.log(pizzaToppings);
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
@@ -148,6 +148,7 @@
     function getToppings(pizzaID) {
             //var id = document.getElementById(_id).value;
            // console.log(id);
+        var pizzaList ="hoe";
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
@@ -159,18 +160,18 @@
                     console.log("data:", data);
                     console.log("PizzaType:", data.type);
                     
-                    return data;
+                    pizzaList = data;
                     //var json = JSON.parse(data);
                    // document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
                 },
                 
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
-                    console.log("no pizza found");
-                    return "No pizza found";
+                    //console.log("no pizza found");
+                    pizzaList  = "No pizza found";
                 }
+                      
             });
-         return "xello";
-        
+                    return pizzaList;
         }
 </script>
