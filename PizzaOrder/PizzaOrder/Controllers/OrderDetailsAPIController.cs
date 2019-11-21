@@ -85,14 +85,13 @@ namespace PizzaOrderAPI.Controllers
         //// POST: api/OrderDetails
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
         //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPost]
-        //public async Task<ActionResult<OrderDetails>> PostOrderDetails(OrderDetails orderDetails)
-        //{
-        //    _context.OrdersDetails.Add(orderDetails);
-        //    await _context.SaveChangesAsync();
+        [HttpPost]
+        public async Task<ActionResult<OrderDetails>> PostOrderDetails(OrderDetails orderDetails)
+        {
+            await _repo.Create(orderDetails);
 
-        //    return CreatedAtAction("GetOrderDetails", new { id = orderDetails.Id }, orderDetails);
-        //}
+            return CreatedAtAction("GetOrderDetails", new { id = orderDetails.Id }, orderDetails);
+        }
 
         //// DELETE: api/OrderDetails/5
         //[HttpDelete("{id}")]

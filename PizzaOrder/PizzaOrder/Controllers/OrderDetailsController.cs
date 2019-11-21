@@ -29,5 +29,20 @@ namespace PizzaOrder.Controllers
             }
             return View(reservationList);
         }
+
+        //public async Task<IActionResult> Create(String orderId, string pizzaId) {
+        //    List<OrderDetails> reservationList = new List<OrderDetails>();
+        //    using (var httpClient = new HttpClient())
+        //    {
+        //        using(var response = await httpClient.PostAsync("htttp://localhost:51600/api/OrderDetails/"))
+
+        //        using (var response = await httpClient.GetAsync("http://localhost:51600/api/OrderDetails/GetOrdersByOrderId/" + id))
+        //        {
+        //            string apiResponse = await response.Content.ReadAsStringAsync();
+        //            reservationList = JsonConvert.DeserializeObject<List<OrderDetails>>(apiResponse);
+        //        }
+        //    }
+        //    return View(reservationList);
+        //}
     }
 }
