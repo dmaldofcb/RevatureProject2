@@ -1,4 +1,5 @@
 ﻿@model Layers.Models.ViewModels.PizzaMenuVM
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -7,24 +8,7 @@
         });
     });
 </script>
-<script>
-    //$(document).ready(function () {
-    //    $('.mdb-select').materialSelect();
-    //});
-    //$(document).ready(function () {
-    //    $("#sizedropdown").click(function () {
-    //        $("#size").show();
-    //    });
-    //});
-    //$(document).ready(function () {
-    //    $("button").on(
-    //        {
-    //            mouseenter: function () {
-    //                $(this).css("background-color", "blue");
-    //            }
-    //        });
-    //});
-</script>
+
 <div id="flip">
     Click to see our list of toppings!>
     <div id="panel">
@@ -42,8 +26,10 @@
                 </tr>
             </table>
         }
+
     </div>
 </div>
+
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
         <div class="row">
@@ -51,37 +37,32 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
                     <div class="card-body">
-                        <h2 id="price"> $16.85 </h2>
+                        <h2 id="price1"> $16.85 </h2>
                         <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
                         <button onclick="AddToCart()" id="1" value="AddToCart" class="=btn btn-primary">Add to Cart</button>
-                        @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
-                        <select name="SelectSize" id="pepperoni" onclick="passPizza(this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="pepperoni" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
                             <option value="3" style="color:blue">Large</option>
                         </select>
-                        @*<div class="dropdown-menu" style="background-color:lightgray">
-                                <a class="dropdown-item" id="size" style="color:blue" href="#">Small</a>
-                                <a class="dropdown-item" id="size" style="color:blue" href="#">Medium</a>
-                                <a class="dropdown-item" id="size" style="color:blue" href="#">Large</a>
-                            </div>*@
                         <button type="button" id="Customize">Customize Your Order</button>
                     </div>
                 </div>
+
             </div>
             <div class="col">
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                     <div class="card-body">
-                        <h2 id="price"> $18.95</h2>
+                        <h2 id="price2"> $18.95</h2>
                         <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
                         <button type="button" class="=btn btn-primary">Add to Cart</button>
-                        <select name="SelectSize" id="hawaiian" onclick="passPizza(this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="hawaiian" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -97,13 +78,13 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                     <div class="card-body">
-                        <h2 id="price2"> $12.75</h2>
+                        <h2 id="price3"> $12.75</h2>
                         <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
                         footer
                         <button type="button" class="=btn btn-primary">Add to Cart</button>
-                        <select name="SelectSize" id="sausage" onclick="passPizza('price2')" class="mdb-select md-form">
+                        <select name="SelectSize" id="sausage" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -113,51 +94,51 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <script>
-//      $('#SelectSize').change(function () {
-//    alert('This works');
-//});
-         //var psize = document.getElementById("SelectSize");
-        //var id = psize.value;
+
         var textToChange = $("#price");
-       // $("#textToChange").empty();
-        function passPizza(pizzaPrice) {
+
+        function passPizza(pizzaPrice, _id) {
             console.log(pizzaPrice);
-            var elems = document.getElementByNames("SelectSize");
-            //var id = elems.getElementById(pizzaPrice)
-            elems.addEventListener("change", selectPizzaSize(pizzaPrice));
-        }
-        //$('#SelectSize').change(function () { // have to get the value of the id after the change has been made. Cannot declare before
-          function selectPizzaSize(pizzaPrice) {
-            var id = $('#SelectSize').val();
+            var elems = document.getElementsByName("SelectSize");
+            var id = getID(elems, _id);
             console.log(id);
-                    //document.getElementById("price").innerHTML = "100";
-           // function ChangePrice()
+            for (var i = 0; i < elems.length; i++) {
+                elems.addEventListener("change", selectPizzaSize(pizzaPrice, id));
+            }
+        }
+
+        function getID(elems, id) {
+            for (var i = 0; i < elems.length; i++) {
+                 if (elems[i].id == id) {
+                    return elems[i].id
+                }
+            }
+    }
+
+        function selectPizzaSize(pizzaPrice, _id) {
+            var id = document.getElementById(_id).value;
+            console.log(id);
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
                 url: "http://localhost:51600/api/PizzaAPI/" + id,
+
+
                 success: function (data) {
                     console.log("data:", data);
                     console.log("Price:", data.price);
+
                     //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = data.price + @Model.Toppings[0].Price;
+                    document.getElementById(pizzaPrice).innerHTML = data.price;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
                 }
             });
         }
-           @*var list = document.getElementById("SelectSize").getElementsByTagName('option');
-        for (var i=0; i<list.length; i++) {
-        list[i].addEventListener('click', getSize(), false);
-        }
-         function getSize() {
-             var price = document.getElementsByTagName("h2");
-             price = @Model.Size.FirstOrDefault(x => x.Id == 1).Price;
-    }
-        document.getElementsById("price").innerHTML = 100;*@
 </script>
