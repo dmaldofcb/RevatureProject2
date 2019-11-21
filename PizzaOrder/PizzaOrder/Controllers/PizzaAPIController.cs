@@ -14,7 +14,7 @@ namespace PizzaOrderAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    
+    [EnableCors("_myAllowSpecificOrigins")]
     public class PizzaAPIController : ControllerBase
     {
        // private readonly PizzaPieRepo _pizzaRepo;
@@ -40,12 +40,26 @@ namespace PizzaOrderAPI.Controllers
             pizzaMenuModel.Toppings = toppings;
             return pizzaMenuModel;
         }
+
         [HttpGet("{id}")]
+
         public async Task<Size> GetSizes(int id)
         {
             var sizes = await _pizzaRepo.GetSizes();
             var getSize = sizes.FirstOrDefault(x => x.Id == id);
             return getSize;
+        }
+
+        [HttpGet()]
+        [Route("Toppings/{name}")]
+        public async Task<List<PizzaToppings>> GetToppingsForPremade(string name)
+        {
+            var pizzas = await _pizzaRepo.Get();
+
+            var pizzaToppings = await _pizzaRepo.GetPizzaToppings();
+            var getPie = pizzas.FirstOrDefault(x => x.Type == name);
+            var toppings = pizzaToppings.Where(x => x.PizzaID == getPie.Id).ToList();
+            return toppings;
         }
 
     }

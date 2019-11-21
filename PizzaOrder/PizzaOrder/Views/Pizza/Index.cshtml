@@ -1,8 +1,4 @@
-@model Layers.Models.ViewModels.PizzaMenuVM
-@using Microsoft.AspNetCore.Identity
-@using Layers.Models.Models;
-@inject SignInManager<Customer> SignInManager
-@inject UserManager<Customer> UserManager
+﻿@model Layers.Models.ViewModels.PizzaMenuVM
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -13,7 +9,6 @@
     });
 </script>
 
-@*
 <div id="flip">
     Click to see our list of toppings!>
     <div id="panel">
@@ -34,7 +29,6 @@
 
     </div>
 </div>
- *@
 
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
@@ -43,32 +37,17 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
                     <div class="card-body">
-                        <h2 id="price1"> $16.85 </h2>
+                        <h2 id="price1" style="color: black"> -- </h2>
                         <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
-
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <button type="button" class="=btn btn-primary" onclick="addPepperoni()">Add to Cart</button>
-                        }
-                        else
-                        {
-                            <button type="button" class="=btn btn-primary" disabled="true">Add to Cart</button>
-                        }
-                        @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
+                        <button onclick="AddToCart()" id="1" value="AddToCart" class="=btn btn-primary">Add to Cart</button>
                         <select name="SelectSize" id="pepperoni" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
-
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
                             <option value="3" style="color:blue">Large</option>
                         </select>
-                        @*<div class="dropdown-menu" style="background-color:lightgray">
-            <a class="dropdown-item" id="size" style="color:blue" href="#">Small</a>
-            <a class="dropdown-item" id="size" style="color:blue" href="#">Medium</a>
-            <a class="dropdown-item" id="size" style="color:blue" href="#">Large</a>
-        </div>*@
                         <button type="button" id="Customize">Customize Your Order</button>
                     </div>
                 </div>
@@ -78,18 +57,11 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                     <div class="card-body">
-                        <h2 id="price2"> $18.95</h2>
+                        <h2 id="price2" style="color: black"> --</h2>
                         <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <button type="button" class="=btn btn-primary" onclick="addHawaiian()">Add to Cart</button>
-                        }
-                        else
-                        {
-                            <button type="button" class="=btn btn-primary" disabled="true">Add to Cart</button>
-                        }
+                        <button type="button" class="=btn btn-primary">Add to Cart</button>
                         <select name="SelectSize" id="hawaiian" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
@@ -106,19 +78,13 @@
                 <div class="card" style="background-color:cornsilk">
                     <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
                     <div class="card-body">
-                        <h2 id="price3"> $12.75</h2>
+                        <h2 id="price3" style="color: black"> --</h2>
                         <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <button type="button" class="=btn btn-primary" onclick="addSausage()">Add to Cart</button>
-                        }
-                        else
-                        {
-                            <button type="button" class="=btn btn-primary" disabled="true">Add to Cart</button>
-                        }
-                        <select name="SelectSize" id="sausage" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
+                        footer
+                        <button type="button" class="=btn btn-primary">Add to Cart</button>
+                        <select name="SelectSize" id="sausage" onchange="passPizza('price3', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -135,7 +101,6 @@
 <script>
 
         var textToChange = $("#price");
-        var key = 0;
 
         function passPizza(pizzaPrice, _id) {
             console.log(pizzaPrice);
@@ -161,103 +126,40 @@
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
-                url: "http://localhost:51600/api/PizzaAPI/" + id,
-
+                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
 
                 success: function (data) {
                     console.log("data:", data);
                     console.log("Price:", data.price);
 
                     //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = data.price;
+                    document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
                 }
             });
-        }
+    }
 
-        function addPepperoni() {
-            var choice = document.getElementById("pepperoni");
-            var valueCopy = choice.options[choice.selectedIndex].value;
+     //function getToppings(pizzaPrice, _id) {
+     //       var id = document.getElementById(_id).value;
+     //       console.log(id);
+     //       $.ajax({
+     //           contentType: "application/json;charset=utf-8",
+     //           type: "GET",
+     //           url: "http://localhost:51600/api/PizzaAPI/" + id,
 
-            while (localStorage.getItem(key) != null) {
-                key++;
-            }
 
-            if (valueCopy == "") {
-                alert("Please select a size.");
-            }
-            else if (valueCopy == 1) {
-                alert("One small pepperoni pizza added to your cart.")
-                localStorage.setItem(key, "One small peperoni pizza")
-                key++;
-            }
-            else if (valueCopy == 2) {
-                alert("One medium pepperoni pizza added to your cart.")
-                localStorage.setItem(key, "One medium peperoni pizza")
-                key++;
-            }
-            else {
-                alert("One large pepperoni pizza added to your cart.")
-                localStorage.setItem(key, "One large peperoni pizza")
-                key++;
-            }
-        }
+     //           success: function (data) {
+     //               console.log("data:", data);
+     //               console.log("Price:", data.price);
 
-        function addHawaiian() {
-            var choice = document.getElementById("hawaiian");
-            var valueCopy = choice.options[choice.selectedIndex].value;
-
-            while (localStorage.getItem(key) != null) {
-                key++;
-            }
-
-            if (valueCopy == "") {
-                alert("Please select a size.");
-            }
-            else if (valueCopy == 1) {
-                alert("One small hawaiian pizza added to your cart.")
-                localStorage.setItem(key, "One small hawaiian pizza")
-                key++;
-            }
-            else if (valueCopy == 2) {
-                alert("One medium hawaiian pizza added to your cart.")
-                localStorage.setItem(key, "One medium hawaiian pizza")
-                key++;
-            }
-            else {
-                alert("One large hawaiian pizza added to your cart.")
-                localStorage.setItem(key, "One large hawaiian pizza")
-                key++;
-            }
-        }
-
-        function addSausage() {
-            var choice = document.getElementById("sausage");
-            var valueCopy = choice.options[choice.selectedIndex].value;
-
-            while (localStorage.getItem(key) != null) {
-                key++;
-            }
-
-            if (valueCopy == "") {
-                alert("Please select a size.");
-            }
-            else if (valueCopy == 1) {
-                alert("One small sausage pizza added to your cart.")
-                localStorage.setItem(key, "One small sausage pizza")
-                key++;
-            }
-            else if (valueCopy == 2) {
-                alert("One medium sausage pizza added to your cart.")
-                localStorage.setItem(key, "One medium sausage pizza")
-                key++;
-            }
-            else {
-                alert("One large sausage pizza added to your cart.")
-                localStorage.setItem(key, "One large sausage pizza")
-                key++;
-            }
-        }
+     //               //var json = JSON.parse(data);
+     //               document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
+     //           },
+     //           error: function (jqXHR, textStatus, errorThrown) {
+     //               textToChange.innerHTML = textStatus;
+     //           }
+     //       });
+     //   }
 </script>
