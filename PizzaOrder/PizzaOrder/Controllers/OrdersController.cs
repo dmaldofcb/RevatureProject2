@@ -34,5 +34,10 @@ namespace PizzaOrder.Controllers
             }
             return View(reservationList);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
     }
 }
