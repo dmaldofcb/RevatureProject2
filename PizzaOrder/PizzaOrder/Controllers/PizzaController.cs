@@ -10,6 +10,7 @@ using PizzaOrder.Data;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using Layers.Models.ViewModels;
 
 namespace PizzaOrder.Controllers
 {
@@ -17,20 +18,38 @@ namespace PizzaOrder.Controllers
     {
         private string url = "http://localhost:51193/";
 
-       
+
 
         // Display Menu
-        public async Task<ActionResult> IndexAsync()
+
+        public async Task<IActionResult> Index()
         {
-            List<PizzaPie> pizzas = new List<PizzaPie>();
-            using (var httpClient = new HttpClient())
+            //List<PizzaPie> pizzas = null;
+            PizzaMenuVM pizzas = null;
+            using (var client = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Pizza"))
+                //client.BaseAddress = new Uri("https://pizzorderapi.azurewebsites.net/"); // DONT PLACE API HERE. OR ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(
+                //    new MediaTypeWithQualityHeaderValue("application/json"));
+                //var apiUrl = "api/Pizza";
+                var responseTask = await client.GetAsync("https://pizzaordersystem.azurewebsites.net/api/PizzaAPI");
+                //responseTask.Wait();
+                //var result = responseTask.Result;
+                if (responseTask.IsSuccessStatusCode)
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    pizzas = JsonConvert.DeserializeObject<List<PizzaPie>>(apiResponse);
+                    var readTask = responseTask.Content.ReadAsStringAsync().Result;
+                    //readTask.Wait();
+                    pizzas = JsonConvert.DeserializeObject<PizzaMenuVM>(readTask);
+                }
+                else //web api sent error response
+                {
+                    ModelState.AddModelError(string.Empty, "Server error. Please wait a few minutes and refresh the page.");
                 }
             }
+            //return Content(pizzas.Size.ToString());
+            return View(pizzas);
+        }
             //IEnumerable<PizzaPie> pizzas = null;
             //HttpClient client = new HttpClient();
             //client.BaseAddress = new Uri("http://localhost:59293/api");
@@ -58,8 +77,7 @@ namespace PizzaOrder.Controllers
 
             //    ModelState.AddModelError(string.Empty, "Server error. Please wait a few minutes and refresh the page.");
             //}
-            return View(pizzas);
-        }
+        
   
             //var pizzasAsString = stringTask.Result;
             //var result = JsonConvert.DeserializeObject<List<PizzaPie>>(pizzasAsString);
