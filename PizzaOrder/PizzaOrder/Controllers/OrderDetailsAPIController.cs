@@ -29,6 +29,13 @@ namespace PizzaOrderAPI.Controllers
             return await _repo.Get();
         }
 
+        [HttpGet]
+        [Route("GetOrdersByOrderID/{orderId}")]
+        public async Task<ActionResult<IEnumerable<OrderDetails>>> GetOrdersByOrderID(int orderId)
+        {
+            return await _repo.GetByOrderID(orderId);
+        }
+
         // GET: api/OrderDetails/5
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDetails>> GetOrderDetails(int id)
