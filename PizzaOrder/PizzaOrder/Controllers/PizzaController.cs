@@ -38,13 +38,13 @@ namespace PizzaOrder.Controllers
                 PizzaMenuVM pizzas = null;
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("https://pizzorderapi.azurewebsites.net/"); // DONT PLACE API HERE. OR ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    //client.BaseAddress = new Uri("https://pizzorderapi.azurewebsites.net/"); // DONT PLACE API HERE. OR ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    //client.DefaultRequestHeaders.Accept.Clear();
+                    //client.DefaultRequestHeaders.Accept.Add(
+                    //    new MediaTypeWithQualityHeaderValue("application/json"));
 
                     //var apiUrl = "api/Pizza";
-                    var responseTask = await client.GetAsync("api/PizzaAPI");
+                    var responseTask = await client.GetAsync("https://pizzaordersystem.azurewebsites.net/api/PizzaAPI");
                     //responseTask.Wait();
                     //var result = responseTask.Result;
                     if (responseTask.IsSuccessStatusCode)
