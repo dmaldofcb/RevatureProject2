@@ -120,14 +120,13 @@
             }
     }
 
-    function selectPizzaSize(pizzaPrice, _id)
-    {
+        function selectPizzaSize(pizzaPrice, _id) {
             var id = document.getElementById(_id).value;
             console.log(id);
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
-                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
+                url: "https://pizzorderapi.azurewebsites.net/api/PizzaAPI" + id,
 
 
                 success: function (data) {
