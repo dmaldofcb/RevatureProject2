@@ -48,5 +48,16 @@ namespace PizzaOrderAPI.Controllers
             return getSize;
         }
 
+        [HttpGet("{name}")]
+        public async Task<List<PizzaToppings>> GetToppings(string name)
+        {
+            var pizzas = await _pizzaRepo.Get();
+
+            var pizzaToppings = await _pizzaRepo.GetPizzaToppings();
+            var getPie = pizzas.FirstOrDefault(x => x.Type == name);
+            var toppings = pizzaToppings.Where(x => x.PizzaID == getPie.Id).ToList();
+            return toppings;
+        }
+
     }
 }
