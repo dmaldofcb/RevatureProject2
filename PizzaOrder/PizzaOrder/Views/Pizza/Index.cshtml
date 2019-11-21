@@ -43,6 +43,7 @@
             </table>
         }
     </div>
+<<<<<<< Updated upstream
 </div>
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
@@ -69,8 +70,38 @@
                                 <a class="dropdown-item" id="size" style="color:blue" href="#">Large</a>
                             </div>*@
                         <button type="button" id="Customize">Customize Your Order</button>
+=======
+    
+    <div class="container-fluid" id="Pizzas">
+        <div class="m-md-4">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="background-color:cornsilk">
+                        <div class="card-header" style="background-color:goldenrod"><h5>Pepperoni</h5></div>
+                        <div class="card-body">
+                            <h2 id="price1" > $16.85 </h2>
+                            <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
+                        </div>
+                        <div class=" card-footer" style="background-color:silver">
+                            <button onclick="AddToCart()" id="1" value="AddToCart" class="=btn btn-primary">Add to Cart</button>
+                            @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
+                            <select name="SelectSize" id="pepperoni" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
+                                <option value="" disabled selected>Select Your Size</option>
+                                <option value="1" style="color:blue">Small</option>
+                                <option value="2" style="color:blue">Medium</option>
+                                <option value="3" style="color:blue">Large</option>
+                            </select>
+                            @*<div class="dropdown-menu" style="background-color:lightgray">
+                                    <a class="dropdown-item" id="size" style="color:blue" href="#">Small</a>
+                                    <a class="dropdown-item" id="size" style="color:blue" href="#">Medium</a>
+                                    <a class="dropdown-item" id="size" style="color:blue" href="#">Large</a>
+                                </div>*@
+                            <button type="button" id="Customize">Customize Your Order</button>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
                 </div>
+<<<<<<< Updated upstream
             </div>
             <div class="col">
                 <div class="card" style="background-color:cornsilk">
@@ -110,11 +141,53 @@
                             <option value="3" style="color:blue">Large</option>
                         </select>
                         <button type="button">Customize Your Order</button>
+=======
+                <div class="col">
+                    <div class="card" style="background-color:cornsilk">
+                        <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
+                        <div class="card-body">
+                            <h2 id="price2"> $18.95</h2>
+                            <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
+                        </div>
+                        <div class=" card-footer" style="background-color:silver">
+                            <button type="button" class="=btn btn-primary">Add to Cart</button>
+                            <select name="SelectSize" id="hawaiian" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
+                                <option value="" disabled selected>Select Your Size</option>
+                                <option value="1" style="color:blue">Small</option>
+                                <option value="2" style="color:blue">Medium</option>
+                                <option value="3" style="color:blue">Large</option>
+                            </select>
+                            <button type="button">Customize Your Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="background-color:cornsilk">
+                        <div class="card-header" style="background-color:goldenrod"> <h5>Sausage</h5></div>
+                        <div class="card-body">
+                            <h2 id="price3"> $12.75</h2>
+                            <img src="~/Images/sausage-pizza.png" class="pizzaimg" />
+                        </div>
+                        <div class=" card-footer" style="background-color:silver">
+                            footer
+                            <button type="button" class="=btn btn-primary">Add to Cart</button>
+                            <select name="SelectSize" id="sausage" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
+                                <option value="" disabled selected>Select Your Size</option>
+                                <option value="1" style="color:blue">Small</option>
+                                <option value="2" style="color:blue">Medium</option>
+                                <option value="3" style="color:blue">Large</option>
+                            </select>
+                            <button type="button">Customize Your Order</button>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
 </div>
 <script>
 //      $('#SelectSize').change(function () {
@@ -122,17 +195,36 @@
 //});
          //var psize = document.getElementById("SelectSize");
         //var id = psize.value;
+=======
+    <script>       
+>>>>>>> Stashed changes
         var textToChange = $("#price");
-       // $("#textToChange").empty();
-        function passPizza(pizzaPrice) {
+
+        function passPizza(pizzaPrice, _id) {
             console.log(pizzaPrice);
-            var elems = document.getElementByNames("SelectSize");
-            //var id = elems.getElementById(pizzaPrice)
-            elems.addEventListener("change", selectPizzaSize(pizzaPrice));
+            var elems = document.getElementsByName("SelectSize");
+            var id = getID(elems, _id);
+            console.log(id);
+            for (var i = 0; i < elems.length; i++) {
+                elems.addEventListener("change", selectPizzaSize(pizzaPrice, id));
+            }
         }
+<<<<<<< Updated upstream
+=======
+
+        function getID(elems, id) {
+            for (var i = 0; i < elems.length; i++) {
+                 if (elems[i].id == id) {
+                    return elems[i].id
+                }
+            }           
+        }
+        
+       
+>>>>>>> Stashed changes
         //$('#SelectSize').change(function () { // have to get the value of the id after the change has been made. Cannot declare before
-          function selectPizzaSize(pizzaPrice) {
-            var id = $('#SelectSize').val();
+        function selectPizzaSize(pizzaPrice, _id) {
+            var id = document.getElementById(_id).value;
             console.log(id);
                     //document.getElementById("price").innerHTML = "100";
            // function ChangePrice()
@@ -144,7 +236,7 @@
                     console.log("data:", data);
                     console.log("Price:", data.price);
                     //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = data.price + @Model.Toppings[0].Price;
+                    document.getElementById(pizzaPrice).innerHTML = data.price;
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
