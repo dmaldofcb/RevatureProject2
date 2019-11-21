@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your Cart</h1>
+
+<script>
+    document.write('<pre>');
+    for (let i = 0; i < localStorage.length; i++){
+        let key = localStorage.key(i);
+        let value = localStorage.getItem(key);
+        document.writeln(value);
+    }
+</script>

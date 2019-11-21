@@ -13,6 +13,7 @@
     });
 </script>
 
+@*
 <div id="flip">
     Click to see our list of toppings!>
     <div id="panel">
@@ -33,6 +34,7 @@
 
     </div>
 </div>
+ *@
 
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
@@ -48,11 +50,11 @@
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary">Add to Cart</button>
+                            <button type="button" class="=btn btn-primary" onclick="addPepperoni()">Add to Cart</button>
                         }
                         else
                         {
-                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+                            <button type="button" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
                         @*<button type="button" id="sizedropdown" class="=btn btn-primary dropdown-toggle" data-toggle="dropdown">Select Size </button>*@
                         <select name="SelectSize" id="pepperoni" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
@@ -82,11 +84,11 @@
                     <div class=" card-footer" style="background-color:silver">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary">Add to Cart</button>
+                            <button type="button" class="=btn btn-primary" onclick="addHawaiian()">Add to Cart</button>
                         }
                         else
                         {
-                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+                            <button type="button" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
                         <select name="SelectSize" id="hawaiian" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
@@ -110,13 +112,12 @@
                     <div class=" card-footer" style="background-color:silver">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary">Add to Cart</button>
+                            <button type="button" class="=btn btn-primary" onclick="addSausage()">Add to Cart</button>
                         }
                         else
                         {
-                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+                            <button type="button" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <button type="button" class="=btn btn-primary">Add to Cart</button>
                         <select name="SelectSize" id="sausage" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
@@ -134,6 +135,7 @@
 <script>
 
         var textToChange = $("#price");
+        var key = 0;
 
         function passPizza(pizzaPrice, _id) {
             console.log(pizzaPrice);
@@ -173,5 +175,89 @@
                     textToChange.innerHTML = textStatus;
                 }
             });
+        }
+
+        function addPepperoni() {
+            var choice = document.getElementById("pepperoni");
+            var valueCopy = choice.options[choice.selectedIndex].value;
+
+            while (localStorage.getItem(key) != null) {
+                key++;
+            }
+
+            if (valueCopy == "") {
+                alert("Please select a size.");
+            }
+            else if (valueCopy == 1) {
+                alert("One small pepperoni pizza added to your cart.")
+                localStorage.setItem(key, "One small peperoni pizza")
+                key++;
+            }
+            else if (valueCopy == 2) {
+                alert("One medium pepperoni pizza added to your cart.")
+                localStorage.setItem(key, "One medium peperoni pizza")
+                key++;
+            }
+            else {
+                alert("One large pepperoni pizza added to your cart.")
+                localStorage.setItem(key, "One large peperoni pizza")
+                key++;
+            }
+        }
+
+        function addHawaiian() {
+            var choice = document.getElementById("hawaiian");
+            var valueCopy = choice.options[choice.selectedIndex].value;
+
+            while (localStorage.getItem(key) != null) {
+                key++;
+            }
+
+            if (valueCopy == "") {
+                alert("Please select a size.");
+            }
+            else if (valueCopy == 1) {
+                alert("One small hawaiian pizza added to your cart.")
+                localStorage.setItem(key, "One small hawaiian pizza")
+                key++;
+            }
+            else if (valueCopy == 2) {
+                alert("One medium hawaiian pizza added to your cart.")
+                localStorage.setItem(key, "One medium hawaiian pizza")
+                key++;
+            }
+            else {
+                alert("One large hawaiian pizza added to your cart.")
+                localStorage.setItem(key, "One large hawaiian pizza")
+                key++;
+            }
+        }
+
+        function addSausage() {
+            var choice = document.getElementById("sausage");
+            var valueCopy = choice.options[choice.selectedIndex].value;
+
+            while (localStorage.getItem(key) != null) {
+                key++;
+            }
+
+            if (valueCopy == "") {
+                alert("Please select a size.");
+            }
+            else if (valueCopy == 1) {
+                alert("One small sausage pizza added to your cart.")
+                localStorage.setItem(key, "One small sausage pizza")
+                key++;
+            }
+            else if (valueCopy == 2) {
+                alert("One medium sausage pizza added to your cart.")
+                localStorage.setItem(key, "One medium sausage pizza")
+                key++;
+            }
+            else {
+                alert("One large sausage pizza added to your cart.")
+                localStorage.setItem(key, "One large sausage pizza")
+                key++;
+            }
         }
 </script>
