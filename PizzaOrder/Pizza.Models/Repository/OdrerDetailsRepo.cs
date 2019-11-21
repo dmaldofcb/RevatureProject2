@@ -41,8 +41,14 @@ namespace Layers.Models.Repository
 
         public async Task<List<OrderDetails>> Get()
         {
-            var pizzas = await _context.OrdersDetails.ToListAsync();
-            return pizzas;
+            var orderDet = await _context.OrdersDetails.ToListAsync();
+            return orderDet;
+        }
+
+        public async Task<List<OrderDetails>> GetByOrderID(int orderId)
+        {
+            var orderDet = await _context.OrdersDetails.Where(d=> d.OrderID == orderId).ToListAsync();
+            return orderDet;
         }
 
         public bool OrderExists(int id)
