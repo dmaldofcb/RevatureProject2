@@ -18,9 +18,12 @@ namespace Layers.Models.Repository
         {
             _context = ctx;
         }
-        public Task<bool> Create(OrderDetails orderDetails)
+        public async Task<bool> Create(OrderDetails orderDetails)
         {
-            throw new NotImplementedException();
+            _context.Add(orderDetails);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
         public Task<bool> Delete(int id)
