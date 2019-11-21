@@ -1,4 +1,8 @@
 ﻿@model Layers.Models.ViewModels.PizzaMenuVM
+@using Microsoft.AspNetCore.Identity
+@using Layers.Models.Models;
+@inject SignInManager<Customer> SignInManager
+@inject UserManager<Customer> UserManager
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -41,7 +45,14 @@
                         <img src="~/Images/pepperoni-pizza.png" class="pizzaimg" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
-                        <button onclick="AddToCart()" id="1" value="AddToCart" class="=btn btn-primary">Add to Cart</button>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <button type="submit" class="=btn btn-primary" onclick="addPepperoni()">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+                        }
                         <select name="SelectSize" id="pepperoni" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
@@ -61,7 +72,14 @@
                         <img src="~/Images/hawaiian-pizza.png" class="hawaiian" />
                     </div>
                     <div class=" card-footer" style="background-color:silver">
-                        <button type="button" class="=btn btn-primary">Add to Cart</button>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <button type="submit" class="=btn btn-primary" onclick="addHawaiian()">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+                        }
                         <select name="SelectSize" id="hawaiian" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
@@ -83,7 +101,14 @@
                     </div>
                     <div class=" card-footer" style="background-color:silver">
                         footer
-                        <button type="button" class="=btn btn-primary">Add to Cart</button>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <button type="submit" class="=btn btn-primary" onclick="addSausage()">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+                        }
                         <select name="SelectSize" id="sausage" onchange="passPizza('price3', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
@@ -100,45 +125,121 @@
 </div>
 <script>
 
-        var textToChange = $("#price");
+    var textToChange = $("#price");
+    var key = 0;
 
-        function passPizza(pizzaPrice, _id) {
-            console.log(pizzaPrice);
-            var elems = document.getElementsByName("SelectSize");
-            var id = getID(elems, _id);
-            console.log(id);
-            for (var i = 0; i < elems.length; i++) {
-                elems.addEventListener("change", selectPizzaSize(pizzaPrice, id));
-            }
+    function passPizza(pizzaPrice, _id) {
+        console.log(pizzaPrice);
+        var elems = document.getElementsByName("SelectSize");
+        var id = getID(elems, _id);
+        console.log(id);
+        for (var i = 0; i < elems.length; i++) {
+            elems.addEventListener("change", selectPizzaSize(pizzaPrice, id));
         }
-
-        function getID(elems, id) {
-            for (var i = 0; i < elems.length; i++) {
-                 if (elems[i].id == id) {
-                    return elems[i].id
-                }
-            }
     }
 
-        function selectPizzaSize(pizzaPrice, _id) {
-            var id = document.getElementById(_id).value;
-            console.log(id);
-            $.ajax({
-                contentType: "application/json;charset=utf-8",
-                type: "GET",
-                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
+    function getID(elems, id) {
+        for (var i = 0; i < elems.length; i++) {
+            if (elems[i].id == id) {
+                return elems[i].id
+            }
+        }
+    }
 
-                success: function (data) {
-                    console.log("data:", data);
-                    console.log("Price:", data.price);
+    function selectPizzaSize(pizzaPrice, _id) {
+        var id = document.getElementById(_id).value;
+        console.log(id);
+        $.ajax({
+            contentType: "application/json;charset=utf-8",
+            type: "GET",
+            url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
 
-                    //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = '$' + data.price ;
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    textToChange.innerHTML = textStatus;
-                }
-            });
+            success: function (data) {
+                console.log("data:", data);
+                console.log("Price:", data.price);
+
+                //var json = JSON.parse(data);
+                document.getElementById(pizzaPrice).innerHTML = '$' + data.price;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                textToChange.innerHTML = textStatus;
+            }
+        });
+    }
+
+    function addPepperoni() {
+        var choice = document.getElementById("pepperoni");
+        var valueCopy = choice.value;
+
+        while (localStorage.getItem(key) != null) {
+            key++;
+        }
+
+        if (valueCopy == "") {
+            alert("Please select a size");
+        }
+        else if (valueCopy == 1) {
+            localStorage.setItem(key, "One small pepperoni pizza");
+            alert("Added one small pepperoni pizza to your cart.");
+        }
+        else if (valueCopy == 2) {
+            localStorage.setItem(key, "One medium pepperoni pizza");
+            alert("Added one medium pepperoni pizza to your cart.");
+        }
+        else if (valueCopy == 3) {
+            localStorage.setItem(key, "One large pepperoni pizza");
+            alert("Added one large pepperoni pizza to your cart.");
+        }
+    }
+
+    function addHawaiian() {
+        var choice = document.getElementById("hawaiian");
+        var valueCopy = choice.value;
+
+        while (localStorage.getItem(key) != null) {
+            key++;
+        }
+
+        if (valueCopy == "") {
+            alert("Please select a size");
+        }
+        else if (valueCopy == 1) {
+            localStorage.setItem(key, "One small hawaiian pizza");
+            alert("Added one small hawaiian pizza to your cart.");
+        }
+        else if (valueCopy == 2) {
+            localStorage.setItem(key, "One medium hawaiian pizza");
+            alert("Added one medium hawaiian pizza to your cart.");
+        }
+        else if (valueCopy == 3) {
+            localStorage.setItem(key, "One large hawaiian pizza");
+            alert("Added one large hawaiian pizza to your cart.");
+        }
+    }
+
+    function addSausage() {
+        var choice = document.getElementById("sausage");
+        var valueCopy = choice.value;
+
+        while (localStorage.getItem(key) != null) {
+            key++;
+        }
+
+        if (valueCopy == "") {
+            alert("Please select a size");
+        }
+        else if (valueCopy == 1) {
+            localStorage.setItem(key, "One small sausage pizza");
+            alert("Added one small sausage pizza to your cart.");
+        }
+        else if (valueCopy == 2) {
+            localStorage.setItem(key, "One medium sausage pizza");
+            alert("Added one medium sausage pizza to your cart.");
+        }
+        else if (valueCopy == 3) {
+            localStorage.setItem(key, "One large sausage pizza");
+            alert("Added one large sausage pizza to your cart.");
+        }
     }
 
      //function getToppings(pizzaPrice, _id) {
