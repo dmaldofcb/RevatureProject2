@@ -36,7 +36,7 @@ namespace PizzaOrder
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("https://pizzaordersystem.azurewebsites.net")
+                    builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
