@@ -28,8 +28,7 @@ namespace PizzaOrderAPI.Controllers
         [HttpGet]
         [Route("GetOrders/{userId}")]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders(string userId)
-        {
-            
+        {           
             return await _repo.Get(userId);
         }
 
