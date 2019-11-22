@@ -62,25 +62,32 @@ namespace PizzaOrder.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
+            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Last name")]
             public string LastName { get; set; }
+            
+            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "City")]
             public string City { get; set; }
 
+            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "State")]
             public string State { get; set; }
 
+            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Street Address")]
             public string Street { get; set; }
 
+            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }

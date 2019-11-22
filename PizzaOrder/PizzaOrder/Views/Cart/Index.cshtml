@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your cart</h1>
+
+<button type="button" class="=btn btn-primary" onclick="emptyCart()">Empty cart</button>
+
+<script>
+    document.write('<pre>');
+    for (let i = 0; i < localStorage.length; i++){
+        let key = localStorage.key(i);
+        let value = localStorage.getItem(key);
+        document.writeln(value);
+    }
+
+    function emptyCart() {
+        localStorage.clear();
+        location.reload();
+    }
+</script>
