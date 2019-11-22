@@ -15,13 +15,13 @@ namespace Layers.Models.Repository
         private readonly ApplicationDbContext _context;
         public async Task<Toppings> Get(int? id)
         {
-            var orderDet = await _context.Toppings.FirstOrDefaultAsync(x => x.Id == id);
-            return orderDet;
+            var toppings = await _context.Toppings.FirstOrDefaultAsync(x => x.Id == id);
+            return toppings;
         }
-        public async Task<List<OrderDetails>> Get()
+        public async Task<List<Toppings>> Get()
         {
-            var orderDet = await _context.OrdersDetails.ToListAsync();
-            return orderDet;
+            var toppings = await _context.Toppings.ToListAsync();
+            return toppings;
         }
     }
 }

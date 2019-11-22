@@ -16,13 +16,13 @@ namespace Layers.Models.Repository
         private readonly ApplicationDbContext _context;
         public async Task<Crust> Get(int? id)
         {
-            var orderDet = await _context.Crusts.FirstOrDefaultAsync(x => x.Id == id);
-            return orderDet;
+            var crust = await _context.Crusts.FirstOrDefaultAsync(x => x.Id == id);
+            return crust;
         }
-        public async Task<List<OrderDetails>> Get()
+        public async Task<List<Crust>> Get()
         {
-            var orderDet = await _context.OrdersDetails.ToListAsync();
-            return orderDet;
+            var crust = await _context.Crusts.ToListAsync();
+            return crust;
         }
     }
 }
