@@ -24,6 +24,12 @@ namespace PizzaOrder.Controllers
             _repo = repo;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Crust>>> GetOrdersDetails()
+        {
+            return await _repo.Get();
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Crust>> GetCrust(int id)
         {
