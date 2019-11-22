@@ -9,6 +9,6 @@ namespace Layers.Models.Repository
     public interface ISize
     {
         Task<Size> Get(int? id);
-        Task<List<Size>> Get(string user);
+        Task<List<OrderDetails>> Get();
     }
 }

@@ -9,6 +9,6 @@ namespace Layers.Models.Repository
     public interface IToppings
     {
         Task<Toppings> Get(int? id);
-        Task<List<Toppings>> Get(string user);
+        Task<List<OrderDetails>> Get();
     }
 }
