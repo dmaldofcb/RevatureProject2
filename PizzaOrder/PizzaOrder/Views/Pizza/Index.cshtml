@@ -14,7 +14,7 @@
 </script>
 
 <div id="flip">
-    Click to see our list of toppings!>
+    Click to see our list of toppings!
     <div id="panel">
         @foreach (var item in Model.Toppings)
         {
@@ -240,6 +240,7 @@
             localStorage.setItem(key, "One large sausage pizza");
             alert("Added one large sausage pizza to your cart.");
         }
+    }
 
         function selectPizzaSize(pizzaPrice, _id) {
             var id = document.getElementById(_id).value;
@@ -264,7 +265,7 @@
                   
                 }
             });
-    }
+        }
 
     function getToppings(pizzaID) {
             //var id = document.getElementById(_id).value;
@@ -295,4 +296,5 @@
             });
                     return pizzaList;
         }
+
 </script>
