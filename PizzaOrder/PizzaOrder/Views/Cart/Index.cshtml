@@ -11,8 +11,27 @@
     document.write('<pre>');
     for (let i = 0; i < localStorage.length; i++){
         let key = localStorage.key(i);
-        let value = localStorage.getItem(key);
-        document.writeln(value);
+        let value = JSON.parse(localStorage.getItem(key));
+        document.write("Pizza Type: " + value.Type + ", ");
+        if (value.CrustID == 1) {
+            document.write("Crust Type: Thin Crust, ");
+        }
+        else if (value.CrustID == 2) {
+            document.write("Crust Type: Thick Crust, ");
+        }
+        else {
+            document.write("Crust Type: Stuffed Crust, ");
+        }
+
+        if (value.SizeId == 1) {
+            document.writeln("Pizza Size: Small");
+        }
+        else if (value.SizeId == 2) {
+            document.writeln("Pizza Size: Medium");
+        }
+        else {
+            document.writeln("Pizza Size: Large");
+        }
     }
 
     function emptyCart() {

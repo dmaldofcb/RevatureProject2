@@ -171,6 +171,11 @@
         var choice = document.getElementById("pepperoni");
         var valueCopy = choice.value;
 
+        var pizza = new Object();
+        pizza.Type = "Pepperoni";
+        pizza.CrustID = 2;
+        pizza.IsCustom = false;
+
         while (localStorage.getItem(key) != null) {
             key++;
         }
@@ -179,15 +184,18 @@
             alert("Please select a size");
         }
         else if (valueCopy == 1) {
-            localStorage.setItem(key, "One small pepperoni pizza");
+            pizza.SizeId = 1;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one small pepperoni pizza to your cart.");
         }
         else if (valueCopy == 2) {
-            localStorage.setItem(key, "One medium pepperoni pizza");
+            pizza.SizeId = 2;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one medium pepperoni pizza to your cart.");
         }
         else if (valueCopy == 3) {
-            localStorage.setItem(key, "One large pepperoni pizza");
+            pizza.SizeId = 3;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one large pepperoni pizza to your cart.");
         }
     }
@@ -196,6 +204,11 @@
         var choice = document.getElementById("hawaiian");
         var valueCopy = choice.value;
 
+        var pizza = new Object();
+        pizza.Type = "Hawaiian";
+        pizza.CrustID = 2;
+        pizza.IsCustom = false;
+
         while (localStorage.getItem(key) != null) {
             key++;
         }
@@ -204,15 +217,18 @@
             alert("Please select a size");
         }
         else if (valueCopy == 1) {
-            localStorage.setItem(key, "One small hawaiian pizza");
+            pizza.SizeId = 1;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one small hawaiian pizza to your cart.");
         }
         else if (valueCopy == 2) {
-            localStorage.setItem(key, "One medium hawaiian pizza");
+            pizza.SizeId = 2;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one medium hawaiian pizza to your cart.");
         }
         else if (valueCopy == 3) {
-            localStorage.setItem(key, "One large hawaiian pizza");
+            pizza.SizeId = 3;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one large hawaiian pizza to your cart.");
         }
     }
@@ -221,6 +237,11 @@
         var choice = document.getElementById("sausage");
         var valueCopy = choice.value;
 
+        var pizza = new Object();
+        pizza.Type = "Sausage";
+        pizza.CrustID = 2;
+        pizza.IsCustom = false;
+
         while (localStorage.getItem(key) != null) {
             key++;
         }
@@ -229,15 +250,18 @@
             alert("Please select a size");
         }
         else if (valueCopy == 1) {
-            localStorage.setItem(key, "One small sausage pizza");
+            pizza.SizeId = 1;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one small sausage pizza to your cart.");
         }
         else if (valueCopy == 2) {
-            localStorage.setItem(key, "One medium sausage pizza");
+            pizza.SizeId = 2;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one medium sausage pizza to your cart.");
         }
         else if (valueCopy == 3) {
-            localStorage.setItem(key, "One large sausage pizza");
+            pizza.SizeId = 3;
+            localStorage.setItem(key, JSON.stringify(pizza));
             alert("Added one large sausage pizza to your cart.");
         }
     }
