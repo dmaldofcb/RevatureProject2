@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
 <style>
      .content-table {
       border-collapse: collapse;
@@ -46,16 +50,18 @@
 
 </style>
 
-<h1 class="align-content-center">Order History</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="content-table">
+<div align="center">
+    <h1>Pizza Order History</h1>  
+    
+<table class="content-table" >
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                <span style="color: white">Order Details</span>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
@@ -73,6 +79,46 @@
                 @Html.DisplayFor(modelItem => item.CustomerID)
             </td>
             <td>
+                    
+                    <script>
+                        var orderDetail = new Array();
+                        var count = 0;
+
+                        $.ajax({
+                            contentType: "application/json;charset=utf-8",
+                            url: "https://pizzaordersystem.azurewebsites.net/api/OrderDetails/GetOrdersByOrderId/" + @item.Id,
+                            type: 'GET',
+                            success: function(res) {
+                                console.log("in success");
+                                $.each(res,function() {
+
+                                    var order = {
+                                        orderID: this.orderID,
+                                        pizzaID: this.pizzaID,
+                                        price: this.price,
+                                        quantity: this.quantity
+                                    };
+                                    orderDetail.push(order);
+
+                                })
+
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                textToChange.innerHTML = textStatus;
+                            }
+                        });
+                                    console.log("****Order****");
+
+                                    console.log("Order: " + orderDetail[count].orderID);
+                                    console.log("Pizza: " + orderDetail[count].pizzaID);
+                                    console.log("Price: " + orderDetail[count].price);
+                                    console.log("Quantity: " + orderDetail[count].quantity);
+
+                        count++;
+                    </script>
+                <p id="orderDetails"></p>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
@@ -87,3 +133,4 @@
 }
     </tbody>
 </table>
+</div>
