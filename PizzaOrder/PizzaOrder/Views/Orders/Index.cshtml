@@ -9,128 +9,126 @@
 
 
 <style>
-     .content-table {
-      border-collapse: collapse;
-      margin: 25px 0;
-      font-size: 0.9em;
-      min-width: 400px;
-      border-radius: 5px 5px 0 0;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    .content-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        min-width: 400px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
 
-    .content-table thead tr {
-      background-color: #009879;
-      color: #ffffff;
-      text-align: left;
-      font-weight: bold;
-    }
+        .content-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
 
-    .content-table th,
-    .content-table td {
-      padding: 12px 15px;
-    }
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
 
-    .content-table tbody tr {
-      border-bottom: 1px solid #dddddd;
-    }
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
 
-    .content-table tbody tr:nth-of-type(even) {
-      background-color: #f3f3f3;
-    }
+            .content-table tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
 
-    .content-table tbody tr:last-of-type {
-      border-bottom: 2px solid #009879;
-    }
+            .content-table tbody tr:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
 
-    .content-table tbody tr.active-row {
-      font-weight: bold;
-      color: #009879;
-    }
-
+            .content-table tbody tr.active-row {
+                font-weight: bold;
+                color: #009879;
+            }
 </style>
 
 
+
 <div align="center">
-    <h1>Pizza Order History</h1>  
-    
-<table class="content-table" >
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerID)
-            </th>
-            <th>
-                <span style="color: white">Order Details</span>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
-            </td>
-            <td>
-                    
-                    <script>
-                        var orderDetail = new Array();
+    <h1>Pizza Order History</h1>
+
+    <table id="myTable" class="content-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerID)
+                </th>
+                <th>
+                    <span style="color: white">Order Details</span>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerID)
+                    </td>
+                    <td >
+                        <script>
+                        //var orderDetail = new Array();
                         var count = 0;
 
                         $.ajax({
                             contentType: "application/json;charset=utf-8",
                             url: "https://pizzaordersystem.azurewebsites.net/api/OrderDetails/GetOrdersByOrderId/" + @item.Id,
                             type: 'GET',
-                            success: function(res) {
+                            success: function (res) {
+
+                                //callback && callback(res);
+                                var i
+                                for (i = 0; i < res.length; i++) {
+                                    console.log("****Order****");
+
+                                    console.log("Order: " + res[i].orderID);
+                                    console.log("Pizza: " + res[i].pizzaID);
+                                    console.log("Price: " + res[i].price);
+                                    console.log("Quantity: " + res[i].quantity);
+
+                                    document.getElementById("myTable").rows[i + 1].cells[1].innerHTML = res[i].orderID + " : " + res[i].pizzaID + " : " + res[i].price;
+
+                                }
+                                console.log("Order2: " + res[0].orderID);
+
                                 console.log("in success");
-                                $.each(res,function() {
-
-                                    var order = {
-                                        orderID: this.orderID,
-                                        pizzaID: this.pizzaID,
-                                        price: this.price,
-                                        quantity: this.quantity
-                                    };
-                                    orderDetail.push(order);
-
-                                })
-
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 textToChange.innerHTML = textStatus;
                             }
                         });
-                                    console.log("****Order****");
 
-                                    console.log("Order: " + orderDetail[count].orderID);
-                                    console.log("Pizza: " + orderDetail[count].pizzaID);
-                                    console.log("Price: " + orderDetail[count].price);
-                                    console.log("Quantity: " + orderDetail[count].quantity);
+                        </script>
 
-                        count++;
-                    </script>
-                <p id="orderDetails"></p>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        @*<p id="orderDetails">dsss</p>*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
