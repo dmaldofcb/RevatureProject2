@@ -1,0 +1,121 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Layers.Models.Models;
+@inject SignInManager<Customer> SignInManager
+@inject UserManager<Customer> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Customize your pizza</h1>
+
+<p>Choose your pizza size</p>
+
+<select name="SelectSize" id="size" class="mdb-select md-form">
+    <option value="" disabled selected>Select Your Size</option>
+    <option value="1" style="color:blue">Small</option>
+    <option value="2" style="color:blue">Medium</option>
+    <option value="3" style="color:blue">Large</option>
+</select>
+<br />
+<select name="SelectCrust" id="crust" class="mdb-select md-form">
+    <option value="" disabled selected>Select Your Crust</option>
+    <option value="1" style="color:blue">Thin Crust</option>
+    <option value="2" style="color:blue">Thick Crust</option>
+    <option value="3" style="color:blue">Stuffed Crust</option>
+</select>
+<br />
+<input type="checkbox" name="toppings" value="Pepperoni" />Pepperoni
+<br />
+<input type="checkbox" name="toppings" value="Sausage" />Sausage
+<br />
+<input type="checkbox" name="toppings" value="Pineapple" />Pineapple
+<br />
+<input type="checkbox" name="toppings" value="Green Peppers" />Green Peppers
+<br />
+<input type="checkbox" name="toppings" value="Red Peppers" />Red Peppers
+<br />
+<input type="checkbox" name="toppings" value="Ham" />Ham
+<br />
+<input type="checkbox" name="toppings" value="Onions" />Onions
+<br />
+<input type="checkbox" name="toppings" value="Mushrooms" />Mushrooms
+<br />
+<input type="checkbox" name="toppings" value="Black Olives" />Black Olives
+<br />
+<input type="checkbox" name="toppings" value="Chicken" />Chicken
+<br />
+<input type="checkbox" name="toppings" value="Buffalo Chicken" />Buffalo Chicken
+<br />
+<input type="checkbox" name="toppings" value="Broccoli" />Broccoli
+<br />
+<input type="checkbox" name="toppings" value="Tomatoes" />Tomatoes
+<br />
+<input type="checkbox" name="toppings" value="Spinach" />Spinach
+<br />
+<input type="checkbox" name="toppings" value="Bacon" />Bacon
+<br />
+<input type="checkbox" name="toppings" value="Meatballs" />Meatballs
+<br />
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <button type="submit" class="=btn btn-primary" onclick="addToCart()">Add to Cart</button>
+}
+else
+{
+    <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
+}
+
+<script>
+    var key = 0;
+
+    function addToCart() {
+        while (localStorage.getItem(key) != null) {
+            key++;
+        }
+
+        var sizeChoice = document.getElementById("size");
+        var size = sizeChoice.value;
+        var crustChoice = document.getElementById("crust");
+        var crust = crustChoice.value;
+
+        var items=document.getElementsByName('toppings');
+        var selectedItems = "";
+		for(var i=0; i<items.length; i++){
+            if (items[i].type == 'checkbox' && items[i].checked == true) {
+                selectedItems = selectedItems + items[i].value + ", ";
+            }
+
+		}
+
+        if (selectedItems == "") {
+            selectedItems = "None";
+        }
+        /*else { //This is supposed to get rid of the last comma and space, but it dosen't work.
+            selectedItems = selectedItems.substring(0, str.length - 2);
+        }*/
+
+        if (size == "") {
+            alert("Please select a size");
+        }
+        else if (crust == "") {
+            alert("Please select a crust");
+        }
+        else {
+
+
+            var pizza = new Object();
+            pizza.Type = "Custom";
+            pizza.crustID = crust;
+            pizza.SizeId = size;
+            pizza.Toppings = selectedItems;
+            pizza.IsCustom = true;
+            localStorage.setItem(key, JSON.stringify(pizza));
+            alert("Pizza added to cart.");
+            key++;
+
+        }
+
+    }
+</script>
