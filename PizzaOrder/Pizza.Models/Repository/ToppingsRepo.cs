@@ -1,18 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Layers.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using PizzaOrder.Data;
-using Layers.Models.Repository;
-using Layers.Models.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace Layers.Models.Repository
 {
-    class ToppingsRepo : IToppings    {
+    public class ToppingsRepo : IToppings    {
+
         private readonly ApplicationDbContext _context;
+
+        public ToppingsRepo(ApplicationDbContext ctx)
+        {
+
+            _context = ctx;
+        }
+
         public async Task<Toppings> Get(int? id)
         {
             var toppings = await _context.Toppings.FirstOrDefaultAsync(x => x.Id == id);

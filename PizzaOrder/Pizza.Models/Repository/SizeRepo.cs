@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Layers.Models.Models;
+using Microsoft.EntityFrameworkCore;
+using PizzaOrder.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using PizzaOrder.Data;
-using Layers.Models.Repository;
-using Layers.Models.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+
 
 
 namespace Layers.Models.Repository
 {
-    class SizeRepo : ISize
+    public class SizeRepo : ISize
     {
         private readonly ApplicationDbContext _context;
+
+        public SizeRepo(ApplicationDbContext ctx)
+        {
+
+            _context = ctx;
+        }
         public async Task<Size> Get(int? id)
         {
             var size = await _context.Sizes.FirstOrDefaultAsync(x => x.Id == id);

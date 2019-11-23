@@ -49,6 +49,9 @@ namespace PizzaOrder
             services.AddTransient<IPizza, PizzaPieRepo>();
             services.AddTransient<IOrder, OrderRepo>();
             services.AddTransient<IOrderDetails, OdrerDetailsRepo>();
+            services.AddTransient<ISize, SizeRepo>();
+            services.AddTransient<ICrust, CrustRepo>();
+            services.AddTransient<IToppings, ToppingsRepo>();
             services.AddControllers();
 
             services.AddControllersWithViews();

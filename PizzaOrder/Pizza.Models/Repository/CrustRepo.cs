@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Layers.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using PizzaOrder.Data;
-using Layers.Models.Repository;
-using Layers.Models.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Layers.Models.Repository
 {
-    class CrustRepo : ICrust
+    public class CrustRepo : ICrust
     {
         private readonly ApplicationDbContext _context;
+
+        public CrustRepo(ApplicationDbContext ctx)
+        {
+
+            _context = ctx;
+        }
+
         public async Task<Crust> Get(int? id)
         {
             var crust = await _context.Crusts.FirstOrDefaultAsync(x => x.Id == id);
