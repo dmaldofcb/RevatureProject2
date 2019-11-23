@@ -24,16 +24,22 @@
         }
 
         if (value.SizeId == 1) {
-            document.writeln("Pizza Size: Small");
+            document.write("Pizza Size: Small");
         }
         else if (value.SizeId == 2) {
-            document.writeln("Pizza Size: Medium");
+            document.write("Pizza Size: Medium");
         }
         else {
-            document.writeln("Pizza Size: Large");
+            document.write("Pizza Size: Large");
+        }
+
+        if (value.IsCustom == true) {
+            document.writeln(" Toppings: " + value.Toppings);
+        }
+        else {
+            document.writeln("");
         }
     }
-
     function emptyCart() {
         localStorage.clear();
         location.reload();
