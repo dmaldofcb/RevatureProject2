@@ -339,7 +339,7 @@
             contentType: "application/json;charset=utf-8",
             type: "POST",
             // returns a list of our middle table
-            url: "https://pizzaordersystem.azurewebsites.net/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
+            url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
             data: JSON.stringify(modelVM),
 
             success: function (data) {
