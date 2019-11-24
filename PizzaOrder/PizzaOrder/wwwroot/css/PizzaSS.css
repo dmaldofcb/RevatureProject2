@@ -13,10 +13,18 @@
     width:75%;*/
 }
 
-.hawaiian{
-    max-width:450px;
-    width:100%;
-    height:auto;
+.hawaiian {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+.nav h2 {
+    list-style: none;
+    display: inline;
+    padding: 0px 5px 0px 5px;
 }
 
 #panel, #flip {
