@@ -50,7 +50,7 @@ namespace PizzaOrder.Controllers
             using (var httpClient = new HttpClient())
             {
                 //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                using (var response = await httpClient.GetAsync("http://localhost:51600/api/Orders/GetOrder/" + user + "/" + id))
+                using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrder/" + user + "/" + id))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     newOrder.CurrOrder = JsonConvert.DeserializeObject<Order>(apiResponse);
@@ -74,7 +74,7 @@ namespace PizzaOrder.Controllers
                 using (var httpClient = new HttpClient())
                 {
                     //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                    using (var response = await httpClient.GetAsync("http://localhost:51600/api/Pizzaapi/getpizza/" + newOrder.OrderDetailsList[0].PizzaID))
+                    using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Pizzaapi/getpizza/" + newOrder.OrderDetailsList[0].PizzaID))
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
                         newOrder.PizzaPieList.Add(JsonConvert.DeserializeObject<PizzaPie>(apiResponse));
@@ -84,7 +84,7 @@ namespace PizzaOrder.Controllers
                 using (var httpClient = new HttpClient())
                 {
                     //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                    using (var response = await httpClient.GetAsync("http://localhost:51600/api/toppingsapi/GetPizzaToppings/" + newOrder.OrderDetailsList[0].PizzaID))
+                    using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/toppingsapi/GetPizzaToppings/" + newOrder.OrderDetailsList[0].PizzaID))
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
                         newOrder.PizzaToppingsList.Add(newOrder.OrderDetailsList[0].PizzaID, JsonConvert.DeserializeObject<List<PizzaToppings>>(apiResponse));
@@ -99,7 +99,7 @@ namespace PizzaOrder.Controllers
                     using (var httpClient = new HttpClient())
                     {
                         //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                        using (var response = await httpClient.GetAsync("http://localhost:51600/api/Pizzaapi/getpizza/" + item.PizzaID))
+                        using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Pizzaapi/getpizza/" + item.PizzaID))
                         {
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             newOrder.PizzaPieList.Add(JsonConvert.DeserializeObject<PizzaPie>(apiResponse));
@@ -109,7 +109,7 @@ namespace PizzaOrder.Controllers
                     using (var httpClient = new HttpClient())
                     {
                         //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                        using (var response = await httpClient.GetAsync("http://localhost:51600/api/toppingsapi/GetPizzaToppings/" + item.PizzaID))
+                        using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/toppingsapi/GetPizzaToppings/" + item.PizzaID))
                         {
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             newOrder.PizzaToppingsList.Add(item.PizzaID, JsonConvert.DeserializeObject<List<PizzaToppings>>(apiResponse));
@@ -128,7 +128,7 @@ namespace PizzaOrder.Controllers
                     using (var httpClient = new HttpClient())
                     {
                         //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                        using (var response = await httpClient.GetAsync("http://localhost:51600/api/ToppingsAPI/" + itemTopping.ToppingsID))
+                        using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/ToppingsAPI/" + itemTopping.ToppingsID))
                         {
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             //newOrder.ToppingsList.Add(pizzapieId, JsonConvert.DeserializeObject<List<Toppings>>(apiResponse));
