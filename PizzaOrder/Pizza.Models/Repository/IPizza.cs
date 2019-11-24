@@ -12,6 +12,7 @@ namespace Layers.Models.Repository
         Task<List<PizzaPie>> Get(); //get list of all pizzas 
         Task<bool> Create(PizzaPie pizza);
         Task<List<Crust>> GetCrust();
+        Task<bool> AddPizzaToppings(PizzaToppings pizzaTopping);
 
         Task<bool> Edit(int id, PizzaPie pizza);
         Task<bool> Delete(int id);
