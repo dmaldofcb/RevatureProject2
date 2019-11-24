@@ -56,8 +56,7 @@ namespace PizzaOrderAPI.Controllers
         [Route("AddToCart")]
         public async Task<PizzaPie> AddToCart(PizzaPie pizza)
         {
-            //var pizzas = await _pizzaRepo.Get();
-
+            //PizzaToppings pizzaToppings = new PizzaToppings();
             // searches our middle table
             //searches our pizza menu to link the name in .cshtml to the name in our database table
             //var getPie = pizzas.FirstOrDefault(x => x.Type == pizza.Type); // returns a single item
@@ -71,7 +70,13 @@ namespace PizzaOrderAPI.Controllers
                 ToppingByID = pizza.ToppingByID        
             };
             await _pizzaRepo.Create(createPizza);
-
+            for(int i = 0; i < pizza.ToppingByID.Length; i++)
+            {
+                PizzaToppings pizzaToppings = new PizzaToppings();
+                pizzaToppings.PizzaID = createPizza.Id;
+                pizzaToppings.ToppingsID = pizza.ToppingByID[i];
+                await _pizzaRepo.AddPizzaToppings(pizzaToppings);
+            }
             //var addToOrders = await _pizzaRepo.AddPizzaToOrder(getPie);
             return createPizza;
         }
