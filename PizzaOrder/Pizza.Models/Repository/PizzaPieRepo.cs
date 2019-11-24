@@ -76,5 +76,12 @@ namespace Layers.Models.Repository
             var crust = await _context.Crusts.ToListAsync();
             return crust;
         }
+
+        public async Task<bool> AddPizzaToppings(PizzaToppings pizzaTopping)
+        {
+            _context.PizzasToppings.Add(pizzaTopping);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
