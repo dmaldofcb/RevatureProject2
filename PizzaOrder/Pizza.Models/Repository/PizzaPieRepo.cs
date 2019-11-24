@@ -18,9 +18,11 @@ namespace Layers.Models.Repository
             _context = context;
         }
 
-        public Task<bool> Create(PizzaPie pizza)
+        public async Task<bool> Create(PizzaPie pizza)
         {
-            throw new NotImplementedException();
+            _context.Pizzas.Add(pizza);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public Task<bool> Delete(int id)
@@ -67,6 +69,12 @@ namespace Layers.Models.Repository
         {
             var sizes = await _context.Sizes.ToListAsync();
             return sizes;
+        }
+
+        public async Task<List<Crust>> GetCrust()
+        {
+            var crust = await _context.Crusts.ToListAsync();
+            return crust;
         }
     }
 }

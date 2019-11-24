@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Layers.Models.Models
@@ -14,5 +15,10 @@ namespace Layers.Models.Models
 
         public int SizeId { get; set; }
 
+        [NotMapped]
+        public List<Toppings> Toppings { get; set; } 
+
+        [NotMapped]
+        public int[] ToppingByID { get; set; }
     }
 }

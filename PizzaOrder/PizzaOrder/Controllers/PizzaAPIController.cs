@@ -24,24 +24,12 @@ namespace PizzaOrderAPI.Controllers
             _pizzaRepo = pizzarepo;
         }
 
-
-
         [HttpGet]
-        [Route("GetPizza/{id}")]
-
-        public async Task<PizzaPie> Get(int? id)
+        public async Task<PizzaPie> Get()
         {
-            //var pizzaMenu = await _pizzaRepo.Get();
-            //var sizes = await _pizzaRepo.GetSizes();
-            //var toppings = await _pizzaRepo.GetToppings();
-            //var menu = await _pizzaRepo.GetPizzaToppings();
-            //PizzaMenuVM pizzaMenuModel = new PizzaMenuVM();
-            //pizzaMenuModel.PizzaPies = pizzaMenu;
-            //pizzaMenuModel.PremadePizzas = menu;
-            //pizzaMenuModel.Size = sizes;
-            //pizzaMenuModel.Toppings = toppings;
-
-            var pizza = await _pizzaRepo.Get(id);
+            PizzaPie pizza = new PizzaPie();
+            var toppings = await _pizzaRepo.GetToppings();
+            pizza.Toppings = toppings;
             return pizza;
         }
 
@@ -55,23 +43,40 @@ namespace PizzaOrderAPI.Controllers
         }
 
 
-
-
-        [HttpGet()]
-        [Route("Toppings/{name}")]
-        public async Task<List<PizzaToppings>> GetToppingsForPremade(string name)
+        [HttpGet]
+        [Route("GetCrust/{crustID}")]
+        public async Task<Crust> GetCrust(int crustID)
         {
-            var pizzas = await _pizzaRepo.Get();
+            var crusts = await _pizzaRepo.GetCrust();
+            var getCrust = crusts.FirstOrDefault(x => x.Id == crustID);
+            return getCrust;
+        }
+
+        [HttpPost]
+        [Route("AddToCart")]
+        public async Task<PizzaPie> AddToCart(PizzaPie pizza)
+        {
+            //var pizzas = await _pizzaRepo.Get();
 
             // searches our middle table
-            var pizzaToppings = await _pizzaRepo.GetPizzaToppings();
             //searches our pizza menu to link the name in .cshtml to the name in our database table
-            var getPie = pizzas.FirstOrDefault(x => x.Type == name); // returns a single item
+            //var getPie = pizzas.FirstOrDefault(x => x.Type == pizza.Type); // returns a single item
             //searches middle table for where our PizzaID matches the pizza id in our menu table 
-            var toppings = pizzaToppings.Where(x => x.PizzaID == getPie.Id).ToList();
-            //returns list of toppings and its associated pizza id. 
-            return toppings;
+            //returns list of toppings and its associated pizza id
+            PizzaPie createPizza = new PizzaPie()
+            {
+                Type = pizza.Type,
+                CrustID = pizza.CrustID,
+                SizeId = pizza.SizeId,
+                ToppingByID = pizza.ToppingByID        
+            };
+            await _pizzaRepo.Create(createPizza);
+
+            //var addToOrders = await _pizzaRepo.AddPizzaToOrder(getPie);
+            return createPizza;
         }
+
+
 
     }
 }

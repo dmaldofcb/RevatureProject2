@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaOrder.Data;
 
-namespace PizzaOrder.Data.Migrations
+namespace Layers.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191117200304_fixing-string")]
-    partial class fixingstring
+    [Migration("20191123043740_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -173,9 +173,6 @@ namespace PizzaOrder.Data.Migrations
 
                     b.Property<int>("CrustID")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsCustom")
-                        .HasColumnType("bit");
 
                     b.Property<int>("SizeId")
                         .HasColumnType("int");

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaOrder.Data;
 
-namespace PizzaOrder.Data.Migrations
+namespace Layers.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191115183740_toppings_init")]
-    partial class toppings_init
+    [Migration("20191123192144_adding toppingsIDList")]
+    partial class addingtoppingsIDList
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,8 +126,8 @@ namespace PizzaOrder.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -164,7 +164,7 @@ namespace PizzaOrder.Data.Migrations
                     b.ToTable("OrdersDetails");
                 });
 
-            modelBuilder.Entity("Layers.Models.Models.Pizza", b =>
+            modelBuilder.Entity("Layers.Models.Models.PizzaPie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,9 +173,6 @@ namespace PizzaOrder.Data.Migrations
 
                     b.Property<int>("CrustID")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsCustom")
-                        .HasColumnType("bit");
 
                     b.Property<int>("SizeId")
                         .HasColumnType("int");
@@ -186,6 +183,42 @@ namespace PizzaOrder.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pizzas");
+                });
+
+            modelBuilder.Entity("Layers.Models.Models.PizzaToppings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PizzaID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToppingsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PizzasToppings");
+                });
+
+            modelBuilder.Entity("Layers.Models.Models.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("Layers.Models.Models.Toppings", b =>
