@@ -25,7 +25,7 @@ namespace PizzaOrder.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Size>>> GetOrdersDetails()
+        public async Task<ActionResult<IEnumerable<Size>>> GetSizes()
         {
             return await _repo.Get();
         }

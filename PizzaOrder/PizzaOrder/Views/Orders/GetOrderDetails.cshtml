@@ -1,0 +1,97 @@
+﻿@model Layers.Models.ViewModels.PizzaOrderVM
+
+@{
+    ViewData["Title"] = "GetOrderDetails";
+}
+
+<h1>GetOrderDetails</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.Id)
+        </dt>
+        <dt class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrOrder.Id)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.CustomerID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrOrder.CustomerID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrOrder.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.Total)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrOrder.Total)
+        </dd>
+    </dl>
+</div>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                <p>Order Id</p>
+            </th>
+            <th>
+                <p>Pizza id</p>
+            </th>
+            <th>
+                <p>Price</p>
+            </th>
+            <th>
+                <p>Quantity</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetailsList)
+        {
+
+
+                <tr class="table-light">
+                    <td>
+                        @item.OrderID
+                    </td>
+                    <td>
+                        @item.PizzaID : <br />
+                        @{
+
+                            foreach (var pizza in Model.PizzaPieList)
+                            {
+                                   if (pizza.Id == item.PizzaID)
+                                    {
+                                        <p>
+                                        Pizza: @pizza.Type Size: @pizza.SizeId PIZZAID: @pizza.Id
+                                       </p>
+                                    }
+
+                            }
+                        }
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                </tr>
+            
+        }
+    </tbody>
+</table>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>

@@ -27,18 +27,22 @@ namespace PizzaOrderAPI.Controllers
 
 
         [HttpGet]
-        public async Task<PizzaMenuVM> Get()
+        [Route("GetPizza/{id}")]
+
+        public async Task<PizzaPie> Get(int? id)
         {
-            var pizzaMenu = await _pizzaRepo.Get();
-            var sizes = await _pizzaRepo.GetSizes();
-            var toppings = await _pizzaRepo.GetToppings();
-            var menu = await _pizzaRepo.GetPizzaToppings();
-            PizzaMenuVM pizzaMenuModel = new PizzaMenuVM();
-            pizzaMenuModel.PizzaPies = pizzaMenu;
-            pizzaMenuModel.PremadePizzas = menu;
-            pizzaMenuModel.Size = sizes;
-            pizzaMenuModel.Toppings = toppings;
-            return pizzaMenuModel;
+            //var pizzaMenu = await _pizzaRepo.Get();
+            //var sizes = await _pizzaRepo.GetSizes();
+            //var toppings = await _pizzaRepo.GetToppings();
+            //var menu = await _pizzaRepo.GetPizzaToppings();
+            //PizzaMenuVM pizzaMenuModel = new PizzaMenuVM();
+            //pizzaMenuModel.PizzaPies = pizzaMenu;
+            //pizzaMenuModel.PremadePizzas = menu;
+            //pizzaMenuModel.Size = sizes;
+            //pizzaMenuModel.Toppings = toppings;
+
+            var pizza = await _pizzaRepo.Get(id);
+            return pizza;
         }
 
         [HttpGet("{id}")]
@@ -49,6 +53,9 @@ namespace PizzaOrderAPI.Controllers
             var getSize = sizes.FirstOrDefault(x => x.Id == id);
             return getSize;
         }
+
+
+
 
         [HttpGet()]
         [Route("Toppings/{name}")]

@@ -14,6 +14,5 @@ namespace Layers.Models.Models
 
         public int SizeId { get; set; }
 
-        public bool IsCustom { get; set; }
     }
 }
