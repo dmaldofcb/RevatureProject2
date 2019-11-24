@@ -257,7 +257,7 @@
         $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
-                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/GetCrust/" + id,
+                url: "http://localhost:51600/api/PizzaAPI/GetCrust/" + id,
                
                 success: function (data) {
                     console.log("data:", data);
@@ -339,7 +339,7 @@
             contentType: "application/json;charset=utf-8",
             type: "POST",
             // returns a list of our middle table
-            url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
+            url: "http://localhost:51600/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
             data: JSON.stringify(modelVM),
 
             success: function (data) {
@@ -374,7 +374,7 @@
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
-                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
+                url: "http://localhost:51600/api/PizzaAPI/" + id,
 
 
                 success: function (data) {
