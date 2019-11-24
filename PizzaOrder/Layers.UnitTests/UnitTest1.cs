@@ -14,9 +14,8 @@ namespace Layers.UnitTests
             ISize sizeRepo = new SizeTestRepository();
             ICrust crustRepo = new CrustTestRepository();
             IToppings toppingsRepo = new ToppingsTestRepository();
-            PizzaAPIController controller = new PizzaAPIController(pizzaRepo, sizeRepo, crustRepo, toppingsRepo);
-
-
+            IPizzaToppings pizzaToppings = new PizzaToppingsTestRepository();
+            PizzaAPIController controller = new PizzaAPIController(pizzaRepo, sizeRepo, toppingsRepo, crustRepo, pizzaToppings);
         }
 
         //public void TestCustomerDetails_ReturnsCustomer()
