@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Layers.UnitTests
 {
-    public class SizeTestRepository : ISize
+    public class PizzaToppingsTestRepository : IPizzaToppings
     {
-        public Task<Size> Get(int? id)
+        public Task<bool> AddPizzaToppings(PizzaToppings pizzaTopping)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Size>> Get()
+        public Task<List<PizzaToppings>> GetPizzaToppings()
         {
             throw new NotImplementedException();
         }
