@@ -18,16 +18,23 @@ namespace PizzaOrder.Controllers
     public class ToppingsAPIController : ControllerBase
     {
         private readonly IToppings _repo;
-
+       
         public ToppingsAPIController(IToppings repo)
         {
             _repo = repo;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Toppings>>> GetOrdersDetails()
+        public async Task<ActionResult<IEnumerable<Toppings>>> GetToppings()
         {
             return await _repo.Get();
+        }
+
+        [HttpGet]
+        [Route("GetPizzaToppings/{id}")]
+        public async Task<ActionResult<IEnumerable<PizzaToppings>>> GetPizzaToppings(int id)
+        {
+            return await _repo.GetPizzaToppings(id);
         }
 
         [HttpGet("{id}")]
