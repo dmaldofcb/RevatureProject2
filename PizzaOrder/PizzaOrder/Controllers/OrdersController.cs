@@ -149,7 +149,7 @@ namespace PizzaOrder.Controllers
             using (var httpClient = new HttpClient())
             {
                 //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                using (var response = await httpClient.GetAsync(" http://localhost:51600/api/Sizeapi"))
+                using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Sizeapi"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     newOrder.SizesList = JsonConvert.DeserializeObject<List<Size>>(apiResponse);
@@ -160,7 +160,7 @@ namespace PizzaOrder.Controllers
             using (var httpClient = new HttpClient())
             {
                 //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
-                using (var response = await httpClient.GetAsync("http://localhost:51600/api/CrustAPI"))
+                using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/CrustAPI"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     newOrder.CrustList = JsonConvert.DeserializeObject<List<Crust>>(apiResponse);
