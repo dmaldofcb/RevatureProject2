@@ -42,6 +42,16 @@ namespace PizzaOrderAPI.Controllers
             return pizza;
         }
 
+
+        [HttpGet]
+        [Route("GetPizza/{id}")]
+
+        public async Task<PizzaPie> Get(int? id)
+        {
+            var pizza = await _pizzaRepo.Get(id);
+            return pizza;
+        }
+
         [HttpGet("{id}")]
 
         public async Task<Size> GetSize(int id)
