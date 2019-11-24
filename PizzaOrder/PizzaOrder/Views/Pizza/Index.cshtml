@@ -12,7 +12,7 @@
         });
     });
 </script>
-
+@*
 <div id="flip">
     Click to see our list of toppings!
     <div id="panel">
@@ -33,7 +33,7 @@
 
     </div>
 </div>
-
+*@
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
         <div class="row">
@@ -74,6 +74,7 @@
                                 <input type="checkbox" name="pepperoniToppings" value="1" disabled="true" checked="true"> Pepperoni<br>
                             </div>
                         
+
                     </div>
                 </div>
 
@@ -159,6 +160,7 @@
                         <div>
                             <input type="checkbox" name="sausageToppings" value="2" disabled="true" checked="true"> Sausage<br>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -272,6 +274,7 @@
                         document.getElementById(cruuuust).innerHTML = 0;
                     
 
+
                         var crustUpdateCounterString = document.getElementById(cruuuust).innerHTML;
                         var crustUpdateCounter = parseInt(crustUpdateCounterString) + data.price;
                         document.getElementById(cruuuust).innerHTML = crustUpdateCounter;
@@ -286,6 +289,7 @@
                     console.log("Failing");
                 }
             });
+
     }
     function AddToCart(pizza, toppingsID, crustID)
     {
@@ -357,6 +361,7 @@
                 return "hello";
             }
         });
+
     }
 
      function selectPizzaSize(pizzaPrice, _id) {
