@@ -54,34 +54,5 @@ namespace Layers.Models.Repository
         {
             throw new NotImplementedException();
         }
-
-        public async Task<List<Toppings>> GetToppings()
-        {
-            var toppings = await _context.Toppings.ToListAsync();
-            return toppings;
-        }
-        public async Task<List<PizzaToppings>> GetPizzaToppings()
-        {
-            var pizzaToppings = await _context.PizzasToppings.ToListAsync();
-            return pizzaToppings;
-        }
-        public async Task<List<Size>> GetSizes()
-        {
-            var sizes = await _context.Sizes.ToListAsync();
-            return sizes;
-        }
-
-        public async Task<List<Crust>> GetCrust()
-        {
-            var crust = await _context.Crusts.ToListAsync();
-            return crust;
-        }
-
-        public async Task<bool> AddPizzaToppings(PizzaToppings pizzaTopping)
-        {
-            _context.PizzasToppings.Add(pizzaTopping);
-            await _context.SaveChangesAsync();
-            return true;
-        }
     }
 }

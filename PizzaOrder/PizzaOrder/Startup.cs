@@ -48,7 +48,7 @@ namespace PizzaOrder
 
             services.AddTransient<IPizza, PizzaPieRepo>();
             services.AddTransient<IOrder, OrderRepo>();
-            services.AddTransient<IOrderDetails, OdrerDetailsRepo>();
+            services.AddTransient<IOrderDetails, OrderDetailsRepo>();
             services.AddTransient<ISize, SizeRepo>();
             services.AddTransient<ICrust, CrustRepo>();
             services.AddTransient<IToppings, ToppingsRepo>();
