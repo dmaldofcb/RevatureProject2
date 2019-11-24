@@ -8,7 +8,8 @@ namespace Layers.Models.Models
 {
     public class Order
     {
-        
+        [DisplayName("Order Number")]
+
         public int Id { get; set; }
 
         public string CustomerID {get;set;}

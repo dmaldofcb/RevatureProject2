@@ -80,6 +80,17 @@ namespace PizzaOrder.Controllers
                         newOrder.PizzaPieList.Add(JsonConvert.DeserializeObject<PizzaPie>(apiResponse));
                     }
                 }
+                
+                using (var httpClient = new HttpClient())
+                {
+                    //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
+                    using (var response = await httpClient.GetAsync("http://localhost:51600/api/toppingsapi/GetPizzaToppings/" + newOrder.OrderDetailsList[0].PizzaID))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        newOrder.PizzaToppingsList.Add(newOrder.OrderDetailsList[0].PizzaID, JsonConvert.DeserializeObject<List<PizzaToppings>>(apiResponse));
+                    }
+                }
+                
             }
             else
             {
@@ -94,9 +105,67 @@ namespace PizzaOrder.Controllers
                             newOrder.PizzaPieList.Add(JsonConvert.DeserializeObject<PizzaPie>(apiResponse));
                         }
                     }
+
+                    using (var httpClient = new HttpClient())
+                    {
+                        //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
+                        using (var response = await httpClient.GetAsync("http://localhost:51600/api/toppingsapi/GetPizzaToppings/" + item.PizzaID))
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            newOrder.PizzaToppingsList.Add(item.PizzaID, JsonConvert.DeserializeObject<List<PizzaToppings>>(apiResponse));
+                        }
+                    }
                 }
             }
 
+            foreach (KeyValuePair<int, List<PizzaToppings>> piePizza in newOrder.PizzaToppingsList)
+            {
+                int pizzapieId = piePizza.Key;
+                List<PizzaToppings> list = piePizza.Value;
+                //Console.WriteLine("Key = {0}, contains {1} values:", key, list.Count);
+                foreach (var itemTopping in list)
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+                        //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
+                        using (var response = await httpClient.GetAsync("http://localhost:51600/api/ToppingsAPI/" + itemTopping.ToppingsID))
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            //newOrder.ToppingsList.Add(pizzapieId, JsonConvert.DeserializeObject<List<Toppings>>(apiResponse));
+                            if (newOrder.ToppingsList.ContainsKey(pizzapieId))
+                            {
+                                newOrder.ToppingsList[pizzapieId].Add(JsonConvert.DeserializeObject<Toppings>(apiResponse));
+
+                            }
+                            else
+                            {
+                                newOrder.ToppingsList.Add(pizzapieId, new List<Toppings> { JsonConvert.DeserializeObject<Toppings>(apiResponse) });
+                            }
+                        }
+                    }
+                }
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+                //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
+                using (var response = await httpClient.GetAsync(" http://localhost:51600/api/Sizeapi"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    newOrder.SizesList = JsonConvert.DeserializeObject<List<Size>>(apiResponse);
+                }
+            }
+
+
+            using (var httpClient = new HttpClient())
+            {
+                //using (var response = await httpClient.GetAsync("https://pizzaordersystem.azurewebsites.net/api/Orders/GetOrders/" + user))
+                using (var response = await httpClient.GetAsync("http://localhost:51600/api/CrustAPI"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    newOrder.CrustList = JsonConvert.DeserializeObject<List<Crust>>(apiResponse);
+                }
+            }
 
 
 
