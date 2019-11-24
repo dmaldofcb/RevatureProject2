@@ -35,23 +35,23 @@ namespace PizzaOrder.Controllers
             public async Task<IActionResult> Index()
             {
                 //List<PizzaPie> pizzas = null;
-                PizzaMenuVM pizzas = null;
+                PizzaPie pizzas = null;
                 using (var client = new HttpClient())
                 {
-                    //client.BaseAddress = new Uri("https://pizzorderapi.azurewebsites.net/"); // DONT PLACE API HERE. OR ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    //client.DefaultRequestHeaders.Accept.Clear();
-                    //client.DefaultRequestHeaders.Accept.Add(
-                    //    new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.BaseAddress = new Uri("http://localhost:51600/"); // DONT PLACE API HERE. OR ELSE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(
+                //    new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    //var apiUrl = "api/Pizza";
-                    var responseTask = await client.GetAsync("https://pizzaordersystem.azurewebsites.net/api/PizzaAPI");
+                //var apiUrl = "api/Pizza";
+                var responseTask = await client.GetAsync("https://pizzaordersystem.azurewebsites.net/api/PizzaAPI");
                     //responseTask.Wait();
                     //var result = responseTask.Result;
                     if (responseTask.IsSuccessStatusCode)
                     {
                         var readTask = responseTask.Content.ReadAsStringAsync().Result;
                         //readTask.Wait();
-                        pizzas = JsonConvert.DeserializeObject<PizzaMenuVM>(readTask);
+                        pizzas = JsonConvert.DeserializeObject<PizzaPie>(readTask);
 
                     }
                     else //web api sent error response 
