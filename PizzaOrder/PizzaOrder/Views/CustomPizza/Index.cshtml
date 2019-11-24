@@ -25,42 +25,42 @@
     <option value="3" style="color:blue">Stuffed Crust</option>
 </select>
 <br />
-<input type="checkbox" name="toppings" value="Pepperoni" />Pepperoni
+<input type="checkbox" name="toppings" value="1" />Pepperoni
 <br />
-<input type="checkbox" name="toppings" value="Sausage" />Sausage
+<input type="checkbox" name="toppings" value="2" />Sausage
 <br />
-<input type="checkbox" name="toppings" value="Pineapple" />Pineapple
+<input type="checkbox" name="toppings" value="3" />Pineapple
 <br />
-<input type="checkbox" name="toppings" value="Green Peppers" />Green Peppers
+<input type="checkbox" name="toppings" value="4" />Green Peppers
 <br />
-<input type="checkbox" name="toppings" value="Red Peppers" />Red Peppers
+<input type="checkbox" name="toppings" value="5" />Red Peppers
 <br />
-<input type="checkbox" name="toppings" value="Ham" />Ham
+<input type="checkbox" name="toppings" value="6" />Ham
 <br />
-<input type="checkbox" name="toppings" value="Onions" />Onions
+<input type="checkbox" name="toppings" value="7" />Onions
 <br />
-<input type="checkbox" name="toppings" value="Mushrooms" />Mushrooms
+<input type="checkbox" name="toppings" value="8" />Mushrooms
 <br />
-<input type="checkbox" name="toppings" value="Black Olives" />Black Olives
+<input type="checkbox" name="toppings" value="9" />Black Olives
 <br />
-<input type="checkbox" name="toppings" value="Chicken" />Chicken
+<input type="checkbox" name="toppings" value="10" />Chicken
 <br />
-<input type="checkbox" name="toppings" value="Buffalo Chicken" />Buffalo Chicken
+<input type="checkbox" name="toppings" value="11" />Buffalo Chicken
 <br />
-<input type="checkbox" name="toppings" value="Broccoli" />Broccoli
+<input type="checkbox" name="toppings" value="12" />Broccoli
 <br />
-<input type="checkbox" name="toppings" value="Tomatoes" />Tomatoes
+<input type="checkbox" name="toppings" value="13" />Tomatoes
 <br />
-<input type="checkbox" name="toppings" value="Spinach" />Spinach
+<input type="checkbox" name="toppings" value="14" />Spinach
 <br />
-<input type="checkbox" name="toppings" value="Bacon" />Bacon
+<input type="checkbox" name="toppings" value="15" />Bacon
 <br />
-<input type="checkbox" name="toppings" value="Meatballs" />Meatballs
+<input type="checkbox" name="toppings" value="16" />Meatballs
 <br />
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <button type="submit" class="=btn btn-primary" onclick="addToCart()">Add to Cart</button>
+    <button type="submit" class="=btn btn-primary" onclick="AddToCart()">Add to Cart</button>
 }
 else
 {
@@ -68,54 +68,79 @@ else
 }
 
 <script>
-    var key = 0;
 
-    function addToCart() {
-        while (localStorage.getItem(key) != null) {
-            key++;
-        }
+    function AddToCart()
+    {
+        var pizza = "size";
+        var crustID = "crust";
+        var toppingsID = "toppings";
+        var checkBoxValues = [];
+            $.each($("input[name=" + toppingsID + "]:checked"), function(){
+                (checkBoxValues).push($(this).val());
+            });
 
-        var sizeChoice = document.getElementById("size");
-        var size = sizeChoice.value;
-        var crustChoice = document.getElementById("crust");
-        var crust = crustChoice.value;
+        //var listOfToppings = [];
+        // checkBoxValues.forEach(function topping() {
+        //     var parsed = parseInt(topping);
+        //     listOfToppings.push(parsed);
+        //});
 
-        var items=document.getElementsByName('toppings');
-        var selectedItems = "";
-		for(var i=0; i<items.length; i++){
-            if (items[i].type == 'checkbox' && items[i].checked == true) {
-                selectedItems = selectedItems + items[i].value + ", ";
+        //console.log("Toppings List:" + listOfToppings.length);
+        //console.log("First Topping:" + checkBoxValues[0]);
+        //checkBoxValues.forEach(function (toppings) {
+        //    console.log(toppings)
+        //});
+        //passing name field in checkbox
+        //var toppings = document.getElementsByName(toppingsID);
+        ////toppings.forEach(function (topping) {
+        ////console.log(topping.value);
+        ////});
+
+        var sizeID = document.getElementById(pizza).value;  
+        var parseSizeID = parseInt(sizeID);
+        var crustID = document.getElementById(crustID).value;   
+        var parseCrustID = parseInt(crustID);
+
+
+        //document.getElementById("sizeId").value = id;
+
+                    //toppingIDs: checkBoxValues,
+
+        var modelVM =
+        {
+            type: "custom",
+            crustID: parseCrustID,
+            sizeId: parseSizeID,
+            //toppingByID: checkBoxValues
+        };
+        var stringify = JSON.stringify(modelVM);
+        console.log("stringify output:" + stringify);
+        $.ajax({
+            contentType: "application/json;charset=utf-8",
+            type: "POST",
+            // returns a list of our middle table
+            url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
+            data: JSON.stringify(modelVM),
+
+            success: function (data) {
+                console.log("Success!");
+                console.log("Type:" + data.type);
+                console.log("Crust ID:" + data.crustID);
+                console.log("Size ID" + data.sizeId);
+                console.log("ID" + data.id);
+                //data.toppingByID.forEach(function (topping) {
+                //    console.log("Toppings:" + topping)
+                //});
+                //var storePizza = Object.assign(data, localStorage);
+                localStorage.setItem(data.id, JSON.stringify(data));
+                //increment number next to shopping cart by 1
+                //add correct pizza to a list....maybe using localStorage?
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                return "hello";
             }
-
-		}
-
-        if (selectedItems == "") {
-            selectedItems = "None";
-        }
-        /*else { //This is supposed to get rid of the last comma and space, but it dosen't work.
-            selectedItems = selectedItems.substring(0, str.length - 2);
-        }*/
-
-        if (size == "") {
-            alert("Please select a size");
-        }
-        else if (crust == "") {
-            alert("Please select a crust");
-        }
-        else {
-
-
-            var pizza = new Object();
-            pizza.Type = "Custom";
-            pizza.crustID = crust;
-            pizza.SizeId = size;
-            pizza.Toppings = selectedItems;
-            pizza.IsCustom = true;
-            localStorage.setItem(key, JSON.stringify(pizza));
-            alert("Pizza added to cart.");
-            key++;
-
-        }
+        });
 
     }
 </script>
