@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaOrder.Data;
 
-namespace PizzaOrder.Data.Migrations
+namespace Layers.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -171,9 +171,6 @@ namespace PizzaOrder.Data.Migrations
 
                     b.Property<int>("CrustID")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsCustom")
-                        .HasColumnType("bit");
 
                     b.Property<int>("SizeId")
                         .HasColumnType("int");

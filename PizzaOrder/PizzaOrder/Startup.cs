@@ -24,11 +24,23 @@ namespace PizzaOrder
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer("Server=tcp:pizzaserver2019.database.windows.net,1433;Initial Catalog=PizzaDb;Persist Security Info=False;User ID=pizzauser;Password=Pizzaparty2019;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
             services.AddDefaultIdentity<Customer>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -36,9 +48,13 @@ namespace PizzaOrder
 
             services.AddTransient<IPizza, PizzaPieRepo>();
             services.AddTransient<IOrder, OrderRepo>();
-            services.AddTransient<IOrderDetails, OdrerDetailsRepo>();
-            services.AddControllers();
+            services.AddTransient<IOrderDetails, OrderDetailsRepo>();
+            services.AddTransient<ISize, SizeRepo>();
+            services.AddTransient<ICrust, CrustRepo>();
+            services.AddTransient<IToppings, ToppingsRepo>();
+            services.AddTransient<IPizzaToppings, PizzaToppingsRepo>();
 
+            services.AddControllers();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -66,6 +82,7 @@ namespace PizzaOrder
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Layers.Models.Models;
 using Layers.Models.Repository;
+using Layers.Models.ViewModels;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,30 +14,75 @@ namespace PizzaOrderAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    
-    public class PizzaController : ControllerBase
+    [EnableCors("_myAllowSpecificOrigins")]
+    public class PizzaAPIController : ControllerBase
     {
        // private readonly PizzaPieRepo _pizzaRepo;
         private readonly IPizza _pizzaRepo;
-        public PizzaController(IPizza pizzarepo)
+        private readonly ISize _sizeRepo;
+        private readonly IToppings _toppingsRepo;
+        private readonly ICrust _crustRepo;
+        private readonly IPizzaToppings _pizzaToppingsRepo;
+
+        public PizzaAPIController(IPizza pizzaRepo, ISize sizeRepo, IToppings toppingsRepo, ICrust crustRepo, IPizzaToppings pizzaToppings)
         {
-            _pizzaRepo = pizzarepo;
+            _pizzaRepo = pizzaRepo;
+            _sizeRepo = sizeRepo;
+            _toppingsRepo = toppingsRepo;
+            _crustRepo = crustRepo;
+            _pizzaToppingsRepo = pizzaToppings;
         }
 
-        public List<PizzaPie> pizzas = new List<PizzaPie>()
+        [HttpGet]
+        public async Task<PizzaPie> Get()
         {
-            new PizzaPie() {Id = 1, CrustID = 1, IsCustom = false, SizeId = 1, Type = "Pepperoni"},
-             new PizzaPie() {Id = 2, CrustID = 2, IsCustom = false, SizeId = 2, Type = "Meat Lovers"},
-              new PizzaPie() {Id = 3, CrustID = 3, IsCustom = false, SizeId = 3, Type = "Sausage"},
-        };
+            PizzaPie pizza = new PizzaPie();
+            var toppings = await _toppingsRepo.Get();
+            pizza.Toppings = toppings;
+            return pizza;
+        }
+
+        [HttpGet("{id}")]
+
+        public async Task<Size> GetSize(int id)
+        {
+            var getSize = await _sizeRepo.Get(id);
+            return getSize;
+        }
 
 
         [HttpGet]
-        public async Task<IEnumerable<PizzaPie>> Get()
+        [Route("GetCrust/{crustID}")]
+        public async Task<Crust> GetCrust(int crustID)
         {
-            var pizzaMenu = await _pizzaRepo.Get();
-            return pizzaMenu;
+            var crust = await _crustRepo.Get(crustID);
+            return crust;
         }
+
+        [HttpPost]
+        [Route("AddToCart")]
+        public async Task<PizzaPie> AddToCart(PizzaPie pizza)
+        {
+            PizzaPie createPizza = new PizzaPie()
+            {
+                Type = pizza.Type,
+                CrustID = pizza.CrustID,
+                SizeId = pizza.SizeId,
+                ToppingByID = pizza.ToppingByID        
+            };
+            await _pizzaRepo.Create(createPizza);
+            for(int i = 0; i < pizza.ToppingByID.Length; i++)
+            {
+                PizzaToppings pizzaToppings = new PizzaToppings();
+                pizzaToppings.PizzaID = createPizza.Id;
+                pizzaToppings.ToppingsID = pizza.ToppingByID[i];
+                await _pizzaToppingsRepo.AddPizzaToppings(pizzaToppings);
+            }
+            //var addToOrders = await _pizzaRepo.AddPizzaToOrder(getPie);
+            return createPizza;
+        }
+
+
 
     }
 }

@@ -14,6 +14,5 @@ namespace Layers.Models.Repository
         Task<bool> Edit(int id, PizzaPie pizza);
         Task<bool> Delete(int id);
         bool PizzaExists(int id);
-
     }
 }
