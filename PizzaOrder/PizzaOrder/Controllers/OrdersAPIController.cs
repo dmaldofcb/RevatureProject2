@@ -33,11 +33,13 @@ namespace PizzaOrderAPI.Controllers
         }
 
         // GET: api/Orders/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        //[HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetOrder/{userId}/{id}")]
+        public async Task<ActionResult<Order>> GetOrder(int id, string userId)
         {
 
-            var order = await _repo.Get(id);
+            var order = await _repo.Get(id, userId);
 
             if (order == null)
             {

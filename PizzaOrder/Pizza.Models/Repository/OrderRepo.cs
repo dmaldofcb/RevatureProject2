@@ -39,9 +39,9 @@ namespace Layers.Models.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Order> Get(int? id)
+        public async Task<Order> Get(int? id, string userId)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id && m.CustomerID == userId);
 
             return order;
         }
