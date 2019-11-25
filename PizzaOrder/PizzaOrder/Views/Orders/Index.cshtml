@@ -4,86 +4,73 @@
     ViewData["Title"] = "Index";
 }
 
-<style>
-     .content-table {
-      border-collapse: collapse;
-      margin: 25px 0;
-      font-size: 0.9em;
-      min-width: 400px;
-      border-radius: 5px 5px 0 0;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    .content-table thead tr {
-      background-color: #009879;
-      color: #ffffff;
-      text-align: left;
-      font-weight: bold;
-    }
+<div class="limiter" align="center">
+    <h1>Pizza Order History</h1>
+    <div>
+        <div class="wrap-table100">
+            <div class="table100 ver3 m-b-110">
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="color:#fac564">
+                                   @Html.DisplayNameFor(model => model.Id)
+                                </th>
+                                <th class="cell100 column2" style="color:#fac564">
+                                    @Html.DisplayNameFor(model => model.OrderDate)
+                                </th>
+                                <th class="cell100 column3" style="color:#fac564">
+                                    @Html.DisplayNameFor(model => model.Total)
+                                </th>
+                                <th class="cell100 column4">
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="table100-body js-pscroll">
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">
+                                        #@Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td class="cell100 column2">
+                                        @Html.DisplayFor(modelItem => item.OrderDate)
+                                    </td>
+                                    <td class="cell100 column3">
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                    <td class="cell100 column4">
+                                        <a asp-action="GetOrderDetails" asp-route-id="@item.Id"> <u>  Order Details  </u></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-    .content-table th,
-    .content-table td {
-      padding: 12px 15px;
-    }
+            </div>
+        </div>
+    </div>
+</div>
 
-    .content-table tbody tr {
-      border-bottom: 1px solid #dddddd;
-    }
+<script src="~/lib/bootstrap/dist/css/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/popper.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/select2/select2.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script>
+    $('.js-pscroll').each(function () {
+        var ps = new PerfectScrollbar(this);
 
-    .content-table tbody tr:nth-of-type(even) {
-      background-color: #f3f3f3;
-    }
-
-    .content-table tbody tr:last-of-type {
-      border-bottom: 2px solid #009879;
-    }
-
-    .content-table tbody tr.active-row {
-      font-weight: bold;
-      color: #009879;
-    }
-
-</style>
-
-<h1 class="align-content-center">Order History</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="content-table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        $(window).on('resize', function () {
+            ps.update();
+        })
+    });
+</script>
+<script src="~/js/main.js"></script>

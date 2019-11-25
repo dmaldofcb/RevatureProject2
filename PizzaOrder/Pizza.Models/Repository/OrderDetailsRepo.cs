@@ -10,11 +10,11 @@ using System.Security.Claims;
 
 namespace Layers.Models.Repository
 {
-    public class OdrerDetailsRepo : IOrderDetails
+    public class OrderDetailsRepo : IOrderDetails
     {
         private readonly ApplicationDbContext _context;
 
-        public OdrerDetailsRepo(ApplicationDbContext ctx)
+        public OrderDetailsRepo(ApplicationDbContext ctx)
         {
             _context = ctx;
         }

@@ -19,26 +19,44 @@ namespace PizzaOrderAPI.Controllers
     {
        // private readonly PizzaPieRepo _pizzaRepo;
         private readonly IPizza _pizzaRepo;
-        public PizzaAPIController(IPizza pizzarepo)
+        private readonly ISize _sizeRepo;
+        private readonly IToppings _toppingsRepo;
+        private readonly ICrust _crustRepo;
+        private readonly IPizzaToppings _pizzaToppingsRepo;
+
+        public PizzaAPIController(IPizza pizzaRepo, ISize sizeRepo, IToppings toppingsRepo, ICrust crustRepo, IPizzaToppings pizzaToppings)
         {
-            _pizzaRepo = pizzarepo;
+            _pizzaRepo = pizzaRepo;
+            _sizeRepo = sizeRepo;
+            _toppingsRepo = toppingsRepo;
+            _crustRepo = crustRepo;
+            _pizzaToppingsRepo = pizzaToppings;
         }
 
         [HttpGet]
         public async Task<PizzaPie> Get()
         {
             PizzaPie pizza = new PizzaPie();
-            var toppings = await _pizzaRepo.GetToppings();
+            var toppings = await _toppingsRepo.Get();
             pizza.Toppings = toppings;
+            return pizza;
+        }
+
+
+        [HttpGet]
+        [Route("GetPizza/{id}")]
+
+        public async Task<PizzaPie> Get(int? id)
+        {
+            var pizza = await _pizzaRepo.Get(id);
             return pizza;
         }
 
         [HttpGet("{id}")]
 
-        public async Task<Size> GetSizes(int id)
+        public async Task<Size> GetSize(int id)
         {
-            var sizes = await _pizzaRepo.GetSizes();
-            var getSize = sizes.FirstOrDefault(x => x.Id == id);
+            var getSize = await _sizeRepo.Get(id);
             return getSize;
         }
 
@@ -47,21 +65,14 @@ namespace PizzaOrderAPI.Controllers
         [Route("GetCrust/{crustID}")]
         public async Task<Crust> GetCrust(int crustID)
         {
-            var crusts = await _pizzaRepo.GetCrust();
-            var getCrust = crusts.FirstOrDefault(x => x.Id == crustID);
-            return getCrust;
+            var crust = await _crustRepo.Get(crustID);
+            return crust;
         }
 
         [HttpPost]
         [Route("AddToCart")]
         public async Task<PizzaPie> AddToCart(PizzaPie pizza)
         {
-            //PizzaToppings pizzaToppings = new PizzaToppings();
-            // searches our middle table
-            //searches our pizza menu to link the name in .cshtml to the name in our database table
-            //var getPie = pizzas.FirstOrDefault(x => x.Type == pizza.Type); // returns a single item
-            //searches middle table for where our PizzaID matches the pizza id in our menu table 
-            //returns list of toppings and its associated pizza id
             PizzaPie createPizza = new PizzaPie()
             {
                 Type = pizza.Type,
@@ -75,7 +86,7 @@ namespace PizzaOrderAPI.Controllers
                 PizzaToppings pizzaToppings = new PizzaToppings();
                 pizzaToppings.PizzaID = createPizza.Id;
                 pizzaToppings.ToppingsID = pizza.ToppingByID[i];
-                await _pizzaRepo.AddPizzaToppings(pizzaToppings);
+                await _pizzaToppingsRepo.AddPizzaToppings(pizzaToppings);
             }
             //var addToOrders = await _pizzaRepo.AddPizzaToOrder(getPie);
             return createPizza;

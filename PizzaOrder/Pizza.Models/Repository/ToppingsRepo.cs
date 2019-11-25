@@ -20,6 +20,15 @@ namespace Layers.Models.Repository
             _context = ctx;
         }
 
+        //get pizzatoppings from a particular pizza id
+        public async Task<List<PizzaToppings>> GetPizzaToppings(int? id)
+        {
+            var toppings = await _context.PizzasToppings.Where(d => d.PizzaID == id).ToListAsync();
+
+            return toppings;
+        }
+
+
         public async Task<Toppings> Get(int? id)
         {
             var toppings = await _context.Toppings.FirstOrDefaultAsync(x => x.Id == id);
@@ -30,5 +39,6 @@ namespace Layers.Models.Repository
             var toppings = await _context.Toppings.ToListAsync();
             return toppings;
         }
+
     }
 }
