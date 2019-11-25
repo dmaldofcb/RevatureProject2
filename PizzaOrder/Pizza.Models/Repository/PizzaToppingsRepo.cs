@@ -1,8 +1,9 @@
 ﻿using Layers.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using PizzaOrder.Data;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,10 +25,10 @@ namespace Layers.Models.Repository
             return true;
         }
 
-        public async Task<List<PizzaToppings>> GetPizzaToppings()
+        public async Task<List<PizzaToppings>> GetPizzaToppings(int? id)
         {
-            var pizzaToppings = await _context.PizzasToppings.ToListAsync();
-            return pizzaToppings;
+            var toppings = await _context.PizzasToppings.Where(d => d.PizzaID == id).ToListAsync();
+            return toppings;
         }
     }
 }

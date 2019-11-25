@@ -1,5 +1,7 @@
 ﻿@model Layers.Models.ViewModels.PizzaOrderVM
 @using Layers.Models.Models;
+@using Microsoft.AspNetCore.Mvc;
+@using System.Security.Claims;
 @{
     ViewData["Title"] = "GetOrderDetails";
 }
@@ -7,67 +9,67 @@
 
 
 
-<div class="container justify-content-center" >
+<div class="container justify-content-center">
     <h1 align="center">Order Details</h1>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.CurrOrder.Id)
-            </dt>
-            <dt class="col-sm-10">
-                # @Html.DisplayFor(model => model.CurrOrder.Id)
-            </dt>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.CurrOrder.OrderDate)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrOrder.OrderDate)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.CurrOrder.Total)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CurrOrder.Total)
-            </dd>
-        </dl>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.Id)
+        </dt>
+        <dt class="col-sm-10">
+            # @Html.DisplayFor(model => model.CurrOrder.Id)
+        </dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.OrderDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrOrder.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CurrOrder.Total)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrOrder.Total)
+        </dd>
+    </dl>
 </div>
 
-    <div class="limiter" align="center">
-        <div>
-            <a asp-action="Index" class="btn-dark btn-lg disabled">Back to Order List</a>
-        </div>
-        <br />
-        <div>
-            <div class="wrap-table100">
-                <div class="table100 ver3 m-b-110">
-                    <div class="table100-head">
-                        <table>
-                            <thead>
-                                <tr class="row100 head">
-                                    <th class="cell100 column1" style="color:#fac564">
-                                        Pizza Information
-                                    </th>
-                                    <th class="cell100 column2" style="color:#fac564">
-                                        Quantity
-                                    </th>
-                                    <th class="cell100 column3" style="color:#fac564">
-                                        Pizza Price
-                                    </th>
+<div class="limiter" align="center">
+    <div>
+        <a asp-action="Index" class="btn-dark btn-lg disabled">Back to Order List</a>
+    </div>
+    <br />
+    <div>
+        <div class="wrap-table100">
+            <div class="table100 ver3 m-b-110">
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="color:#fac564">
+                                    Pizza Information
+                                </th>
+                                <th class="cell100 column2" style="color:#fac564">
+                                    Quantity
+                                </th>
+                                <th class="cell100 column3" style="color:#fac564">
+                                    Pizza Price
+                                </th>
 
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="table100-body js-pscroll">
-                        <table>
-                            <tbody>
-                                @foreach (var item in Model.OrderDetailsList)
-                                {
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="table100-body js-pscroll">
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetailsList)
+                            {
                                 <tr class="row100 body">
 
                                     <td class="cell100 column1">
                                         @{
-
+                                            var user = User.FindFirstValue(ClaimTypes.NameIdentifier);
                                             foreach (var pizza in Model.PizzaPieList)
                                             {
                                                 if (pizza.Id == item.PizzaID)
@@ -150,30 +152,31 @@
                                     </td>
                                 </tr>
 
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-
+                            }
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 
 
 
-    <script src="~/lib/bootstrap/dist/css/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/popper.js"></script>
-    <script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/bootstrap/dist/css/vendor/select2/select2.min.js"></script>
-    <script src="~/lib/bootstrap/dist/css/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script>
-        $('.js-pscroll').each(function () {
-            var ps = new PerfectScrollbar(this);
+<script src="~/lib/bootstrap/dist/css/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/popper.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/select2/select2.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script>
+    $('.js-pscroll').each(function () {
+        var ps = new PerfectScrollbar(this);
 
-            $(window).on('resize', function () {
-                ps.update();
-            })
-        });
-    </script>
-    <script src="~/js/main.js"></script>
+        $(window).on('resize', function () {
+            ps.update();
+        })
+    });
+
+</script>
+<script src="~/js/main.js"></script>
