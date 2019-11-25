@@ -9,7 +9,7 @@ namespace Layers.Models.Repository
     public interface IPizzaToppings
     {
         Task<bool> AddPizzaToppings(PizzaToppings pizzaTopping);
-        Task<List<PizzaToppings>> GetPizzaToppings();
+        Task<List<PizzaToppings>> GetPizzaToppings(int? id);
 
     }
 }
