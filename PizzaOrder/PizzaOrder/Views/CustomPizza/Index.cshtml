@@ -9,7 +9,7 @@
 
 <h1>Customize your pizza</h1>
 
-<p>Choose your pizza size</p>
+<p>Choose your pizza size.</p>
 
 <select name="SelectSize" id="size" class="mdb-select md-form">
     <option value="" disabled selected>Select Your Size</option>
@@ -18,6 +18,7 @@
     <option value="3" style="color:blue">Large</option>
 </select>
 <br />
+<p>Choose your pizza crust.</p>
 <select name="SelectCrust" id="crust" class="mdb-select md-form">
     <option value="" disabled selected>Select Your Crust</option>
     <option value="1" style="color:blue">Thin Crust</option>
@@ -25,6 +26,7 @@
     <option value="3" style="color:blue">Stuffed Crust</option>
 </select>
 <br />
+<p>Choose your pizza toppings.</p>
 <input type="checkbox" name="toppings" value="1" />Pepperoni
 <br />
 <input type="checkbox" name="toppings" value="2" />Sausage
@@ -79,11 +81,13 @@ else
                 (checkBoxValues).push($(this).val());
             });
 
-        //var listOfToppings = [];
-        // checkBoxValues.forEach(function topping() {
-        //     var parsed = parseInt(topping);
-        //     listOfToppings.push(parsed);
-        //});
+        var listOfToppings = [];
+        for(var i = 0; i < checkBoxValues.length; i++)
+        {
+            var toInt = parseInt(checkBoxValues[i]);
+            listOfToppings.push(toInt);
+
+        }
 
         //console.log("Toppings List:" + listOfToppings.length);
         //console.log("First Topping:" + checkBoxValues[0]);
@@ -111,7 +115,7 @@ else
             type: "custom",
             crustID: parseCrustID,
             sizeId: parseSizeID,
-            //toppingByID: checkBoxValues
+            toppingByID: listOfToppings
         };
         var stringify = JSON.stringify(modelVM);
         console.log("stringify output:" + stringify);
@@ -128,9 +132,9 @@ else
                 console.log("Crust ID:" + data.crustID);
                 console.log("Size ID" + data.sizeId);
                 console.log("ID" + data.id);
-                //data.toppingByID.forEach(function (topping) {
-                //    console.log("Toppings:" + topping)
-                //});
+                data.toppingByID.forEach(function (topping) {
+                    console.log("Toppings:" + topping)
+                });
                 //var storePizza = Object.assign(data, localStorage);
                 localStorage.setItem(data.id, JSON.stringify(data));
                 //increment number next to shopping cart by 1
