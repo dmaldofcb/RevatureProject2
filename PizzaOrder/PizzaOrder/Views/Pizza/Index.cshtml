@@ -69,7 +69,7 @@
                                 <option value="2" style="color:blue">Thick Crust</option>
                                 <option value="3" style="color:blue">Stuffed Crust</option>
                             </select>
-                            <button type="button" id="Customize">Customize Your Order</button>
+                            <button type="button" id="Customize" onclick="location.href='CustomPizza'">Customize Your Order</button>
                             <div>
                                 <input type="checkbox" name="pepperoniToppings" value="1" disabled="true" checked="true"> Pepperoni<br>
                             </div>
@@ -111,7 +111,7 @@
                             <option value="2" style="color:blue">Thick Crust</option>
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
-                        <button type="button">Customize Your Order</button>
+                        <button type="button" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="hawaiianToppings" value="3" disabled="true" checked="true">Pineapple<br>
                             <input type="checkbox" name="hawaiianToppings" value="6" disabled="true" checked="true">Ham<br>
@@ -156,7 +156,7 @@
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
                         @*<input asp-for="@Model.PizzaToAdd.SizeId" hidden id="sizeId" />*@
-                        <button type="button">Customize Your Order</button>
+                        <button type="button" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="sausageToppings" value="2" disabled="true" checked="true"> Sausage<br>
                         </div>

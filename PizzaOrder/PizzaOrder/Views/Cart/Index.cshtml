@@ -9,37 +9,45 @@
 
 <script>
     document.write('<pre>');
-    for (let i = 0; i < localStorage.length; i++){
+    for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         let value = JSON.parse(localStorage.getItem(key));
-        document.write("Pizza Type: " + value.Type + ", ");
-        if (value.CrustID == 1) {
+        let price = 0;
+       // document.writeln(localStorage.getItem(key));
+        document.write("Pizza Type: " + value.type + ", ");
+        if (value.crustID == 1) {
             document.write("Crust Type: Thin Crust, ");
+            price = 1.50;
         }
-        else if (value.CrustID == 2) {
+        else if (value.crustID == 2) {
             document.write("Crust Type: Thick Crust, ");
+            price = 2.00;
         }
         else {
             document.write("Crust Type: Stuffed Crust, ");
+            price = 3.00
         }
 
-        if (value.SizeId == 1) {
-            document.write("Pizza Size: Small");
+        if (value.sizeId == 1) {
+            document.write("Pizza Size: Small ");
+            price = price + 8.25;
         }
-        else if (value.SizeId == 2) {
-            document.write("Pizza Size: Medium");
+        else if (value.sizeId == 2) {
+            document.write("Pizza Size: Medium ");
+            price = price + 14.25;
         }
         else {
-            document.write("Pizza Size: Large");
+            document.write("Pizza Size: Large ");
+            price = price + 18.75;
         }
+        //Once i figure out why i can't access the toppings API, i will replace this with code that accesses the api and 
+        //gets the topping's name and price from the database, instead of just showing the user all the toppings IDs
+        //It will also add each topping's price to the price. 
+        document.write("Toppings: " + value.toppingByID)
 
-        if (value.IsCustom == true) {
-            document.writeln(" Toppings: " + value.Toppings);
-        }
-        else {
-            document.writeln("");
-        }
+        document.writeln(" Price: " + price);
     }
+
     function emptyCart() {
         localStorage.clear();
         location.reload();
