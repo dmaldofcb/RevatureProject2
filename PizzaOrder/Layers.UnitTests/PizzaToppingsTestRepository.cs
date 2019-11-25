@@ -14,7 +14,7 @@ namespace Layers.UnitTests
             throw new NotImplementedException();
         }
 
-        public Task<List<PizzaToppings>> GetPizzaToppings()
+        public Task<List<PizzaToppings>> GetPizzaToppings(int? id)
         {
             throw new NotImplementedException();
         }

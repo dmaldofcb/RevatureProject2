@@ -1,6 +1,7 @@
 ﻿@model Layers.Models.Models.PizzaPie
 @using Microsoft.AspNetCore.Identity
 @using Layers.Models.Models;
+
 @inject SignInManager<Customer> SignInManager
 @inject UserManager<Customer> UserManager
 
@@ -15,24 +16,25 @@
 
 <div id="flip">
     Click to see our list of toppings!
-    <div id="panel">
-        @foreach (var item in Model.Toppings)
+    <div id="panel" style="background-color:#fac564">
+        <div class="table100 ver3 m-b-110">
+
+            @foreach (var item in Model.Toppings)
             {
-                <table>
-                    <tr>
-                        <td>
+                <table class="table100-body">
+                    <tr class="row100 body">
+                        <td class="cell100 column1">
                             @Html.DisplayFor(modelItem => item.Type)
                         </td>
-                        <td>
-                            $
+                        <td class="cell100 column1" >
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
                     </tr>
                 </table>
             }
-
+        </div>
+        </div>
     </div>
-</div>
 
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
@@ -57,23 +59,23 @@
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                            <select name="SelectSize" id="pepperoni" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
-                                <option value="" disabled selected>Select Your Size</option>
-                                <option value="1" style="color:blue">Small</option>
-                                <option value="2" style="color:blue">Medium</option>
-                                <option value="3" style="color:blue">Large</option>
-                            </select>
-                            <select name="SelectCrust" id="crust1" onclick="subtractCrust('crustprice1', 'price1')" onchange="passCrust('price1', this.id, 'crustprice1')"class="mdb-select md-form">
-                                <option value="" disabled selected>Choose your crust</option>
-                                <option value="1" style="color:blue">Thin Crust</option>
-                                <option value="2" style="color:blue">Thick Crust</option>
-                                <option value="3" style="color:blue">Stuffed Crust</option>
-                            </select>
-                            <button type="button" id="Customize" onclick="location.href='CustomPizza'">Customize Your Order</button>
-                            <div>
-                                <input type="checkbox" name="pepperoniToppings" value="1" disabled="true" checked="true"> Pepperoni<br>
-                            </div>
-                        
+                        <select name="SelectSize" id="pepperoni" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
+                            <option value="" disabled selected>Select Your Size</option>
+                            <option value="1" style="color:blue">Small</option>
+                            <option value="2" style="color:blue">Medium</option>
+                            <option value="3" style="color:blue">Large</option>
+                        </select>
+                        <select name="SelectCrust" id="crust1" onclick="subtractCrust('crustprice1', 'price1')" onchange="passCrust('price1', this.id, 'crustprice1')" class="mdb-select md-form">
+                            <option value="" disabled selected>Choose your crust</option>
+                            <option value="1" style="color:blue">Thin Crust</option>
+                            <option value="2" style="color:blue">Thick Crust</option>
+                            <option value="3" style="color:blue">Stuffed Crust</option>
+                        </select>
+                        <button type="button" id="Customize" onclick="location.href='CustomPizza'">Customize Your Order</button>
+                        <div>
+                            <input type="checkbox" name="pepperoniToppings" value="1" disabled="true" checked="true"> Pepperoni<br>
+                        </div>
+
 
                     </div>
                 </div>
@@ -144,7 +146,7 @@
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="sausage" onclick="resetCrustCounter('crustprice3')"onchange="passPizza('price3', this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="sausage" onclick="resetCrustCounter('crustprice3')" onchange="passPizza('price3', this.id)" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -215,8 +217,9 @@
         </div>
     </div>
 </div>
+
 <script>
- 
+
     function passPizza(pizzaPrice, _id) {
         console.log(pizzaPrice);
         var elems = document.getElementsByName("SelectSize");
@@ -238,7 +241,7 @@
     function subtractCrust(crustPrice, totalPrice) {
         var string = document.getElementById(crustPrice).innerHTML;
         var parse = parseInt(string);
-     
+
         var total = document.getElementById(totalPrice).innerHTML;
         var parseTotal = parseInt(total);
         if (parseTotal > 0 && parse > 0) {
@@ -259,7 +262,7 @@
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
                 url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/GetCrust/" + id,
-               
+
                 success: function (data) {
                     console.log("data:", data);
                     console.log("Price:", data.price);
@@ -267,13 +270,13 @@
                     var crustCounterString = document.getElementById(cruuuust).innerHTML;
                     var crustCounter = parseInt(crustCounterString);
                     document.getElementById(cruuuust).innerHTML = crustCounter;
-                    
+
                         var string = document.getElementById(price).innerHTML;
                         console.log(string);
                         var parseTotal = parseInt(string);
                         document.getElementById(price).innerHTML = (parseTotal - crustCounter);
                         document.getElementById(cruuuust).innerHTML = 0;
-                    
+
 
 
                         var crustUpdateCounterString = document.getElementById(cruuuust).innerHTML;
@@ -283,7 +286,7 @@
 
                         console.log(parseTotal);
                         document.getElementById(price).innerHTML = (parseTotal + crustUpdateCounter);
-                    
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
@@ -294,7 +297,7 @@
     }
     function AddToCart(pizza, toppingsID, crustID)
     {
-        
+
          var checkBoxValues = [];
             $.each($("input[name=" + toppingsID + "]:checked"), function(){
                 (checkBoxValues).push($(this).val());
@@ -317,9 +320,9 @@
         ////console.log(topping.value);
         ////});
 
-        var sizeID = document.getElementById(pizza).value;  
+        var sizeID = document.getElementById(pizza).value;
         var parseSizeID = parseInt(sizeID);
-        var crustID = document.getElementById(crustID).value;   
+        var crustID = document.getElementById(crustID).value;
         var parseCrustID = parseInt(crustID);
 
 
@@ -354,7 +357,7 @@
                     console.log("Toppings:" + topping)
                 });
 
-               
+
                 //var storePizza = Object.assign(data, localStorage);
                 localStorage.setItem(data.id, JSON.stringify(data));
                 //increment number next to shopping cart by 1
@@ -405,4 +408,4 @@
                 }
             });
         }
-    </script>
+</script>

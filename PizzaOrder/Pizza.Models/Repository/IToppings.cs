@@ -10,7 +10,7 @@ namespace Layers.Models.Repository
     {
         Task<Toppings> Get(int? id);
         Task<List<Toppings>> Get();
-        Task<List<PizzaToppings>> GetPizzaToppings(int? id);
+       // Task<List<PizzaToppings>> GetPizzaToppings(int? id);
 
     }
 }

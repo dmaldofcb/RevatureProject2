@@ -18,10 +18,11 @@ namespace PizzaOrder.Controllers
     public class ToppingsAPIController : ControllerBase
     {
         private readonly IToppings _repo;
-       
-        public ToppingsAPIController(IToppings repo)
+        private readonly IPizzaToppings _pizzaToppingsRepo;
+        public ToppingsAPIController(IToppings repo, IPizzaToppings rep2)
         {
             _repo = repo;
+            _pizzaToppingsRepo = rep2;
         }
 
         [HttpGet]
@@ -34,7 +35,7 @@ namespace PizzaOrder.Controllers
         [Route("GetPizzaToppings/{id}")]
         public async Task<ActionResult<IEnumerable<PizzaToppings>>> GetPizzaToppings(int id)
         {
-            return await _repo.GetPizzaToppings(id);
+            return await _pizzaToppingsRepo.GetPizzaToppings(id);
         }
 
         [HttpGet("{id}")]
