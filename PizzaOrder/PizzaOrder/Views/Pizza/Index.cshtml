@@ -84,6 +84,7 @@
                     <div class="card-header" style="background-color:goldenrod"><h5>Hawaiian</h5></div>
                     <div class="card-body">
                         <div class="nav">
+                            <h1 id="cartnumber"></h1>
                             <h2 id="dollarSign" style="color: black"> $</h2>
                             <h2 id="price2" style="color: black"> 0</h2>
                             <h2 id="crustprice2" style="color: black" hidden> 0</h2>
@@ -343,6 +344,7 @@
             data: JSON.stringify(modelVM),
 
             success: function (data) {
+                alert("Your pizza has been added to the cart!");
                 console.log("Success!");
                 console.log("Type:" + data.type);
                 console.log("Crust ID:" + data.crustID);
@@ -351,6 +353,8 @@
                 data.toppingByID.forEach(function (topping) {
                     console.log("Toppings:" + topping)
                 });
+
+               
                 //var storePizza = Object.assign(data, localStorage);
                 localStorage.setItem(data.id, JSON.stringify(data));
                 //increment number next to shopping cart by 1
