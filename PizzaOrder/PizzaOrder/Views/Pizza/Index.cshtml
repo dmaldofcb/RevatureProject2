@@ -326,33 +326,9 @@
         };
         var stringify = JSON.stringify(modelVM);
         console.log("stringify output:" + stringify);
-        $.ajax({
-            contentType: "application/json;charset=utf-8",
-            type: "POST",
-            url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
-            data: JSON.stringify(modelVM),
 
-            success: function (data) {
-                alert("Your pizza has been added to the cart!");
-                console.log("Success!");
-                console.log("Type:" + data.type);
-                console.log("Crust ID:" + data.crustID);
-                console.log("Size ID" + data.sizeId);
-                console.log("ID" + data.id);
-                data.toppingByID.forEach(function (topping) {
-                    console.log("Toppings:" + topping)
-                    var count = 0;
-                    document.getElementById("cart").innerHTML = 1;
-                });
-
-                var num2 = sessionStorage.length + 1;
-                sessionStorage.setItem(num2, JSON.stringify(data));
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                return "hello";
-            }
-        });
+        var num2 = sessionStorage.length + 1;
+        sessionStorage.setItem(num2, stringify);
 
     }
     
