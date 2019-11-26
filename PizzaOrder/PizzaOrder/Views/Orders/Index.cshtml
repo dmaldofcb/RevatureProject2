@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Layers.Models.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<div class="limiter" align="center">
+    <h1>Pizza Order History</h1>
+    <div>
+        <div class="wrap-table100">
+            <div class="table100 ver3 m-b-110">
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="color:#fac564">
+                                   @Html.DisplayNameFor(model => model.Id)
+                                </th>
+                                <th class="cell100 column2" style="color:#fac564">
+                                    @Html.DisplayNameFor(model => model.OrderDate)
+                                </th>
+                                <th class="cell100 column3" style="color:#fac564">
+                                    @Html.DisplayNameFor(model => model.Total)
+                                </th>
+                                <th class="cell100 column4">
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="table100-body js-pscroll">
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">
+                                        #@Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td class="cell100 column2">
+                                        @Html.DisplayFor(modelItem => item.OrderDate)
+                                    </td>
+                                    <td class="cell100 column3">
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                    <td class="cell100 column4">
+                                        <a asp-action="GetOrderDetails" asp-route-id="@item.Id"> <u>  Order Details  </u></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/bootstrap/dist/css/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/popper.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/select2/select2.min.js"></script>
+<script src="~/lib/bootstrap/dist/css/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script>
+    $('.js-pscroll').each(function () {
+        var ps = new PerfectScrollbar(this);
+
+        $(window).on('resize', function () {
+            ps.update();
+        })
+    });
+</script>
+<script src="~/js/main.js"></script>

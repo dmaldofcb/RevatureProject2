@@ -1,0 +1,93 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<head>
+    <style>
+        section {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+
+<section class="ftco-section" style="background-image: url(../Images/bg_4.jpg);">
+<center>
+
+<h1>@ViewData["Title"]</h1>
+<h4>Login to start ordering pizzas</h4>
+</center>
+    <div class="container mt-5">
+        <div class="row block-9">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 ftco-animate">
+                <form id="account" method="post" class="contact-form">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <section><input type="text" asp-for="Input.Email" class="form-control" placeholder="Email" /></section>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <section><input asp-for="Input.Password" class="form-control" placeholder="Password" /></section>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">
+                                <ul>
+                                    <button type="button" class="btn btn-secondary py-1 px-2">Forgot your password? </button>
+                                </ul>
+                            </a>
+                        </p>
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><button type="button" class="btn btn-secondary py-1 px-2">Register as a new user</button></a>
+                        </p>
+                        <p>
+                            <button type="submit" asp-page-handler="SendVerificationEmail" class="btn-link" style="padding:0px;margin:0px;border:0px">Resend email confirmation</button>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="form-group" align="center">
+                        <button type="submit" class="btn btn-primary py-3 px-5">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/PizzaJS/jquery.min.js"></script>
+    <script src="~/js/PizzaJS/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/PizzaJS/popper.min.js"></script>
+    <script src="~/js/PizzaJS/bootstrap.min.js"></script>
+    <script src="~/js/PizzaJS/jquery.easing.1.3.js"></script>
+    <script src="~/js/PizzaJS/jquery.waypoints.min.js"></script>
+    <script src="~/js/PizzaJS/jquery.stellar.min.js"></script>
+    <script src="~/js/PizzaJS/owl.carousel.min.js"></script>
+    <script src="~/js/PizzaJS/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/PizzaJS/aos.js"></script>
+    <script src="~/js/PizzaJS/jquery.animateNumber.min.js"></script>
+    <script src="~/js/PizzaJS/bootstrap-datepicker.js"></script>
+    <script src="~/js/PizzaJS/jquery.timepicker.min.js"></script>
+    <script src="~/js/PizzaJS/scrollax.min.js"></script>
+    <script src="~/js/PizzaJS/main.js"></script>
+}

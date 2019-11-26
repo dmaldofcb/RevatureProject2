@@ -1,0 +1,40 @@
+﻿body {
+}
+
+.pizzaimg{
+    max-width: 500px;
+    width: 100%;
+    height:auto;
+    display:block;
+    margin:20px auto;
+    /*display: block;
+    margin-left:auto;
+    margin-right: auto;
+    width:75%;*/
+}
+
+.hawaiian {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+.nav h2 {
+    list-style: none;
+    display: inline;
+    padding: 0px 5px 0px 5px;
+}
+
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color:aquamarine;
+    border:solid 1px #808080;
+}
+
+#panel{
+    padding:50px;
+    display:none;
+}
