@@ -20,7 +20,7 @@
 
 <p>Choose your pizza size.</p>
 
-<select name="SelectSize" id="size" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
+<select name="SelectSize" id="size" onchange="updatePrice()" class="mdb-select md-form">
     <option value="" disabled selected>Select Your Size</option>
     <option value="1" style="color:blue">Small</option>
     <option value="2" style="color:blue">Medium</option>
@@ -28,7 +28,7 @@
 </select>
 <br />
 <p>Choose your pizza crust.</p>
-<select name="SelectCrust" id="crust" class="mdb-select md-form" onclick="subtractCrust('crustprice1', 'price1')" onchange="passCrust('price1', this.id, 'crustprice1')">
+<select name="SelectCrust" id="crust" class="mdb-select md-form" onchange="updatePrice()">
     <option value="" disabled selected>Select Your Crust</option>
     <option value="1" style="color:blue">Thin Crust</option>
     <option value="2" style="color:blue">Thick Crust</option>
@@ -36,42 +36,41 @@
 </select>
 <br />
 <p>Choose your pizza toppings.</p>
-<input type="checkbox" name="toppings" value="1" />Pepperoni
+<input type="checkbox" name="toppings" value="1" onchange="updatePrice()" />Pepperoni
 <br />
-<input type="checkbox" name="toppings" value="2" />Sausage
+<input type="checkbox" name="toppings" value="2" onchange="updatePrice()" />Sausage
 <br />
-<input type="checkbox" name="toppings" value="3" />Pineapple
+<input type="checkbox" name="toppings" value="3" onchange="updatePrice()" />Pineapple
 <br />
-<input type="checkbox" name="toppings" value="4" />Green Peppers
+<input type="checkbox" name="toppings" value="4" onchange="updatePrice()" />Green Peppers
 <br />
-<input type="checkbox" name="toppings" value="5" />Red Peppers
+<input type="checkbox" name="toppings" value="5" onchange="updatePrice()" />Red Peppers
 <br />
-<input type="checkbox" name="toppings" value="6" />Ham
+<input type="checkbox" name="toppings" value="6" onchange="updatePrice()" />Ham
 <br />
-<input type="checkbox" name="toppings" value="7" />Onions
+<input type="checkbox" name="toppings" value="7" onchange="updatePrice()" />Onions
 <br />
-<input type="checkbox" name="toppings" value="8" />Mushrooms
+<input type="checkbox" name="toppings" value="8" onchange="updatePrice()" />Mushrooms
 <br />
-<input type="checkbox" name="toppings" value="9" />Black Olives
+<input type="checkbox" name="toppings" value="9" onchange="updatePrice()" />Black Olives
 <br />
-<input type="checkbox" name="toppings" value="10" />Chicken
+<input type="checkbox" name="toppings" value="10" onchange="updatePrice()" />Chicken
 <br />
-<input type="checkbox" name="toppings" value="11" />Buffalo Chicken
+<input type="checkbox" name="toppings" value="11" onchange="updatePrice()" />Buffalo Chicken
 <br />
-<input type="checkbox" name="toppings" value="12" />Broccoli
+<input type="checkbox" name="toppings" value="12" onchange="updatePrice()" />Broccoli
 <br />
-<input type="checkbox" name="toppings" value="13" />Tomatoes
+<input type="checkbox" name="toppings" value="13" onchange="updatePrice()" />Tomatoes
 <br />
-<input type="checkbox" name="toppings" value="14" />Spinach
+<input type="checkbox" name="toppings" value="14" onchange="updatePrice()" />Spinach
 <br />
-<input type="checkbox" name="toppings" value="15" />Bacon
+<input type="checkbox" name="toppings" value="15" onchange="updatePrice()" />Bacon
 <br />
-<input type="checkbox" name="toppings" value="16" />Meatballs
+<input type="checkbox" name="toppings" value="16" onchange="updatePrice()" />Meatballs
 <br />
 <div class="nav">
     <h2 id="dollarSign" style="color: black"> $</h2>
     <h2 id="price1" style="color: black"> 0</h2>
-    <h2 id="crustprice1" style="color: black" hidden> 0</h2>
 </div>
 
 
@@ -85,6 +84,9 @@ else
 }
 
 <script>
+    var currentId = 0;
+    var priceArray = [0, 1.75, 2, 1.25, 1, 1, 1.4, 0.75, 1.5, 1.1, 2, 2.25, 1.3, 1.75, 2.25, 2.5, 2.5];
+
 
     function passPizza(pizzaPrice, _id) {
         console.log(pizzaPrice);
@@ -96,109 +98,47 @@ else
         }
     }
 
-    function getID(elems, id) {
-        for (var i = 0; i < elems.length; i++) {
-            if (elems[i].id == id) {
-                return elems[i].id
-            }
-        }
-    }
+    function updatePrice()
+    {
 
-    function selectPizzaSize(pizzaPrice, _id) {
-            var id = document.getElementById(_id).value;
-            @*var toppings = '@Model.Toppings';
-          var checkBoxValues = [];
-            $.each($("input[name=" + toppingsID + "]:checked"), function(){
-                (checkBoxValues).push($(this).val());
-            });*@
-            $.ajax({
-                contentType: "application/json;charset=utf-8",
-                type: "GET",
-                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
-
-
-                success: function (data) {
-                    //console.log("data:", data);
-                    //console.log("Price:", data.price);
-
-                    //console.log(toppings[0].id);
-                    //  var newListOfToppings = [];
-                    //for (i = 0; i < checkBoxValues.length; i++) {
-                    //    for (j = 0; j < toppings.length; j++) {
-                    //        if (toppings[j].id == checkBoxValues[i]) {
-                    //            newListOfToppings.push[toppings[i]];
-                    //            console.log("List of Toppings:" + newListOfToppings.length);
-                    //        }
-
-                    //    }
-                    //}
-                    //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = (data.price);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    textToChange.innerHTML = textStatus;
-                    console.log("Failing");
-                }
-            });
-    }
-
-    function subtractCrust(crustPrice, totalPrice) {
-        var string = document.getElementById(crustPrice).innerHTML;
-        var parse = parseInt(string);
-
-        var total = document.getElementById(totalPrice).innerHTML;
-        var parseTotal = parseInt(total);
-        if (parseTotal > 0 && parse > 0) {
-            document.getElementById(totalPrice).innerHTML = (parseTotal - parse);
-            document.getElementById(crustPrice).innerHTML = 0;
-        }
-
-    }
-
-    function resetCrustCounter(crustCounter) {
-        document.getElementById(crustCounter).innerHTML = 0;
-    }
-
-    function passCrust(price, crust, cruuuust) {
-
-        var id = document.getElementById(crust).value;
-        $.ajax({
-                contentType: "application/json;charset=utf-8",
-                type: "GET",
-                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/GetCrust/" + id,
-
-                success: function (data) {
-                    console.log("data:", data);
-                    console.log("Price:", data.price);
-
-                    var crustCounterString = document.getElementById(cruuuust).innerHTML;
-                    var crustCounter = parseInt(crustCounterString);
-                    document.getElementById(cruuuust).innerHTML = crustCounter;
-
-                        var string = document.getElementById(price).innerHTML;
-                        console.log(string);
-                        var parseTotal = parseInt(string);
-                        document.getElementById(price).innerHTML = (parseTotal - crustCounter);
-                        document.getElementById(cruuuust).innerHTML = 0;
-
-
-
-                        var crustUpdateCounterString = document.getElementById(cruuuust).innerHTML;
-                        var crustUpdateCounter = parseInt(crustUpdateCounterString) + data.price;
-                        document.getElementById(cruuuust).innerHTML = crustUpdateCounter;
-
-
-                        console.log(parseTotal);
-                        document.getElementById(price).innerHTML = (parseTotal + crustUpdateCounter);
-
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    textToChange.innerHTML = textStatus;
-                    console.log("Failing");
-                }
+        var sizeID = document.getElementById('size').value;
+        var parseSizeID = parseInt(sizeID);
+        var crustID = document.getElementById('crust').value;
+        var parseCrustID = parseInt(crustID);
+        var newPrice = 0;
+        var checkBoxValues = [];
+        $.each($("input[name=toppings]:checked"), function(){
+            (checkBoxValues).push($(this).val());
         });
 
+        if (parseSizeID == 1) {
+            newPrice = newPrice + 8.25
+        }
+        else if (parseSizeID == 2) {
+            newPrice = newPrice + 14.25
+        }
+        else if (parseSizeID == 3) {
+            newPrice = newPrice + 18.75
+        }
+
+        if (parseCrustID == 1) {
+            newPrice = newPrice + 1.50
+        }
+        else if (parseCrustID == 2) {
+            newPrice = newPrice + 2
+        }
+        else if (parseCrustID == 3) {
+            newPrice = newPrice + 3
+        }
+
+        checkBoxValues.forEach(element => {
+            newPrice = newPrice + priceArray[element];
+        });
+
+        document.getElementById('price1').innerHTML = newPrice;
     }
+
+
 
     function AddToCart() {
         var pizza = "size";
