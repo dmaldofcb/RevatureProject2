@@ -14,6 +14,13 @@
     });
 </script>
 
+@if (SignInManager.IsSignedIn(User))
+{
+    <a href="/Cart" style="background-color:black">
+        <img src="~/Images/48-489736_cart-0-shop-cart-icon-png.png" height="40" width="50" />0
+    </a>
+}
+
 <div id="flip">
     Click to see our list of toppings!
     <div id="panel" style="background-color:#fac564">
@@ -357,9 +364,10 @@
                     console.log("Toppings:" + topping)
                 });
 
+                var num2 = sessionStorage.length + 1;
 
                 //var storePizza = Object.assign(data, localStorage);
-                localStorage.setItem(data.id, JSON.stringify(data));
+                sessionStorage.setItem(num2, JSON.stringify(data));
                 //increment number next to shopping cart by 1
                 //add correct pizza to a list....maybe using localStorage?
 

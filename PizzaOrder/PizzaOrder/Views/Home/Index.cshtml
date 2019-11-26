@@ -1,378 +1,532 @@
-﻿@{
+﻿
+@using Microsoft.AspNetCore.Identity
+@using Layers.Models.Models;
+
+@inject SignInManager<Customer> SignInManager
+@inject UserManager<Customer> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-  
 
-    <section class="home-slider owl-carousel img" style="background-image: url(../Images/bg_12.jpg);">
 
-        <div class="slider-item">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center" data-scrollax-parent="true">
+<section class="home-slider owl-carousel img" style="background-image: url(../Images/bg_12.jpg);">
 
-                    <div class="col-md-6 col-sm-12 ftco-animate">
-                        <span class="subheading">Delicious</span>
-                        <h1 class="mb-4">Italian Cuizine</h1>
-                        <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                        <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+    <div class="slider-item">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text align-items-center" data-scrollax-parent="true">
+
+                <div class="col-md-6 col-sm-12 ftco-animate">
+                    <span class="subheading">Delicious</span>
+                    <h1 class="mb-4">Italian Cuizine</h1>
+                    <p class="mb-4 mb-md-5">The secret to success is much like the secret to making a better pizza - the more you put into it, the more you get out of it. Our pizza family is as hungry for perfection today as we were when we first opened our doors.</p>
+                    <p><a class="btn btn-primary p-3 px-xl-4 py-xl-3" asp-area="" asp-controller="Pizza" asp-action="Index">View Menu</a></p>
+                </div>
+                <div class="col-md-6 ftco-animate">
+                    <img src="~/Images/bg_1.png" class="img-fluid" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-item">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text align-items-center" data-scrollax-parent="true">
+
+                <div class="col-md-6 col-sm-12 order-md-last ftco-animate">
+                    <span class="subheading">Crunchy</span>
+                    <h1 class="mb-4">Italian Pizza</h1>
+                    <p class="mb-4 mb-md-5">We don’t use cheap and more processed ingredients. Whether it's our signature sauce, toppings, our original fresh dough, or even the box itself, we invest in our ingredients to ensure that we always give you the finest quality pizza.</p>
+                    <p> <a class="btn btn-primary p-3 px-xl-4 py-xl-3" asp-area="" asp-controller="Pizza" asp-action="Index">View Menu</a></p>
+                </div>
+                <div class="col-md-6 ftco-animate">
+                    <img src="~/Images/bg_2.png" class="img-fluid" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-item" style="background-image: url(../Images/bg_3.jpg)">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <span class="subheading">Welcome</span>
+                    <h1 class="mb-4">We cooked your desired Pizza Recipe</h1>
+                    <p class="mb-4 mb-md-5">Our farmers have grown right alongside us, and the ingredients we use are still our highest priority. No one loves pizza more than us.</p>
+                    <p><a class="btn btn-primary p-3 px-xl-4 py-xl-3" asp-area="" asp-controller="Pizza" asp-action="Index">View Menu</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-about d-md-flex" style="background-color:black">
+    <div class="one-half img" style="background-image: url(../Images/about.jpg);"></div>
+    <div class="one-half ftco-animate">
+        <div class="heading-section ftco-animate ">
+            <h2 class="mb-4">Welcome to <span class="flaticon-pizza">Callback Cat's Pizzeria</span></h2>
+        </div>
+        <div>
+            <p>At <b style="color:white">Callback Cat's Pizzeria</b>, we don’t just make pizza. We make people happy. <strong style="color:white">Callback Cat's Pizzeria </strong>was built on the belief that pizza night should be special, and we carry that belief into everything we do. With more than 60 years of experience under our belts, we understand how to best serve our customers through tried and true service principles: We create food we’re proud to serve and deliver it fast, with a smile.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section" style="background-image: url(../Images/bg_4.jpg);">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h2 class="mb-4">Chef's Special Pizzas</h2>
+                <p>Our fundamental belief is simple: take care of your people and give them the best to work with and you will make superior quality pizza.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-wrap">
+        <div class="row no-gutters d-flex">
+            <div class="col-lg-4 d-flex ftco-animate">
+                <div class="services-wrap d-flex">
+                    <a href="#" class="img" style="background-image: url(../Images/pizza-1.jpg);"></a>
+                    <div class="text p-4">
+                        <h3>Italian Pizza</h3>
+                        <p> <small style="color: white">Large, Thin Crust, Toppings: Red Peppers, Green Peppers, Onions, Black Olives</small> <br>  Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
+                        <p class="price">
+                            <span>$20.00</span>
+
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" onclick="AddToCartHome('Italian Pizza', [5,4,7,9], 1, 3)">Add to Cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" disabled>Add to Cart</button> <br />
+                                <small style="color:red">Please Login To Order</small>
+                            }
+
+                            @*<a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a>*@
+
+                        </p>
                     </div>
-                    <div class="col-md-6 ftco-animate">
-                        <img src="~/Images/bg_1.png" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex ftco-animate">
+                <div class="services-wrap d-flex">
+                    <a href="#" class="img" style="background-image: url(../Images/pizza-2.jpg);"></a>
+                    <div class="text p-4">
+                        <h3>Greek Pizza</h3>
+                        <p> <small style="color: white">Large, Thin Crust, Toppings: Tomatoes, Mushrooms</small> <br> Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                        <p class="price">
+                            <span>$15.00</span>
+                            @* <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a>*@
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" onclick="AddToCartHome('Greek Pizza', [13,8], 1, 3)">Add to Cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" disabled>Add to Cart</button> <br />
+                                <small style="color:red">Please Login To Order</small>
+                            }
+                        </p>
                     </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex ftco-animate">
+                <div class="services-wrap d-flex">
+                    <a href="#" class="img" style="background-image: url(../Images/pizza-3.jpg);"></a>
+                    <div class="text p-4">
+                        <h3>Spring Pizza</h3>
+                        <p> <small style="color: white">Large, Thin Crust, Toppings: Red Peppers, Onions, Black Olives, Mushrooms, Ham</small> <br> Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                        <p class="price">
+                            <span>$18.00</span>
+                            @*<a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a>*@
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" onclick="AddToCartHome('Spring Pizza', [5,7,9,8,6], 1, 3)">Add to Cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" disabled>Add to Cart</button> <br />
+                                <small style="color:red">Please Login To Order</small>
+                            }
 
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-flex ftco-animate">
+                <div class="services-wrap d-flex">
+                    <a href="#" class="img order-lg-last" style="background-image: url(../Images/pizza-4.jpg);"></a>
+                    <div class="text p-4">
+                        <h3>Pizza al Pesto.</h3>
+                        <p> <small style="color: white">Large, Thin Crust, Toppings: Red Peppers, Onions, Black Olives, Mushrooms, Chicken</small> <br>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
+                        <p class="price">
+                            <span>$22.00</span>
+                          @*  <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a>*@
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" onclick="AddToCartHome('Pizza al Pesto', [5,7,9,8,10], 1, 3)">Add to Cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" disabled>Add to Cart</button> <br />
+                                <small style="color:red">Please Login To Order</small>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex ftco-animate">
+                <div class="services-wrap d-flex">
+                    <a href="#" class="img order-lg-last" style="background-image: url(../Images/pizza-5.jpg);"></a>
+                    <div class="text p-4">
+                        <h3>Ricotta e Spinaci</h3>
+                        <p><small style="color: white">Large, Thin Crust, Toppings: Spinach, Tomatoes, Bacon</small> <br>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                        <p class="price">
+                            <span>$15.50</span>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" onclick="AddToCartHome('Ricotta e Spinaci', [14,13,15], 1, 3)">Add to Cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" disabled>Add to Cart</button> <br />
+                                <small style="color:red">Please Login To Order</small>
+                            }
+                            @*<a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a>*@
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex ftco-animate">
+                <div class="services-wrap d-flex">
+                    <a href="#" class="img order-lg-last" style="background-image: url(../Images/pizza-6.jpg);"></a>
+                    <div class="text p-4">
+                        <h3>Margherita</h3>
+                        <p> <small style="color: white">Large, Thin Crust, Toppings: Spinach, Tomatoes, Onions, Black Olives</small> <br> Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                        <p class="price">
+                            <span>$14.00</span>
+                            @*<a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a>*@
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" onclick="AddToCartHome('Margherita', [14,13,7,9], 1, 3)">Add to Cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="ml-2 btn btn-white btn-outline-white" disabled>Add to Cart</button> <br />
+                                <small style="color:red">Please Login To Order</small>
+                            }
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="slider-item">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text align-items-center" data-scrollax-parent="true">
-
-                    <div class="col-md-6 col-sm-12 order-md-last ftco-animate">
-                        <span class="subheading">Crunchy</span>
-                        <h1 class="mb-4">Italian Pizza</h1>
-                        <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                        <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Our Menu Pricing</h2>
+                <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
+                <p class="mt-5">For you, it’s not just a better pizza. It’s a family gathering, memorable birthday, work celebration or simply a great meal. It’s our goal to make sure you always have the best ingredients for every occasion.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-1.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Italian Pizza</span></h3>
+                            <span class="price">$20.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
                     </div>
-                    <div class="col-md-6 ftco-animate">
-                        <img src="~/Images/bg_2.png" class="img-fluid" alt="">
+                </div>
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/hawaiin_top.png);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Hawaiian Pizza</span></h3>
+                            <span class="price">$29.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
                     </div>
+                </div>
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-2.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Greek Pizza</span></h3>
+                            <span class="price">$15.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-3.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Spring Pizza</span></h3>
+                            <span class="price">$18.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-md-6">
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-5.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Ricotta e Spinaci</span></h3>
+                            <span class="price">$15.50</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-6.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Margherita</span></h3>
+                            <span class="price">$14.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-7.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>Pepperoni Pizza</span></h3>
+                            <span class="price">$20.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-entry d-flex ftco-animate">
+                    <div class="img" style="background-image: url(../Images/pizza-8.jpg);"></div>
+                    <div class="desc pl-3">
+                        <div class="d-flex text align-items-center">
+                            <h3><span>MeatLovers</span></h3>
+                            <span class="price">$20.00</span>
+                        </div>
+                        <div class="d-block">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="slider-item" style="background-image: url(../Images/bg_3.jpg)">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-                    <div class="col-md-7 col-sm-12 text-center ftco-animate">
-                        <span class="subheading">Welcome</span>
-                        <h1 class="mb-4">We cooked your desired Pizza Recipe</h1>
-                        <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                        <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+<section class="ftco-gallery">
+    <div class="container-wrap">
+        <div class="row no-gutters">
+            <div class="col-md-3 ftco-animate">
+                <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-1.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-search"></span>
                     </div>
+                </a>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-2.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-search"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-3.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-search"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ftco-animate">
+                <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-4.jpg);">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="icon-search"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
+
+<section class="ftco-section ftco-services">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h2 class="mb-4">Our Services</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 ftco-animate">
+                <div class="media d-block text-center block-6 services">
+                    <div class="icon d-flex justify-content-center align-items-center mb-5">
+                        <span class="flaticon-diet"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Healthy Foods</h3>
+                        <p>virtually everything on our menu is a made-to-order product, made just as you request it.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ftco-animate">
+                <div class="media d-block text-center block-6 services">
+                    <div class="icon d-flex justify-content-center align-items-center mb-5">
+                        <span class="flaticon-bicycle"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Fastest Delivery</h3>
+                        <p>We’re all about pizza, as well as harnessing the power of technology to make your ordering experience even better. So we identified key ways our customers would benefit from online tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ftco-animate">
+                <div class="media d-block text-center block-6 services">
+                    <div class="icon d-flex justify-content-center align-items-center mb-5"><span class="flaticon-pizza-1"></span></div>
+                    <div class="media-body">
+                        <h3 class="heading">Original Recipes</h3>
+                        <p>Order a thin crust pizza with a smaller portion of cheese and topped with quality ingredients such as fresh baby spinach and grilled chicken breast.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-
-        <section class="ftco-about d-md-flex" style="background-color:black">
-            <div class="one-half img" style="background-image: url(../Images/about.jpg);"></div>
-            <div class="one-half ftco-animate">
-                <div class="heading-section ftco-animate ">
-                    <h2 class="mb-4">Welcome to <span class="flaticon-pizza">Callback Cat's Pizzeria</span></h2>
-                </div>
-                <div>
-                    <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="ftco-section ftco-services">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-3">
-                    <div class="col-md-7 heading-section ftco-animate text-center">
-                        <h2 class="mb-4">Our Services</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 ftco-animate">
-                        <div class="media d-block text-center block-6 services">
-                            <div class="icon d-flex justify-content-center align-items-center mb-5">
-                                <span class="flaticon-diet"></span>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="heading">Healthy Foods</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="media d-block text-center block-6 services">
-                            <div class="icon d-flex justify-content-center align-items-center mb-5">
-                                <span class="flaticon-bicycle"></span>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="heading">Fastest Delivery</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="media d-block text-center block-6 services">
-                            <div class="icon d-flex justify-content-center align-items-center mb-5"><span class="flaticon-pizza-1"></span></div>
-                            <div class="media-body">
-                                <h3 class="heading">Original Recipes</h3>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="ftco-section" style="background-image: url(../Images/bg_4.jpg);">
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-3">
-                    <div class="col-md-7 heading-section ftco-animate text-center">
-                        <h2 class="mb-4">Hot Pizza Meals</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="container-wrap">
-                <div class="row no-gutters d-flex">
-                    <div class="col-lg-4 d-flex ftco-animate">
-                        <div class="services-wrap d-flex">
-                            <a href="#" class="img" style="background-image: url(../Images/pizza-1.jpg);"></a>
-                            <div class="text p-4">
-                                <h3>Italian Pizza</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
-                                <p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-flex ftco-animate">
-                        <div class="services-wrap d-flex">
-                            <a href="#" class="img" style="background-image: url(../Images/pizza-2.jpg);"></a>
-                            <div class="text p-4">
-                                <h3>Greek Pizza</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                                <p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-flex ftco-animate">
-                        <div class="services-wrap d-flex">
-                            <a href="#" class="img" style="background-image: url(../Images/pizza-3.jpg);"></a>
-                            <div class="text p-4">
-                                <h3>Caucasian Pizza</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                                <p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 d-flex ftco-animate">
-                        <div class="services-wrap d-flex">
-                            <a href="#" class="img order-lg-last" style="background-image: url(../Images/pizza-4.jpg);"></a>
-                            <div class="text p-4">
-                                <h3>American Pizza</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
-                                <p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-flex ftco-animate">
-                        <div class="services-wrap d-flex">
-                            <a href="#" class="img order-lg-last" style="background-image: url(../Images/pizza-5.jpg);"></a>
-                            <div class="text p-4">
-                                <h3>Tomatoe Pie</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                                <p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-flex ftco-animate">
-                        <div class="services-wrap d-flex">
-                            <a href="#" class="img order-lg-last" style="background-image: url(../Images/pizza-6.jpg);"></a>
-                            <div class="text p-4">
-                                <h3>Margherita</h3>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                                <p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
-                    <div class="col-md-7 heading-section text-center ftco-animate">
-                        <h2 class="mb-4">Our Menu Pricing</h2>
-                        <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
-                        <p class="mt-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-1.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Italian Pizza</span></h3>
-                                    <span class="price">$20.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-2.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Hawaiian Pizza</span></h3>
-                                    <span class="price">$29.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-3.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Greek Pizza</span></h3>
-                                    <span class="price">$20.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-4.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Bacon Crispy Thins</span></h3>
-                                    <span class="price">$20.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-5.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Hawaiian Special</span></h3>
-                                    <span class="price">$49.91</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-6.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Ultimate Overload</span></h3>
-                                    <span class="price">$20.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-7.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Bacon Pizza</span></h3>
-                                    <span class="price">$20.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pricing-entry d-flex ftco-animate">
-                            <div class="img" style="background-image: url(../Images/pizza-8.jpg);"></div>
-                            <div class="desc pl-3">
-                                <div class="d-flex text align-items-center">
-                                    <h3><span>Ham &amp; Pineapple</span></h3>
-                                    <span class="price">$20.00</span>
-                                </div>
-                                <div class="d-block">
-                                    <p>A small river named Duden flows by their place and supplies</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="ftco-gallery">
-            <div class="container-wrap">
-                <div class="row no-gutters">
-                    <div class="col-md-3 ftco-animate">
-                        <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-1.jpg);">
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-2.jpg);">
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-3.jpg);">
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 ftco-animate">
-                        <a href="#" class="gallery img d-flex align-items-center" style="background-image: url(../Images/gallery-4.jpg);">
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </div>
+</section>
 
 
 
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"></circle>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"></circle>
+    </svg>
+</div>
+
+<script>
+    function AddToCartHome(pizza, toppingsID, crustID, sizeID) {
+
+        // var checkBoxValues = [];
+        //    $.each($("input[name=" + toppingsID + "]:checked"), function(){
+        //        (checkBoxValues).push($(this).val());
+        //    });
+
+        //var listOfToppings = [];
+        //for(var i = 0; i < checkBoxValues.length; i++)
+        //{
+        //    var toInt = parseInt(checkBoxValues[i]);
+        //    listOfToppings.push(toInt);
+        //}
+
+        //console.log("First Topping:" + checkBoxValues[0]);
+        //checkBoxValues.forEach(function (toppings) {
+        //    console.log(toppings)
+        //});
+        //passing name field in checkbox
+        //var toppings = document.getElementsByName(toppingsID);
+        ////toppings.forEach(function (topping) {
+        ////console.log(topping.value);
+        ////});
+
+        console.log("Success!");
+        console.log("Type:" + pizza);
+        console.log("Crust ID:" + crustID);
+        console.log("Size ID:" + sizeID);
+        toppingsID.forEach(function (topping) {
+            console.log("Toppings:" + topping)
+        });
+
+        var modelVM =
+        {
+            type: pizza,
+            crustID: crustID,
+            sizeId: sizeID,
+            toppingByID: toppingsID
+        };
+        var stringify = JSON.stringify(modelVM);
+        console.log("stringify output:" + stringify);
+        console.log("LENGTH: " + sessionStorage.length);
+        var num = sessionStorage.length + 1;
+        sessionStorage.setItem(num, JSON.stringify(modelVM));
+        //console.log("LENGTH: " + localStorage.length);
+        alert("Your pizza has been added to the cart!");
+
+        //$.ajax({
+        //    contentType: "application/json;charset=utf-8",
+        //    type: "POST",
+        //    // returns a list of our middle table
+        //    url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
+        //    data: JSON.stringify(modelVM),
+
+        //    success: function (data) {
+        //        alert("Your pizza has been added to the cart!");
+        //        console.log("Success!");
+        //        console.log("Type:" + data.type);
+        //        console.log("Crust ID:" + data.crustID);
+        //        console.log("Size ID" + data.sizeId);
+        //        console.log("ID" + data.id);
+        //        data.toppingByID.forEach(function (topping) {
+        //            console.log("Toppings:" + topping)
+        //        });
 
 
+        //        //var storePizza = Object.assign(data, localStorage);
+        //        localStorage.setItem(data.id, JSON.stringify(data));
+        //        //increment number next to shopping cart by 1
+        //        //add correct pizza to a list....maybe using localStorage?
 
-        <!-- loader -->
-        <div id="ftco-loader" class="show fullscreen">
-            <svg class="circular" width="48px" height="48px">
-                <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"></circle>
-                <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"></circle>
-            </svg>
-        </div>
+        //    },
+        //    error: function (jqXHR, textStatus, errorThrown) {
+        //        return "hello";
+        //    }
+        //});
+
+    }
+</script>
 
 
-        @section Scripts{
+@section Scripts{
 
-            <script src="~/js/PizzaJS/jquery.min.js"></script>
-            <script src="~/js/PizzaJS/jquery-migrate-3.0.1.min.js"></script>
-            <script src="~/js/PizzaJS/popper.min.js"></script>
-            <script src="~/js/PizzaJS/bootstrap.min.js"></script>
-            <script src="~/js/PizzaJS/jquery.easing.1.3.js"></script>
-            <script src="~/js/PizzaJS/jquery.waypoints.min.js"></script>
-            <script src="~/js/PizzaJS/jquery.stellar.min.js"></script>
-            <script src="~/js/PizzaJS/owl.carousel.min.js"></script>
-            <script src="~/js/PizzaJS/jquery.magnific-popup.min.js"></script>
-            <script src="~/js/PizzaJS/aos.js"></script>
-            <script src="~/js/PizzaJS/jquery.animateNumber.min.js"></script>
-            <script src="~/js/PizzaJS/bootstrap-datepicker.js"></script>
-            <script src="~/js/PizzaJS/jquery.timepicker.min.js"></script>
-            <script src="~/js/PizzaJS/scrollax.min.js"></script>
-            <script src="~/js/PizzaJS/main.js"></script>
+    <script src="~/js/PizzaJS/jquery.min.js"></script>
+    <script src="~/js/PizzaJS/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/PizzaJS/popper.min.js"></script>
+    <script src="~/js/PizzaJS/bootstrap.min.js"></script>
+    <script src="~/js/PizzaJS/jquery.easing.1.3.js"></script>
+    <script src="~/js/PizzaJS/jquery.waypoints.min.js"></script>
+    <script src="~/js/PizzaJS/jquery.stellar.min.js"></script>
+    <script src="~/js/PizzaJS/owl.carousel.min.js"></script>
+    <script src="~/js/PizzaJS/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/PizzaJS/aos.js"></script>
+    <script src="~/js/PizzaJS/jquery.animateNumber.min.js"></script>
+    <script src="~/js/PizzaJS/bootstrap-datepicker.js"></script>
+    <script src="~/js/PizzaJS/jquery.timepicker.min.js"></script>
+    <script src="~/js/PizzaJS/scrollax.min.js"></script>
+    <script src="~/js/PizzaJS/main.js"></script>
 
-        }
+}

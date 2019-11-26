@@ -7,11 +7,20 @@
     ViewData["Title"] = "Index";
 }
 
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <a href="/Cart" style="background-color:black">
+        <img src="~/Images/48-489736_cart-0-shop-cart-icon-png.png" height="40" width="50" />0
+    </a>
+}
+
 <h1>Customize your pizza</h1>
 
 <p>Choose your pizza size.</p>
 
-<select name="SelectSize" id="size" class="mdb-select md-form">
+<select name="SelectSize" id="size" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
     <option value="" disabled selected>Select Your Size</option>
     <option value="1" style="color:blue">Small</option>
     <option value="2" style="color:blue">Medium</option>
@@ -19,7 +28,7 @@
 </select>
 <br />
 <p>Choose your pizza crust.</p>
-<select name="SelectCrust" id="crust" class="mdb-select md-form">
+<select name="SelectCrust" id="crust" class="mdb-select md-form" onclick="subtractCrust('crustprice1', 'price1')" onchange="passCrust('price1', this.id, 'crustprice1')">
     <option value="" disabled selected>Select Your Crust</option>
     <option value="1" style="color:blue">Thin Crust</option>
     <option value="2" style="color:blue">Thick Crust</option>
@@ -59,6 +68,12 @@
 <br />
 <input type="checkbox" name="toppings" value="16" />Meatballs
 <br />
+<div class="nav">
+    <h2 id="dollarSign" style="color: black"> $</h2>
+    <h2 id="price1" style="color: black"> 0</h2>
+    <h2 id="crustprice1" style="color: black" hidden> 0</h2>
+</div>
+
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -71,19 +86,131 @@ else
 
 <script>
 
-    function AddToCart()
-    {
+    function passPizza(pizzaPrice, _id) {
+        console.log(pizzaPrice);
+        var elems = document.getElementsByName("SelectSize");
+        var id = getID(elems, _id);
+        console.log(id);
+        for (var i = 0; i < elems.length; i++) {
+            elems.addEventListener("change", selectPizzaSize(pizzaPrice, id));
+        }
+    }
+
+    function getID(elems, id) {
+        for (var i = 0; i < elems.length; i++) {
+            if (elems[i].id == id) {
+                return elems[i].id
+            }
+        }
+    }
+
+    function selectPizzaSize(pizzaPrice, _id) {
+            var id = document.getElementById(_id).value;
+            @*var toppings = '@Model.Toppings';
+          var checkBoxValues = [];
+            $.each($("input[name=" + toppingsID + "]:checked"), function(){
+                (checkBoxValues).push($(this).val());
+            });*@
+            $.ajax({
+                contentType: "application/json;charset=utf-8",
+                type: "GET",
+                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
+
+
+                success: function (data) {
+                    //console.log("data:", data);
+                    //console.log("Price:", data.price);
+
+                    //console.log(toppings[0].id);
+                    //  var newListOfToppings = [];
+                    //for (i = 0; i < checkBoxValues.length; i++) {
+                    //    for (j = 0; j < toppings.length; j++) {
+                    //        if (toppings[j].id == checkBoxValues[i]) {
+                    //            newListOfToppings.push[toppings[i]];
+                    //            console.log("List of Toppings:" + newListOfToppings.length);
+                    //        }
+
+                    //    }
+                    //}
+                    //var json = JSON.parse(data);
+                    document.getElementById(pizzaPrice).innerHTML = (data.price);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    textToChange.innerHTML = textStatus;
+                    console.log("Failing");
+                }
+            });
+    }
+
+    function subtractCrust(crustPrice, totalPrice) {
+        var string = document.getElementById(crustPrice).innerHTML;
+        var parse = parseInt(string);
+
+        var total = document.getElementById(totalPrice).innerHTML;
+        var parseTotal = parseInt(total);
+        if (parseTotal > 0 && parse > 0) {
+            document.getElementById(totalPrice).innerHTML = (parseTotal - parse);
+            document.getElementById(crustPrice).innerHTML = 0;
+        }
+
+    }
+
+    function resetCrustCounter(crustCounter) {
+        document.getElementById(crustCounter).innerHTML = 0;
+    }
+
+    function passCrust(price, crust, cruuuust) {
+
+        var id = document.getElementById(crust).value;
+        $.ajax({
+                contentType: "application/json;charset=utf-8",
+                type: "GET",
+                url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/GetCrust/" + id,
+
+                success: function (data) {
+                    console.log("data:", data);
+                    console.log("Price:", data.price);
+
+                    var crustCounterString = document.getElementById(cruuuust).innerHTML;
+                    var crustCounter = parseInt(crustCounterString);
+                    document.getElementById(cruuuust).innerHTML = crustCounter;
+
+                        var string = document.getElementById(price).innerHTML;
+                        console.log(string);
+                        var parseTotal = parseInt(string);
+                        document.getElementById(price).innerHTML = (parseTotal - crustCounter);
+                        document.getElementById(cruuuust).innerHTML = 0;
+
+
+
+                        var crustUpdateCounterString = document.getElementById(cruuuust).innerHTML;
+                        var crustUpdateCounter = parseInt(crustUpdateCounterString) + data.price;
+                        document.getElementById(cruuuust).innerHTML = crustUpdateCounter;
+
+
+                        console.log(parseTotal);
+                        document.getElementById(price).innerHTML = (parseTotal + crustUpdateCounter);
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    textToChange.innerHTML = textStatus;
+                    console.log("Failing");
+                }
+        });
+
+    }
+
+    function AddToCart() {
         var pizza = "size";
         var crustID = "crust";
         var toppingsID = "toppings";
         var checkBoxValues = [];
-            $.each($("input[name=" + toppingsID + "]:checked"), function(){
-                (checkBoxValues).push($(this).val());
-            });
+        $.each($("input[name=" + toppingsID + "]:checked"), function () {
+            (checkBoxValues).push($(this).val());
+        });
 
         var listOfToppings = [];
-        for(var i = 0; i < checkBoxValues.length; i++)
-        {
+        for (var i = 0; i < checkBoxValues.length; i++) {
             var toInt = parseInt(checkBoxValues[i]);
             listOfToppings.push(toInt);
 
@@ -100,15 +227,15 @@ else
         ////console.log(topping.value);
         ////});
 
-        var sizeID = document.getElementById(pizza).value;  
+        var sizeID = document.getElementById(pizza).value;
         var parseSizeID = parseInt(sizeID);
-        var crustID = document.getElementById(crustID).value;   
+        var crustID = document.getElementById(crustID).value;
         var parseCrustID = parseInt(crustID);
 
 
         //document.getElementById("sizeId").value = id;
 
-                    //toppingIDs: checkBoxValues,
+        //toppingIDs: checkBoxValues,
 
         var modelVM =
         {
@@ -136,7 +263,9 @@ else
                     console.log("Toppings:" + topping)
                 });
                 //var storePizza = Object.assign(data, localStorage);
-                localStorage.setItem(data.id, JSON.stringify(data));
+                var num3 = sessionStorage.length + 1;
+
+                sessionStorage.setItem(num3, JSON.stringify(data));
                 //increment number next to shopping cart by 1
                 //add correct pizza to a list....maybe using localStorage?
 
