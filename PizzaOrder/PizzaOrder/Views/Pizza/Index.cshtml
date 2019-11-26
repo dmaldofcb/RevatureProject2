@@ -14,13 +14,6 @@
     });
 </script>
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <a href="/Cart" style="background-color:black">
-        <img src="~/Images/48-489736_cart-0-shop-cart-icon-png.png" height="40" width="50" />0
-    </a>
-}
-
 <div id="flip">
     Click to see our list of toppings!
     <div id="panel" style="background-color:#fac564">
@@ -33,15 +26,15 @@
                         <td class="cell100 column1">
                             @Html.DisplayFor(modelItem => item.Type)
                         </td>
-                        <td class="cell100 column1" >
+                        <td class="cell100 column1">
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
                     </tr>
                 </table>
             }
         </div>
-        </div>
     </div>
+</div>
 
 <div class="container-fluid" id="Pizzas">
     <div class="m-md-4">
@@ -66,7 +59,7 @@
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="pepperoni" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="pepperoni" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id, 'pepperoniToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -109,7 +102,7 @@
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="hawaiian" onclick="resetCrustCounter('crustprice2')" onchange="passPizza('price2', this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="hawaiian" onclick="resetCrustCounter('crustprice2')" onchange="passPizza('price2', this.id, 'hawaiianToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -153,7 +146,7 @@
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="sausage" onclick="resetCrustCounter('crustprice3')" onchange="passPizza('price3', this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="sausage" onclick="resetCrustCounter('crustprice3')" onchange="passPizza('price3', this.id, 'sausageToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -195,7 +188,7 @@
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="meatlovers" onclick="resetCrustCounter('crustprice4')" onchange="passPizza('price4', this.id)" class="mdb-select md-form">
+                        <select name="SelectSize" id="meatlovers" onclick="resetCrustCounter('crustprice4')" onchange="passPizza('price4', this.id, 'meatloversToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -216,7 +209,6 @@
                             <input type="checkbox" name="meatloversToppings" value="15" disabled="true" checked="true">Bacon<br>
                             <input type="checkbox" name="meatloversToppings" value="16" disabled="true" checked="true">Meatballs<br>
 
-
                         </div>
                     </div>
                 </div>
@@ -227,13 +219,16 @@
 
 <script>
 
-    function passPizza(pizzaPrice, _id) {
+    @*console.log("Toppings" + '@Model.Toppings.Count');
+    var toppings = '@Model.Toppings';*@
+    console.log("javascript toppings:" + toppings);
+    function passPizza(pizzaPrice, _id, toppings) {
         console.log(pizzaPrice);
         var elems = document.getElementsByName("SelectSize");
         var id = getID(elems, _id);
         console.log(id);
         for (var i = 0; i < elems.length; i++) {
-            elems.addEventListener("change", selectPizzaSize(pizzaPrice, id));
+            elems.addEventListener("change", selectPizzaSize(pizzaPrice, id, toppings));
         }
     }
 
@@ -280,7 +275,7 @@
 
                         var string = document.getElementById(price).innerHTML;
                         console.log(string);
-                        var parseTotal = parseInt(string);
+                        var parseTotal = parseFloat(string);
                         document.getElementById(price).innerHTML = (parseTotal - crustCounter);
                         document.getElementById(cruuuust).innerHTML = 0;
 
@@ -292,7 +287,8 @@
 
 
                         console.log(parseTotal);
-                        document.getElementById(price).innerHTML = (parseTotal + crustUpdateCounter);
+                    document.getElementById(price).innerHTML = (parseTotal + crustUpdateCounter);
+                    console.log("Crust Counter:" + crustUpdateCounter);
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -304,7 +300,6 @@
     }
     function AddToCart(pizza, toppingsID, crustID)
     {
-
          var checkBoxValues = [];
             $.each($("input[name=" + toppingsID + "]:checked"), function(){
                 (checkBoxValues).push($(this).val());
@@ -362,9 +357,11 @@
                 console.log("ID" + data.id);
                 data.toppingByID.forEach(function (topping) {
                     console.log("Toppings:" + topping)
+                    var count = 0;
+                    document.getElementById("cart").innerHTML = 1;
                 });
 
-                var num2 = sessionStorage.length + 1;
+                var nume2 = sessionStorage.length + 1;
 
                 //var storePizza = Object.assign(data, localStorage);
                 sessionStorage.setItem(num2, JSON.stringify(data));
@@ -378,37 +375,138 @@
         });
 
     }
-
-     function selectPizzaSize(pizzaPrice, _id) {
+    
+     function selectPizzaSize(pizzaPrice, _id, toppings) {
             var id = document.getElementById(_id).value;
-            @*var toppings = '@Model.Toppings';
+         var toppingsArray = [];
+         
+         var topping1 =
+         {
+             ID: '@Model.Toppings[1].Id',
+             Price: '@Model.Toppings[1].Price'
+         };
+          var topping2 =
+         {
+             ID: '@Model.Toppings[2].Id',
+             Price: '@Model.Toppings[2].Price'
+         };
+          var topping3 =
+         {
+             ID: '@Model.Toppings[3].Id',
+             Price: '@Model.Toppings[3].Price'
+         };
+     var topping4 =
+         {
+             ID: '@Model.Toppings[4].Id',
+             Price: '@Model.Toppings[4].Price'
+         };
+          var topping5 =
+         {
+             ID: '@Model.Toppings[5].Id',
+             Price: '@Model.Toppings[5].Price'
+         };
+          var topping6 =
+         {
+             ID: '@Model.Toppings[6].Id',
+             Price: '@Model.Toppings[6].Price'
+         };
+          var topping7 =
+         {
+             ID: '@Model.Toppings[7].Id',
+             Price: '@Model.Toppings[7].Price'
+         };
+         var topping8 =
+         {
+             ID: '@Model.Toppings[8].Id',
+             Price: '@Model.Toppings[8].Price'
+         };
+          var topping9 =
+         {
+             ID: '@Model.Toppings[9].Id',
+             Price: '@Model.Toppings[9].Price'
+         };
+          var topping10 =
+         {
+             ID: '@Model.Toppings[10].Id',
+             Price: '@Model.Toppings[10].Price'
+         };
+          var topping11 =
+         {
+             ID: '@Model.Toppings[11].Id',
+             Price: '@Model.Toppings[11].Price'
+         };
+         var topping12 =
+         {
+             ID: '@Model.Toppings[12].Id',
+             Price: '@Model.Toppings[12].Price'
+         };
+         var topping13 =
+         {
+             ID: '@Model.Toppings[13].Id',
+             Price: '@Model.Toppings[13].Price'
+             };
+         var topping14 =
+         {
+             ID: '@Model.Toppings[14].Id',
+             Price: '@Model.Toppings[14].Price'
+             };
+         var topping15 =
+         {
+             ID: '@Model.Toppings[15].Id',
+             Price: '@Model.Toppings[15].Price'
+             };
+         var topping16 =
+         {
+             ID: '@Model.Toppings[16].Id',
+             Price: '@Model.Toppings[16].Price'
+         };
+         
+         toppingsArray.push(topping1);
+         toppingsArray.push(topping2);
+         toppingsArray.push(topping3);
+         toppingsArray.push(topping4);
+         toppingsArray.push(topping5);
+         toppingsArray.push(topping6);
+         toppingsArray.push(topping7);
+         toppingsArray.push(topping8);
+         toppingsArray.push(topping9);
+         toppingsArray.push(topping10);
+         toppingsArray.push(topping11);
+         toppingsArray.push(topping12);
+         toppingsArray.push(topping13);
+         toppingsArray.push(topping14);
+         toppingsArray.push(topping15);
+         toppingsArray.push(topping16);
+
+
           var checkBoxValues = [];
-            $.each($("input[name=" + toppingsID + "]:checked"), function(){
+            $.each($("input[name=" + toppings + "]:checked"), function(){
                 (checkBoxValues).push($(this).val());
-            });*@
+            });
             $.ajax({
                 contentType: "application/json;charset=utf-8",
                 type: "GET",
                 url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/" + id,
 
+              
 
                 success: function (data) {
-                    //console.log("data:", data);
-                    //console.log("Price:", data.price);
+                    //console.log(toppingsArray[1].Price);
+                    var newListOfToppings = [];
+                    var toppingsTotal = 0;
+                    for (i = 0; i < checkBoxValues.length; i++) {
+                        for (j = 0; j < toppingsArray.length; j++) {
+                            if (toppingsArray[j].ID == checkBoxValues[i]) {
+                                newListOfToppings.push(toppingsArray[j]);
+                            }
+                        }
+                    }
 
-                    //console.log(toppings[0].id);
-                    //  var newListOfToppings = [];
-                    //for (i = 0; i < checkBoxValues.length; i++) {
-                    //    for (j = 0; j < toppings.length; j++) {
-                    //        if (toppings[j].id == checkBoxValues[i]) {
-                    //            newListOfToppings.push[toppings[i]];
-                    //            console.log("List of Toppings:" + newListOfToppings.length);
-                    //        }
-
-                    //    }
-                    //}
-                    //var json = JSON.parse(data);
-                    document.getElementById(pizzaPrice).innerHTML = (data.price);
+                    for (var i = 0; i < newListOfToppings.length; i++) {
+                        toppingsTotal += parseFloat(newListOfToppings[i].Price);
+                        console.log("toppingsTotal:" + toppingsTotal);           
+                    }
+                    document.getElementById(pizzaPrice).innerHTML = (data.price + toppingsTotal);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
@@ -416,4 +514,4 @@
                 }
             });
         }
-</script>
+ </script>
