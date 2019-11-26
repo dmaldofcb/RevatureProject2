@@ -246,6 +246,7 @@ else
         };
         var stringify = JSON.stringify(modelVM);
         console.log("stringify output:" + stringify);
+
         $.ajax({
             contentType: "application/json;charset=utf-8",
             type: "POST",
@@ -263,9 +264,12 @@ else
                     console.log("Toppings:" + topping)
                 });
                 //var storePizza = Object.assign(data, localStorage);
+
                 var num3 = sessionStorage.length + 1;
 
                 sessionStorage.setItem(num3, JSON.stringify(data));
+                alert("Pizza added to cart.");
+              
                 //increment number next to shopping cart by 1
                 //add correct pizza to a list....maybe using localStorage?
 
