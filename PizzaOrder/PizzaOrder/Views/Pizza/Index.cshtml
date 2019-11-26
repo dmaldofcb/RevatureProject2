@@ -498,26 +498,15 @@
                         for (j = 0; j < toppingsArray.length; j++) {
                             if (toppingsArray[j].ID == checkBoxValues[i]) {
                                 newListOfToppings.push(toppingsArray[j]);
-                                //console.log("List of Toppings:" + newListOfToppings.length);
-                                //console.log("topping price:" + newListOfToppings[0].Price);
-                                //console.log("topping price:" + newListOfToppings[1].Price);
-                                //console.log("topping price:" + newListOfToppings[2].Price);
                             }
                         }
                     }
 
                     for (var i = 0; i < newListOfToppings.length; i++) {
-                        //parseFloat(newListOfToppings[i]);
                         toppingsTotal += parseFloat(newListOfToppings[i].Price);
-                        console.log("toppingsTotal:" + toppingsTotal);
-                       
+                        console.log("toppingsTotal:" + toppingsTotal);           
                     }
-                    // console.log("topping price:" + newListOfToppings[1].Price);
-
                     document.getElementById(pizzaPrice).innerHTML = (data.price + toppingsTotal);
-                    
-
-                    //var json = JSON.parse(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     textToChange.innerHTML = textStatus;
@@ -525,4 +514,4 @@
                 }
             });
         }
-            </script>
+ </script>

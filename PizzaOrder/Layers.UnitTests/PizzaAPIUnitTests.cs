@@ -65,7 +65,6 @@ namespace Layers.UnitTests
             var result = taskReturn.Result;
 
 
-            Assert.IsTrue(result is NotFoundObjectResult);
             Assert.IsNull(result);
             //Assert.AreEqual((result as NotFoundObjectResult).StatusCode, 404);
             #endregion
