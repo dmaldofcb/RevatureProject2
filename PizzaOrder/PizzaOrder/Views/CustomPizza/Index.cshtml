@@ -263,7 +263,9 @@ else
                     console.log("Toppings:" + topping)
                 });
                 //var storePizza = Object.assign(data, localStorage);
-                localStorage.setItem(data.id, JSON.stringify(data));
+                var num3 = sessionStorage.length + 1;
+
+                sessionStorage.setItem(num3, JSON.stringify(data));
                 //increment number next to shopping cart by 1
                 //add correct pizza to a list....maybe using localStorage?
 
