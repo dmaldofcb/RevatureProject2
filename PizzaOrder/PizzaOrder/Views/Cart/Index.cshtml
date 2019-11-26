@@ -37,9 +37,9 @@
     var totalPrice = 0;
     console.log("ID: " + userID);
     document.write('<pre>');
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        let value = JSON.parse(localStorage.getItem(key));
+    for (let i = 0; i < sessionStorage.length; i++) {
+        let key = sessionStorage.key(i);
+        let value = JSON.parse(sessionStorage.getItem(key));
         let price = 0;
         // document.writeln(localStorage.getItem(key));
         document.write("Pizza Type: " + value.type + ", ");
@@ -322,7 +322,7 @@
     }
 
     function emptyCart() {
-        localStorage.clear();
+        sessionStorage.clear();
         location.reload();
     }
 </script>
