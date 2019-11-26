@@ -41,7 +41,7 @@
         let key = sessionStorage.key(i);
         let value = JSON.parse(sessionStorage.getItem(key));
         let price = 0;
-        // document.writeln(localStorage.getItem(key));
+        // document.writeln(sessionStorage.getItem(key));
         document.write("Pizza Type: " + value.type + ", ");
         if (value.crustID == 1) {
             document.write("Crust Type: Thin Crust, ");
@@ -173,9 +173,9 @@
                 }
         });
 
-        for (let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            let value = JSON.parse(localStorage.getItem(key));
+        for (let i = 0; i < sessionStorage.length; i++) {
+            let key = sessionStorage.key(i);
+            let value = JSON.parse(sessionStorage.getItem(key));
 
             var modelVM =
             {
