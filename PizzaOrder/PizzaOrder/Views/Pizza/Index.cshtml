@@ -312,25 +312,10 @@
             listOfToppings.push(toInt);
         }
 
-        //console.log("First Topping:" + checkBoxValues[0]);
-        //checkBoxValues.forEach(function (toppings) {
-        //    console.log(toppings)
-        //});
-        //passing name field in checkbox
-        //var toppings = document.getElementsByName(toppingsID);
-        ////toppings.forEach(function (topping) {
-        ////console.log(topping.value);
-        ////});
-
         var sizeID = document.getElementById(pizza).value;
         var parseSizeID = parseInt(sizeID);
         var crustID = document.getElementById(crustID).value;
         var parseCrustID = parseInt(crustID);
-
-
-        //document.getElementById("sizeId").value = id;
-
-                    //toppingIDs: checkBoxValues,
 
         var modelVM =
         {
@@ -344,7 +329,6 @@
         $.ajax({
             contentType: "application/json;charset=utf-8",
             type: "POST",
-            // returns a list of our middle table
             url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
             data: JSON.stringify(modelVM),
 
@@ -361,12 +345,8 @@
                     document.getElementById("cart").innerHTML = 1;
                 });
 
-                var nume2 = sessionStorage.length + 1;
-
-                //var storePizza = Object.assign(data, localStorage);
+                var num2 = sessionStorage.length + 1;
                 sessionStorage.setItem(num2, JSON.stringify(data));
-                //increment number next to shopping cart by 1
-                //add correct pizza to a list....maybe using localStorage?
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -395,7 +375,7 @@
              ID: '@Model.Toppings[3].Id',
              Price: '@Model.Toppings[3].Price'
          };
-     var topping4 =
+           var topping4 =
          {
              ID: '@Model.Toppings[4].Id',
              Price: '@Model.Toppings[4].Price'
