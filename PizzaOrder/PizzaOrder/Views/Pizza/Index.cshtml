@@ -14,6 +14,13 @@
     });
 </script>
 
+@if (SignInManager.IsSignedIn(User))
+{
+    <a href="/Cart" style="background-color:black">
+        <img src="~/Images/48-489736_cart-0-shop-cart-icon-png.png" height="40" width="50" />0
+    </a>
+}
+
 <div id="flip">
     Click to see our list of toppings!
     <div id="panel" style="background-color:#fac564">
