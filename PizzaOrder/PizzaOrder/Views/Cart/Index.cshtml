@@ -21,6 +21,10 @@
             $("#panel").slideToggle("slow");
         });
     });
+    
+        var numOfPizzas = sessionStorage.length;
+        document.getElementById("cart").innerHTML = numOfPizzas;
+
 </script>
 
 
@@ -144,7 +148,11 @@
 
     function buy() {
 
+        //var currentDate = new Date();
         var currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() - 5);
+        console.log('USA time: ' + currentDate.toLocaleString());
+
         var orderIdNumber;
         var pizzaIdNumber;
 
