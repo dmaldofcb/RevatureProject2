@@ -7,17 +7,12 @@
     ViewData["Title"] = "Index";
 }
 
-<<<<<<< Updated upstream
-=======
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     var numOfPizzas = sessionStorage.length;
     document.getElementById("cart").innerHTML = numOfPizzas;
 </script>
 
->>>>>>> Stashed changes
 <h1>Customize your pizza</h1>
 
 <p>Choose your pizza size.</p>
@@ -210,6 +205,8 @@ else
                 var num3 = sessionStorage.length + 1;
 
                 sessionStorage.setItem(num3, JSON.stringify(data));
+                var length = sessionStorage.length;
+                document.getElementById("cart").innerHTML = length;
                 alert("Pizza added to cart.");
 
                 //increment number next to shopping cart by 1
