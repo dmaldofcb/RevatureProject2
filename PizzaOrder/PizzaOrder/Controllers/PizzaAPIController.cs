@@ -92,6 +92,21 @@ namespace PizzaOrderAPI.Controllers
             return createPizza;
         }
 
+        [HttpPost]
+        [Route("AddPizza")]
+        public async Task<PizzaPie> AddPizza(PizzaPie pizza)
+        {
+            PizzaPie createPizza = new PizzaPie()
+            {
+                Type = pizza.Type,
+                CrustID = pizza.CrustID,
+                SizeId = pizza.SizeId
+            };
+            await _pizzaRepo.Create(createPizza);
+
+            return createPizza;
+        }
+
 
 
     }
