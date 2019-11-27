@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
+@using Microsoft.AspNetCore.Identity
 @using Layers.Models.Models;
 
 @inject SignInManager<Customer> SignInManager
@@ -8,10 +9,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <script>
-        var numOfPizzas = sessionStorage.length;
-        document.getElementById("cart").innerHTML = numOfPizzas;
-    </script>
+
 
 <section class="home-slider owl-carousel img" style="background-image: url(../Images/bg_12.jpg);">
 

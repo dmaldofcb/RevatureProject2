@@ -17,6 +17,8 @@ namespace PizzaOrder.Controllers
     public class PizzaController : Controller
     {
 
+       
+
         //// Display Menu
         //public async Task<ActionResult> IndexAsync()
         //{
@@ -54,8 +56,8 @@ namespace PizzaOrder.Controllers
                     }
                     else //web api sent error response 
                     {
+
                         ModelState.AddModelError(string.Empty, "Server error. Please wait a few minutes and refresh the page.");
-                        return View();
                     }
                 }
                 //return Content(pizzas.Size.ToString());

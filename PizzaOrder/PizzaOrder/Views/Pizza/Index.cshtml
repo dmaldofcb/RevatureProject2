@@ -12,14 +12,10 @@
             $("#panel").slideToggle("slow");
         });
     });
-
-        var numOfPizzas = sessionStorage.length;
-        document.getElementById("cart").innerHTML = numOfPizzas;
-
 </script>
 
 <div id="flip">
-    <h4> Click here to see our list of toppings!</h4>
+    Click to see our list of toppings!
     <div id="panel" style="background-color:#fac564">
         <div class="table100 ver3 m-b-110">
 
@@ -57,13 +53,13 @@
                     <div class=" card-footer" style="background-color:silver">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('Pepperoni', 'pepperoniToppings', 'crust1')">Add to Cart</button>
+                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('pepperoni', 'pepperoniToppings', 'crust1')">Add to Cart</button>
                         }
                         else
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="Pepperoni" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id, 'pepperoniToppings')" class="mdb-select md-form">
+                        <select name="SelectSize" id="pepperoni" onclick="resetCrustCounter('crustprice1')" onchange="passPizza('price1', this.id, 'pepperoniToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -100,13 +96,13 @@
                     <div class=" card-footer" style="background-color:silver">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('Hawaiian', 'hawaiianToppings', 'crust2')">Add to Cart</button>
+                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('hawaiian', 'hawaiianToppings', 'crust2')">Add to Cart</button>
                         }
                         else
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="Hawaiian" onclick="resetCrustCounter('crustprice2')" onchange="passPizza('price2', this.id, 'hawaiianToppings')" class="mdb-select md-form">
+                        <select name="SelectSize" id="hawaiian" onclick="resetCrustCounter('crustprice2')" onchange="passPizza('price2', this.id, 'hawaiianToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -144,13 +140,13 @@
                         footer
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('Sausage', 'sausageToppings', 'crust3')">Add to Cart</button>
+                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('sausage', 'sausageToppings', 'crust3')">Add to Cart</button>
                         }
                         else
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="Sausage" onclick="resetCrustCounter('crustprice3')" onchange="passPizza('price3', this.id, 'sausageToppings')" class="mdb-select md-form">
+                        <select name="SelectSize" id="sausage" onclick="resetCrustCounter('crustprice3')" onchange="passPizza('price3', this.id, 'sausageToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -186,13 +182,13 @@
                         footer
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('Meatlovers', 'meatloversToppings', 'crust4')">Add to Cart</button>
+                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('meatlovers', 'meatloversToppings', 'crust4')">Add to Cart</button>
                         }
                         else
                         {
                             <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
                         }
-                        <select name="SelectSize" id="Meatlovers" onclick="resetCrustCounter('crustprice4')" onchange="passPizza('price4', this.id, 'meatloversToppings')" class="mdb-select md-form">
+                        <select name="SelectSize" id="meatlovers" onclick="resetCrustCounter('crustprice4')" onchange="passPizza('price4', this.id, 'meatloversToppings')" class="mdb-select md-form">
                             <option value="" disabled selected>Select Your Size</option>
                             <option value="1" style="color:blue">Small</option>
                             <option value="2" style="color:blue">Medium</option>
@@ -218,98 +214,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="card" style="background-color:cornsilk">
-                    <div class="card-header" style="background-color:goldenrod"><h5>Vegetable</h5></div>
-                    <div class="card-body">
-                        <div class="nav">
-                            <h2 id="dollarSign" style="color: black"> $</h2>
-                            <h2 id="price5" style="color: black"> 0</h2>
-                            <h2 id="crustprice5" style="color: black" hidden> 0</h2>
-                        </div>
-                        <img src="~/Images/vegetable-pizza.png" class="pizzaimg" />
-                    </div>
-                    <div class=" card-footer" style="background-color:silver">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('Vegetable', 'vegetableToppings', 'crust5')">Add to Cart</button>
-                        }
-                        else
-                        {
-                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
-                        }
-                        <select name="SelectSize" id="Vegetable" onclick="resetCrustCounter('crustprice5')" onchange="passPizza('price5', this.id, 'vegetableToppings')" class="mdb-select md-form">
-                            <option value="" disabled selected>Select Your Size</option>
-                            <option value="1" style="color:blue">Small</option>
-                            <option value="2" style="color:blue">Medium</option>
-                            <option value="3" style="color:blue">Large</option>
-                        </select>
-                        <select name="SelectCrust" id="crust5" onclick="subtractCrust('crustprice5', 'price5')" onchange="passCrust('price5', this.id, 'crustprice5')" class="mdb-select md-form">
-                            <option value="" disabled selected>Choose your crust</option>
-                            <option value="1" style="color:blue">Thin Crust</option>
-                            <option value="2" style="color:blue">Thick Crust</option>
-                            <option value="3" style="color:blue">Stuffed Crust</option>
-                        </select>
-                        <button type="button" id="Customize" onclick="location.href='CustomPizza'">Customize Your Order</button>
-                        <div>
-                            <input type="checkbox" name="vegetableToppings" value="5" disabled="true" checked="true"> Red Peppers<br>
-                            <input type="checkbox" name="vegetableToppings" value="7" disabled="true" checked="true"> Onions <br>
-                            <input type="checkbox" name="vegetableToppings" value="8" disabled="true" checked="true"> Mushrooms <br>
-                            <input type="checkbox" name="vegetableToppings" value="13" disabled="true" checked="true"> Tomatoes <br>
-                            <input type="checkbox" name="vegetableToppings" value="14" disabled="true" checked="true"> Spinach<br>
-                            <input type="checkbox" name="vegetableToppings" value="12" disabled="true" checked="true"> Broccoli<br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="background-color:cornsilk">
-                    <div class="card-header" style="background-color:goldenrod"><h5>Buffalo Chicken</h5></div>
-                    <div class="card-body">
-                        <div class="nav">
-                            <h1 id="cartnumber"></h1>
-                            <h2 id="dollarSign" style="color: black"> $</h2>
-                            <h2 id="price6" style="color: black"> 0</h2>
-                            <h2 id="crustprice6" style="color: black" hidden> 0</h2>
-                        </div>
-                        <img src="~/Images/buffalochicken-pizza.png" class="pizzaimg" />
-                    </div>
-                    <div class=" card-footer" style="background-color:silver">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <button type="submit" class="=btn btn-primary" onclick="AddToCart('Buffalo Chicken', 'buffaloChickenToppings', 'crust6')">Add to Cart</button>
-                        }
-                        else
-                        {
-                            <button type="submit" class="=btn btn-primary" disabled="true">Add to Cart</button>
-                        }
-                        <select name="SelectSize" id="Buffalo Chicken" onclick="resetCrustCounter('crustprice6')" onchange="passPizza('price6', this.id, 'buffaloChickenToppings')" class="mdb-select md-form">
-                            <option value="" disabled selected>Select Your Size</option>
-                            <option value="1" style="color:blue">Small</option>
-                            <option value="2" style="color:blue">Medium</option>
-                            <option value="3" style="color:blue">Large</option>
-                        </select>
-                        <select name="SelectCrust" id="crust6" onclick="subtractCrust('crustprice6', 'price6')" onchange="passCrust('price6', this.id, 'crustprice6')" class="mdb-select md-form">
-                            <option value="" disabled selected>Choose your crust</option>
-                            <option value="1" style="color:blue">Thin Crust</option>
-                            <option value="2" style="color:blue">Thick Crust</option>
-                            <option value="3" style="color:blue">Stuffed Crust</option>
-                        </select>
-                        <button type="button" onclick="location.href='CustomPizza'">Customize Your Order</button>
-                        <div>
-                            <input type="checkbox" name="buffaloChickenToppings" value="11" disabled="true" checked="true">Buffalo Chicken<br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br />
     </div>
 </div>
 
 <script>
-    var count = 0;
+
     @*console.log("Toppings" + '@Model.Toppings.Count');
     var toppings = '@Model.Toppings';*@
     console.log("javascript toppings:" + toppings);
@@ -389,7 +298,6 @@
             });
 
     }
-
     function AddToCart(pizza, toppingsID, crustID)
     {
          var checkBoxValues = [];
@@ -418,42 +326,9 @@
         };
         var stringify = JSON.stringify(modelVM);
         console.log("stringify output:" + stringify);
-<<<<<<< Updated upstream
 
         var num2 = sessionStorage.length + 1;
         sessionStorage.setItem(num2, stringify);
-=======
-        //$.ajax({
-        //    contentType: "application/json;charset=utf-8",
-        //    type: "POST",
-        //    url: "https://pizzaordersystem.azurewebsites.net/api/PizzaAPI/AddToCart", // had to add Route to Post. Also DO NOT include slash at end of url if it isn't receiving any parameters
-        //    data: JSON.stringify(modelVM),
-
-        //    success: function (data) {
-        alert("Your pizza has been added to the cart!");
-        count++;
-        document.getElementById("cart").innerHTML = count;
-        console.log(count);
-        //        console.log("Success!");
-        //        console.log("Type:" + data.type);
-        //        console.log("Crust ID:" + data.crustID);
-        //        console.log("Size ID" + data.sizeId);
-        //        console.log("ID" + data.id);
-        //        data.toppingByID.forEach(function (topping) {
-        //            console.log("Toppings:" + topping)
-        //            var count = 0;
-        //            document.getElementById("cart").innerHTML = count++;
-        //        });
-
-                var num2 = sessionStorage.length + 1;
-                sessionStorage.setItem(num2, JSON.stringify(modelVM));
-
-        //    },
-        //    error: function (jqXHR, textStatus, errorThrown) {
-        //        return "hello";
-        //    }
-        //});
->>>>>>> Stashed changes
 
     }
     
