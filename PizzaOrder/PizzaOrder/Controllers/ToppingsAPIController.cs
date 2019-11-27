@@ -38,6 +38,15 @@ namespace PizzaOrder.Controllers
             return await _pizzaToppingsRepo.GetPizzaToppings(id);
         }
 
+        [HttpPost]
+        [Route("AddTopping")]
+        public async Task<ActionResult<PizzaToppings>> PostToppings(PizzaToppings topping)
+        {
+            await _pizzaToppingsRepo.AddPizzaToppings(topping);
+            return CreatedAtAction("GetToppings", new { id = topping.Id }, topping);
+
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Toppings>> GetToppings(int id)
         {
