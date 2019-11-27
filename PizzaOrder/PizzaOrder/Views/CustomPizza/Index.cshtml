@@ -135,7 +135,8 @@ else
             newPrice = newPrice + priceArray[element];
         });
 
-        document.getElementById('price1').innerHTML = newPrice;
+        document.getElementById('price1').innerHTML = parseFloat(Math.round(newPrice * 100) / 100).toFixed(2);
+;
     }
 
 
