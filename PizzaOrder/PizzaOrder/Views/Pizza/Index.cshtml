@@ -309,9 +309,6 @@
 </div>
 
 <script>
-    var count = 0;
-    @*console.log("Toppings" + '@Model.Toppings.Count');
-    var toppings = '@Model.Toppings';*@
     console.log("javascript toppings:" + toppings);
     function passPizza(pizzaPrice, _id, toppings) {
         console.log(pizzaPrice);
@@ -416,11 +413,11 @@
             sizeId: parseSizeID,
             toppingByID: listOfToppings
         };
-        var stringify = JSON.stringify(modelVM);
-        console.log("stringify output:" + stringify);
+        //var stringify = JSON.stringify(modelVM);
+        //console.log("stringify output:" + stringify);
 
-        var num2 = sessionStorage.length + 1;
-        sessionStorage.setItem(num2, stringify);
+        //var num2 = sessionStorage.length + 1;
+        //sessionStorage.setItem(num2, stringify);
 
         //$.ajax({
         //    contentType: "application/json;charset=utf-8",
@@ -430,9 +427,8 @@
 
         //    success: function (data) {
         alert("Your pizza has been added to the cart!");
-        count++;
-        document.getElementById("cart").innerHTML = count;
-        console.log(count);
+        var length = sessionStorage.length;
+        document.getElementById("cart").innerHTML = length;
         //        console.log("Success!");
         //        console.log("Type:" + data.type);
         //        console.log("Crust ID:" + data.crustID);
