@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Layers.Models.Models;
+@using Layers.Models.Models
 @inject SignInManager<Customer> SignInManager
 @inject UserManager<Customer> UserManager
 
@@ -7,6 +7,17 @@
     ViewData["Title"] = "Index";
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    var numOfPizzas = sessionStorage.length;
+    document.getElementById("cart").innerHTML = numOfPizzas;
+</script>
+
+>>>>>>> Stashed changes
 <h1>Customize your pizza</h1>
 
 <p>Choose your pizza size.</p>
@@ -200,7 +211,7 @@ else
 
                 sessionStorage.setItem(num3, JSON.stringify(data));
                 alert("Pizza added to cart.");
-              
+
                 //increment number next to shopping cart by 1
                 //add correct pizza to a list....maybe using localStorage?
 
