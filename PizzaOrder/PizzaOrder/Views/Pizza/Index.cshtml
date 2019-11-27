@@ -426,9 +426,8 @@
 
         //    success: function (data) {
         alert("Your pizza has been added to the cart!");
-        count++;
-        document.getElementById("cart").innerHTML = count;
-        console.log(count);
+        var length = sessionStorage.length;
+        document.getElementById("cart").innerHTML = length;
         //        console.log("Success!");
         //        console.log("Type:" + data.type);
         //        console.log("Crust ID:" + data.crustID);
