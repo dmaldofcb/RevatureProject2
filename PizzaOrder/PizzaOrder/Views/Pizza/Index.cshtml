@@ -418,11 +418,10 @@
         };
         var stringify = JSON.stringify(modelVM);
         console.log("stringify output:" + stringify);
-<<<<<<< Updated upstream
 
         var num2 = sessionStorage.length + 1;
         sessionStorage.setItem(num2, stringify);
-=======
+
         //$.ajax({
         //    contentType: "application/json;charset=utf-8",
         //    type: "POST",
@@ -453,7 +452,6 @@
         //        return "hello";
         //    }
         //});
->>>>>>> Stashed changes
 
     }
     
@@ -584,7 +582,8 @@
                     }
 
                     for (var i = 0; i < newListOfToppings.length; i++) {
-                        toppingsTotal += parseFloat(newListOfToppings[i].Price);
+                        toppingsTotal += Math.round(parseFloat(newListOfToppings[i].Price, 2));
+                       
                         console.log("toppingsTotal:" + toppingsTotal);           
                     }
                     document.getElementById(pizzaPrice).innerHTML = (data.price + toppingsTotal);
