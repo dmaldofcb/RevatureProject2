@@ -13,9 +13,6 @@
         });
     });
 
-        var numOfPizzas = sessionStorage.length;
-        document.getElementById("cart").innerHTML = numOfPizzas;
-
 </script>
 
 <div id="flip">
@@ -75,7 +72,7 @@
                             <option value="2" style="color:blue">Thick Crust</option>
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
-                        <button type="button" id="Customize" onclick="location.href='CustomPizza'">Customize Your Order</button>
+                        <button type="button" id="Customize" class="btn btn-secondary" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="pepperoniToppings" value="1" disabled="true" checked="true"> Pepperoni<br>
                         </div>
@@ -118,7 +115,7 @@
                             <option value="2" style="color:blue">Thick Crust</option>
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
-                        <button type="button" onclick="location.href='CustomPizza'">Customize Your Order</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="hawaiianToppings" value="3" disabled="true" checked="true">Pineapple<br>
                             <input type="checkbox" name="hawaiianToppings" value="6" disabled="true" checked="true">Ham<br>
@@ -163,7 +160,7 @@
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
                         @*<input asp-for="@Model.PizzaToAdd.SizeId" hidden id="sizeId" />*@
-                        <button type="button" onclick="location.href='CustomPizza'">Customize Your Order</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="sausageToppings" value="2" disabled="true" checked="true"> Sausage<br>
                         </div>
@@ -205,7 +202,7 @@
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
                         @*<input asp-for="@Model.PizzaToAdd.SizeId" hidden id="sizeId" />*@
-                        <button type="button">Customize Your Order</button>
+                        <button type="button" class="btn btn-secondary"  >Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="meatloversToppings" value="1" disabled="true" checked="true">Pepperoni<br>
                             <input type="checkbox" name="meatloversToppings" value="2" disabled="true" checked="true">Sausage<br>
@@ -251,7 +248,7 @@
                             <option value="2" style="color:blue">Thick Crust</option>
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
-                        <button type="button" id="Customize" onclick="location.href='CustomPizza'">Customize Your Order</button>
+                        <button type="button" id="Customize" class="btn btn-secondary" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="vegetableToppings" value="5" disabled="true" checked="true"> Red Peppers<br>
                             <input type="checkbox" name="vegetableToppings" value="7" disabled="true" checked="true"> Onions <br>
@@ -296,7 +293,7 @@
                             <option value="2" style="color:blue">Thick Crust</option>
                             <option value="3" style="color:blue">Stuffed Crust</option>
                         </select>
-                        <button type="button" onclick="location.href='CustomPizza'">Customize Your Order</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='CustomPizza'">Customize Your Order</button>
                         <div>
                             <input type="checkbox" name="buffaloChickenToppings" value="11" disabled="true" checked="true">Buffalo Chicken<br>
                         </div>
@@ -309,6 +306,7 @@
 </div>
 
 <script>
+
     console.log("javascript toppings:" + toppings);
     function passPizza(pizzaPrice, _id, toppings) {
         console.log(pizzaPrice);
@@ -413,11 +411,6 @@
             sizeId: parseSizeID,
             toppingByID: listOfToppings
         };
-        //var stringify = JSON.stringify(modelVM);
-        //console.log("stringify output:" + stringify);
-
-        //var num2 = sessionStorage.length + 1;
-        //sessionStorage.setItem(num2, stringify);
 
         //$.ajax({
         //    contentType: "application/json;charset=utf-8",
