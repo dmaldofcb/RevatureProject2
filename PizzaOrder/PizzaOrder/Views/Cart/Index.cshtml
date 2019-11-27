@@ -145,9 +145,9 @@
     function buy() {
 
         //var currentDate = new Date();
-        var currentDate = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
-        currentDate = new Date(currentDate);
-        console.log('USA time: '+currentDate.toLocaleString())
+        var currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() - 5);
+        console.log('USA time: ' + currentDate.toLocaleString());
 
         var orderIdNumber;
         var pizzaIdNumber;

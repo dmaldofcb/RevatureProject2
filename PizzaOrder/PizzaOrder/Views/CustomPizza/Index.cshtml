@@ -10,7 +10,10 @@
 <h1>Customize your pizza</h1>
 
 <p>Choose your pizza size.</p>
-
+<div class="nav">
+    <h2 id="dollarSign" style="color: black"> $</h2>
+    <h2 id="price1" style="color: black"> 0</h2>
+</div>
 <select name="SelectSize" id="size" onchange="updatePrice()" class="mdb-select md-form">
     <option value="" disabled selected>Select Your Size</option>
     <option value="1" style="color:blue">Small</option>
@@ -59,10 +62,7 @@
 <br />
 <input type="checkbox" name="toppings" value="16" onchange="updatePrice()" />Meatballs
 <br />
-<div class="nav">
-    <h2 id="dollarSign" style="color: black"> $</h2>
-    <h2 id="price1" style="color: black"> 0</h2>
-</div>
+
 
 
 @if (SignInManager.IsSignedIn(User))
