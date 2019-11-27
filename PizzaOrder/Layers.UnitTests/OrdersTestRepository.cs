@@ -16,7 +16,7 @@ namespace Layers.UnitTests
             {
                 Id = 1,
                 CustomerID = "abc",
-               // OrderDate = DateTime.Now,
+                OrderDate = DateTime.Now,
                 Total = 1.5m
             },
               new Order
@@ -29,7 +29,7 @@ namespace Layers.UnitTests
                 new Order
             {
                 Id = 3,
-                CustomerID = "cde",
+                CustomerID = "abc",
                 OrderDate = DateTime.Now,
                 Total = 10.5m
             },

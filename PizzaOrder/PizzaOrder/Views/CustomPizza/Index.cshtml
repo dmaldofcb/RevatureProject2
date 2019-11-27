@@ -7,8 +7,6 @@
     ViewData["Title"] = "Index";
 }
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     var numOfPizzas = sessionStorage.length;
@@ -210,6 +208,8 @@ else
                 var num3 = sessionStorage.length + 1;
 
                 sessionStorage.setItem(num3, JSON.stringify(data));
+                var length = sessionStorage.length;
+                document.getElementById("cart").innerHTML = length;
                 alert("Pizza added to cart.");
 
                 count++;

@@ -479,6 +479,8 @@
         console.log("LENGTH: " + sessionStorage.length);
         var num = sessionStorage.length + 1;
         sessionStorage.setItem(num, JSON.stringify(modelVM));
+        var length = sessionStorage.length;
+        document.getElementById("cart").innerHTML = length;
         //console.log("LENGTH: " + localStorage.length);
         alert("Your pizza has been added to the cart!");
 
