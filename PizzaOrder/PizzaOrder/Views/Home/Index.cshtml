@@ -432,6 +432,9 @@
 </div>
 
 <script>
+    var count = sessionStorage.length;
+    document.getElementById("cart").innerHTML = count;
+
     function AddToCartHome(pizza, toppingsID, crustID, sizeID) {
 
         // var checkBoxValues = [];
@@ -478,6 +481,9 @@
         sessionStorage.setItem(num, JSON.stringify(modelVM));
         //console.log("LENGTH: " + localStorage.length);
         alert("Your pizza has been added to the cart!");
+
+        count++;
+        document.getElementById("cart").innerHTML = count;
 
         //$.ajax({
         //    contentType: "application/json;charset=utf-8",

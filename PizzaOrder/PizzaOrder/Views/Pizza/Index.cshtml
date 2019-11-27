@@ -13,9 +13,6 @@
         });
     });
 
-        var numOfPizzas = sessionStorage.length;
-        document.getElementById("cart").innerHTML = numOfPizzas;
-
 </script>
 
 <div id="flip">
@@ -309,7 +306,11 @@
 </div>
 
 <script>
-    var count = 0;
+    //var count = 0;
+
+    var count = sessionStorage.length;
+    document.getElementById("cart").innerHTML = count;
+
     @*console.log("Toppings" + '@Model.Toppings.Count');
     var toppings = '@Model.Toppings';*@
     console.log("javascript toppings:" + toppings);
